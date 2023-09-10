@@ -10,13 +10,98 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_10_075624) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_10_084019) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "competitions", force: :cascade do |t|
+    t.bigint "couple_id", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.string "reward"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["couple_id"], name: "index_competitions_on_couple_id"
+    t.index ["user_id"], name: "index_competitions_on_user_id"
+  end
+
+  create_table "competitions_tasks", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.bigint "competition_id", null: false
+    t.boolean "is_done", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["competition_id"], name: "index_competitions_tasks_on_competition_id"
+    t.index ["task_id"], name: "index_competitions_tasks_on_task_id"
+  end
+
+  create_table "couples", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.date "date"
+    t.bigint "user_id"
+    t.bigint "couple_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["couple_id"], name: "index_events_on_couple_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
+  create_table "kids", force: :cascade do |t|
+    t.string "name"
+    t.string "blood_type"
+    t.string "doctor_number"
+    t.bigint "couple_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["couple_id"], name: "index_kids_on_couple_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "scoreboards", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "competition_id", null: false
+    t.integer "score", default: 0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["competition_id"], name: "index_scoreboards_on_competition_id"
+    t.index ["user_id"], name: "index_scoreboards_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.date "deadline"
+    t.boolean "is_recurent", default: false
+    t.bigint "user_id"
+    t.bigint "couple_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["couple_id"], name: "index_tasks_on_couple_id"
+    t.index ["user_id"], name: "index_tasks_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "couple"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -26,4 +111,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_075624) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "competitions", "couples"
+  add_foreign_key "competitions", "users"
+  add_foreign_key "competitions_tasks", "competitions"
+  add_foreign_key "competitions_tasks", "tasks"
+  add_foreign_key "events", "couples"
+  add_foreign_key "events", "users"
+  add_foreign_key "kids", "couples"
+  add_foreign_key "notifications", "users"
+  add_foreign_key "scoreboards", "competitions"
+  add_foreign_key "scoreboards", "users"
+  add_foreign_key "tasks", "couples"
+  add_foreign_key "tasks", "users"
 end
