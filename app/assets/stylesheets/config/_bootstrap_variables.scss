@@ -7,20 +7,19 @@
 // General style
 $font-family-sans-serif: $body-font;
 $headings-font-family:   $headers-font;
-$body-bg:                $light-gray;
+$body-bg:                $white;
 $font-size-base:         1rem;
 
 // Colors
-$body-color: #212529;
-$body-mute: #ADADAF;
-$primary: #191919;
-$secondary: #FFBE2F;
-$success: #75C6B1;
-$info: #868480;
-$danger: #ef4361;
-$warning: #E38902;
-$light: #ECECEC;
-$white: #FFFFFF;
+$body-color: $black;
+$body-mute: $grey;
+$primary: $black;
+$secondary: $yellow;
+$success: $green;
+$info: $grey;
+$danger: $red;
+$warning: $orange;
+$light: $light-grey;
 
 // Buttons & inputs' radius
 $border-radius:    2px;
