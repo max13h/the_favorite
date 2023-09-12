@@ -9,4 +9,6 @@ class User < ApplicationRecord
   has_many :scoreboards
   has_many :competitions
   has_many :tasks
+
+  has_one :couple
 end
