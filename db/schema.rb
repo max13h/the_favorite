@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_10_084019) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_12_065909) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,10 +47,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_084019) do
     t.string "content"
     t.date "date"
     t.bigint "user_id"
-    t.bigint "couple_id", null: false
+    t.bigint "kid_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["couple_id"], name: "index_events_on_couple_id"
+    t.index ["kid_id"], name: "index_events_on_kid_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
@@ -89,10 +89,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_084019) do
     t.date "deadline"
     t.boolean "is_recurent", default: false
     t.bigint "user_id"
-    t.bigint "couple_id", null: false
+    t.bigint "kid_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["couple_id"], name: "index_tasks_on_couple_id"
+    t.index ["kid_id"], name: "index_tasks_on_kid_id"
     t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
@@ -101,12 +101,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_084019) do
     t.string "encrypted_password", default: "", null: false
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
-    t.string "couple"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "couple_id", null: false
+    t.index ["couple_id"], name: "index_users_on_couple_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -115,12 +116,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_084019) do
   add_foreign_key "competitions", "users"
   add_foreign_key "competitions_tasks", "competitions"
   add_foreign_key "competitions_tasks", "tasks"
-  add_foreign_key "events", "couples"
+  add_foreign_key "events", "kids"
   add_foreign_key "events", "users"
   add_foreign_key "kids", "couples"
   add_foreign_key "notifications", "users"
   add_foreign_key "scoreboards", "competitions"
   add_foreign_key "scoreboards", "users"
-  add_foreign_key "tasks", "couples"
+  add_foreign_key "tasks", "kids"
   add_foreign_key "tasks", "users"
+  add_foreign_key "users", "couples"
 end
