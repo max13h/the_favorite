@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_12_065909) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_13_193044) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_065909) do
     t.bigint "kid_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "competition_id"
+    t.index ["competition_id"], name: "index_events_on_competition_id"
     t.index ["kid_id"], name: "index_events_on_kid_id"
     t.index ["user_id"], name: "index_events_on_user_id"
   end
@@ -73,14 +75,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_065909) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "scoreboards", force: :cascade do |t|
+  create_table "scores", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "competition_id", null: false
     t.integer "score", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["competition_id"], name: "index_scoreboards_on_competition_id"
-    t.index ["user_id"], name: "index_scoreboards_on_user_id"
+    t.index ["competition_id"], name: "index_scores_on_competition_id"
+    t.index ["user_id"], name: "index_scores_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -116,12 +118,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_065909) do
   add_foreign_key "competitions", "users"
   add_foreign_key "competitions_tasks", "competitions"
   add_foreign_key "competitions_tasks", "tasks"
+  add_foreign_key "events", "competitions"
   add_foreign_key "events", "kids"
   add_foreign_key "events", "users"
   add_foreign_key "kids", "couples"
   add_foreign_key "notifications", "users"
-  add_foreign_key "scoreboards", "competitions"
-  add_foreign_key "scoreboards", "users"
+  add_foreign_key "scores", "competitions"
+  add_foreign_key "scores", "users"
   add_foreign_key "tasks", "kids"
   add_foreign_key "tasks", "users"
   add_foreign_key "users", "couples"

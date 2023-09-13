@@ -1,2 +1,0 @@
-class ScoreboardsController < ApplicationController
-end
