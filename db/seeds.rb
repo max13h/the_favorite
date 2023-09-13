@@ -21,12 +21,12 @@ puts "Clear database..."
 puts ""
 
 Notification.destroy_all
-Kid.destroy_all
+Event.destroy_all
 CompetitionsTask.destroy_all
+Task.destroy_all
+Kid.destroy_all
 Score.destroy_all
 Competition.destroy_all
-Event.destroy_all
-Task.destroy_all
 User.destroy_all
 Couple.destroy_all
 
@@ -203,21 +203,28 @@ events_list = [
 ]
 
 Couple.all.each do |couple|
-  5.times do
-    Event.create!(
-      title: events_list.sample,
-      content: Faker::Lorem.paragraph(sentence_count: rand(2..8)),
-      date: Faker::Date.forward(days: 100),
-      user: nil,
-      kid: couple.kids.sample
-    )
-  end
+  Competition.where(couple: couple).each do |competition|
 
-  couple.users.each do |user|
-    rand(1..3) do
-      event = couple.events.sample
-      event.user = user
+    event_date = Faker::Date.between(from: competition.start_date, to: competition.end_date)
+
+    5.times do
+      Event.create!(
+        title: events_list.sample,
+        content: Faker::Lorem.paragraph(sentence_count: rand(2..8)),
+        date: event_date,
+        user: nil,
+        kid: couple.kids.sample,
+        competition: competition
+      )
     end
+
+    if competition.user
+      competition.events.each do |event|
+        event.user = competition.user
+        event.save
+      end
+    end
+
   end
 end
 
@@ -225,7 +232,7 @@ puts "#{Event.count} events created"
 puts ""
 
 # ==================================================================
-# Tasks creation
+# Tasks and Competitions_tasks creation
 # ==================================================================
 
 tasks_list = [
@@ -246,40 +253,33 @@ tasks_list = [
 ]
 
 Couple.all.each do |couple|
-  5.times do
-    Task.create!(
-      title: tasks_list.sample,
-      content: Faker::Lorem.paragraph(sentence_count: rand(2..8)),
-      deadline: Faker::Date.forward(days: 30),
-      is_recurent: rand(3).zero?,
-      user: nil,
-      kid: couple.kids.sample
-    )
-  end
+  Competition.where(couple: couple).each do |competition|
 
-  couple.users.each do |user|
-    rand(1..3) do
-      task = couple.tasks.sample
-      task.user = user
+    task_deadline = Faker::Date.between(from: competition.start_date, to: competition.end_date)
+    winner = competition.user if competition.user
+
+    5.times do
+      task = Task.create!(
+        title: tasks_list.sample,
+        content: Faker::Lorem.paragraph(sentence_count: rand(2..8)),
+        deadline: task_deadline,
+        is_recurent: rand(5).zero?,
+        user: winner || nil,
+        kid: couple.kids.sample
+      )
+
+      CompetitionsTask.create!(
+        task: task,
+        competition: competition,
+        is_done: competition.user == true
+      )
     end
+
   end
 end
 
 puts "#{Task.count} tasks created"
 puts ""
-
-# ==================================================================
-# Competitions_tasks creation
-# ==================================================================
-
-Task.all.each do |task|
-  couple = task.kid.couple
-  CompetitionsTask.create!(
-    task: task,
-    competition: Competition.where(couple: couple).sample,
-    is_done: rand(3).zero?
-  )
-end
 
 puts "#{CompetitionsTask.count} competitionsTasks created"
 puts ""
