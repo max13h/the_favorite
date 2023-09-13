@@ -6,12 +6,12 @@ c = Couple.count
 k = Kid.count
 e = Event.count
 t = Task.count
-s = Scoreboard.count
+s = Score.count
 co = Competition.count
 co_t = CompetitionsTask.count
 
 
-puts "There is #{u} Users, #{n} Notifications, #{c} Couples, #{k} Kids, #{e} Events, #{t} Tasks, #{s} Scoreboards, #{co} Competitions and #{co_t} Competitions_tasks in you database"
+puts "There is #{u} Users, #{n} Notifications, #{c} Couples, #{k} Kids, #{e} Events, #{t} Tasks, #{s} Scores, #{co} Competitions and #{co_t} Competitions_tasks in you database"
 puts "Do you want to continue (y/n)"
 input = gets.chomp
 
@@ -23,7 +23,7 @@ puts ""
 Notification.destroy_all
 Kid.destroy_all
 CompetitionsTask.destroy_all
-Scoreboard.destroy_all
+Score.destroy_all
 Competition.destroy_all
 Event.destroy_all
 Task.destroy_all
@@ -152,20 +152,20 @@ puts "#{Competition.count} competitions created"
 puts ""
 
 # ==================================================================
-# Scoreboards creation
+# Scores creation
 # ==================================================================
 
 Competition.all.each do |competition|
   if competition.user
     User.all.each do |user|
       if user == competition.user
-        Scoreboard.create!(
+        Score.create!(
           user: user,
           competition: competition,
           score: rand(20..25)
         )
       else
-        Scoreboard.create!(
+        Score.create!(
           user: user,
           competition: competition,
           score: rand(10..20)
@@ -174,7 +174,7 @@ Competition.all.each do |competition|
     end
   else
     User.all.each do |user|
-      Scoreboard.create!(
+      Score.create!(
         user: user,
         competition: competition,
         score: rand(5..10)
@@ -182,7 +182,7 @@ Competition.all.each do |competition|
     end
   end
 end
-puts "#{Scoreboard.count} scoreboards created"
+puts "#{Score.count} scores created"
 puts ""
 
 # ==================================================================

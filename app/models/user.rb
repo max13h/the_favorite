@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :notifications
   has_many :events
-  has_many :scoreboards
+  has_many :scores
   has_many :competitions
   has_many :tasks
 
