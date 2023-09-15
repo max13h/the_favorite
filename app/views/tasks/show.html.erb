@@ -1,11 +1,11 @@
 <div class="container">
   <%= link_to 'Back to all my tasks', tasks_path, class: "fw-bold mt-5 mb-3 d-inline-block" %>
-  <h1 class="mb-5 fw-bold"><%= @task.name %></h1>
+  <h1 class="mb-5 fw-bold"><%= @task.title %></h1>
 
   <div class="lens-details bg-white p-4 rounded shadow mb-4 d-flex justify-content-between align-items-center">
     <div class="details">
       <p>
-        <%= @task.name %>
+        <%= @task.title %>
       </p>
       <p>
         <%= @task.content %>
@@ -20,6 +20,6 @@
   </div>
 
   <div class="bg-white p-4 rounded shadow mb-5 position-relative">
-      < ! -- <strong>Mark as done?</strong> <%= insert code here to update the boolean %> -->
+      <strong>Mark as done?</strong> todo
   </div>
 </div>
