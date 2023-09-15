@@ -1,0 +1,29 @@
+<div class="container">
+  <h1 class="fw-bold my-5">Add a new Task</h1>
+
+  <%= simple_form_for(@task, html: {class: "d-flex align-items-center flex-column"}) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :name,
+                  required: true,
+                  autofocus: true,
+                  input_html: { class: "bg-white" }%>
+      <%= f.input :content,
+                  required: true,
+                  autofocus: true,
+                  input_html: { class: "bg-white" }%>
+      <%= f.input :deadline,
+                  required: true,
+                  autofocus: true,
+                  input_html: { class: "bg-white" }%>
+      <%= f.input :kid,
+                  required: true,
+                  autofocus: true,
+                  input_html: { class: "bg-white" }%>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Save", class: "btn btn-primary" %>
+    </div>
+  <% end %>
