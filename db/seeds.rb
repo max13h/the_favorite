@@ -264,14 +264,14 @@ Couple.all.each do |couple|
         content: Faker::Lorem.paragraph(sentence_count: rand(2..8)),
         deadline: task_deadline,
         is_recurent: rand(5).zero?,
-        user: winner || nil,
         kid: couple.kids.sample
       )
 
       CompetitionsTask.create!(
         task: task,
         competition: competition,
-        is_done: competition.user == true
+        is_done: competition.user == true,
+        user: winner || nil
       )
     end
 
