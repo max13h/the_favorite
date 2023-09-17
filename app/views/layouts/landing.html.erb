@@ -11,12 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
   </head>
 
-  <body class="d-flex flex-column" style="height: 100vh">
-    <%= render "shared/flashes" %>
-    <%= render "shared/header" %>
-    <div class="flex-grow-1 overflow-scroll px-2 py-3">
-      <%= yield %>
-    </div>
-    <%= render "shared/navbar" %>
+  <body>
+    <%= yield %>
   </body>
 </html>
