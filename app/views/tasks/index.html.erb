@@ -8,7 +8,7 @@
         <div class="task-options">
           <% if task.user_id.nil? %>
             <span class="unassigned-task">Not Assigned</span>
-            <%= link_to 'Add to To-Do List', add_to_todo_list_task_path(task), method: :post, class: 'add-to-do-link' %>
+            <%= link_to 'Add To To-Do List', add_to_todo_list_task_path(task), method: :post, class: 'add-to-do-link' %>
           <% end %>
         </div>
       </li>
