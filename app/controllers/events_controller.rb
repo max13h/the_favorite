@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :assign_event]
 
   # GET /events
   def index
@@ -46,6 +46,14 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     redirect_to event_url, notice: 'Your event was successfully deleted.'
+  end
+
+  def assign_event
+    if @event && @event.user.nil?
+      @event.user = current_user
+      @event.save!
+    end
+    redirect_back(fallback_location: root_path)
   end
 
   private
