@@ -8,7 +8,7 @@
         <div class="event-options">
           <% if event.user_id.nil? %>
             <span class="unassigned-event">Not Assigned</span>
-            <%= link_to 'Add to Calendar', add_to_Calendar_root_path(event), method: :post, class: 'add-calendar-link' %>
+            <%= link_to 'Add To Calendar', add_to_Calendar_root_path(event), method: :post, class: 'add-calendar-link' %>
             <% else %>
              User <%= event.user_id %> is assigned to this event.
             <% end %>
