@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :assign_task]
 
   # GET /tasks
   def index
@@ -46,6 +46,24 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     redirect_to task_url, notice: 'Your task was successfully deleted.'
+  end
+
+  def assign_task
+    if @task && @task.user.nil?
+      @task.user = current_user
+      @task.save!
+    end
+    redirect_back(fallback_location: root_path)
+  end
+
+  def mark_as_done
+    @competition_task = CompetitionsTask.find(params[:id])
+
+    if @competition_task && @competition_task.task.user == current_user
+      @competition_task.is_done = true
+      @competition_task.save!
+    end
+    redirect_back(fallback_location: root_path, anchor: 'todo')
   end
 
   private
