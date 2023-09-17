@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :tasks
   get '/assign-task', to: 'tasks#assign_task'
   get '/mark-as-done', to: 'tasks#mark_as_done'
+  get '/unmark-as-done', to: 'tasks#unmark_as_done'
 
   resources :events
   get '/assign-event', to: 'events#assign_event'

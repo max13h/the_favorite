@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy, :assign_task]
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   # GET /tasks
   def index
@@ -49,21 +49,30 @@ class TasksController < ApplicationController
   end
 
   def assign_task
-    if @task && @task.user.nil?
-      @task.user = current_user
-      @task.save!
+    @competition_task = CompetitionsTask.find(params[:id])
+
+    if @competition_task && @competition_task.user.nil?
+      @competition_task.user = current_user
+      @competition_task.save!
     end
     redirect_back(fallback_location: root_path)
   end
 
   def mark_as_done
     @competition_task = CompetitionsTask.find(params[:id])
-
-    if @competition_task && @competition_task.task.user == current_user
+    if @competition_task && @competition_task.user == current_user
       @competition_task.is_done = true
       @competition_task.save!
     end
-    redirect_back(fallback_location: root_path, anchor: 'todo')
+    redirect_back(fallback_location: root_path, anchor: "todo")
+  end
+  def unmark_as_done
+    @competition_task = CompetitionsTask.find(params[:id])
+    if @competition_task && @competition_task.user == current_user
+      @competition_task.is_done = false
+      @competition_task.save!
+    end
+    redirect_back(fallback_location: root_path, anchor: "todo")
   end
 
   private
