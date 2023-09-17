@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_13_193044) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_17_133203) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,8 +32,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_193044) do
     t.boolean "is_done", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["competition_id"], name: "index_competitions_tasks_on_competition_id"
     t.index ["task_id"], name: "index_competitions_tasks_on_task_id"
+    t.index ["user_id"], name: "index_competitions_tasks_on_user_id"
   end
 
   create_table "couples", force: :cascade do |t|
@@ -90,12 +92,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_193044) do
     t.string "content"
     t.date "deadline"
     t.boolean "is_recurent", default: false
-    t.bigint "user_id"
     t.bigint "kid_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["kid_id"], name: "index_tasks_on_kid_id"
-    t.index ["user_id"], name: "index_tasks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -118,6 +118,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_193044) do
   add_foreign_key "competitions", "users"
   add_foreign_key "competitions_tasks", "competitions"
   add_foreign_key "competitions_tasks", "tasks"
+  add_foreign_key "competitions_tasks", "users"
   add_foreign_key "events", "competitions"
   add_foreign_key "events", "kids"
   add_foreign_key "events", "users"
@@ -126,6 +127,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_13_193044) do
   add_foreign_key "scores", "competitions"
   add_foreign_key "scores", "users"
   add_foreign_key "tasks", "kids"
-  add_foreign_key "tasks", "users"
   add_foreign_key "users", "couples"
 end

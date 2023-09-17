@@ -1,17 +1,17 @@
 <div class="navbar d-flex justify-content-around p-0" style="font-size: 2.2rem">
-  <%= link_to dashboard_path do %>
+  <%= link_to home_path, class: "on-active" do %>
     <i class="ri-home-4-line"></i>
   <% end %>
-  <%= link_to competitions_path do %>
+  <%= link_to competitions_path, class: "on-active" do %>
     <i class="ri-trophy-line"></i>
   <% end %>
-  <%= link_to new_task_path do %>
+  <%= link_to new_task_path, class: "on-active" do %>
     <i class="ri-add-circle-line" style="font-size: 2.7rem"></i>
   <% end %>
-  <%= link_to kids_path do %>
+  <%= link_to kids_path, class: "on-active" do %>
     <i class="ri-bear-smile-line"></i>
   <% end %>
-  <%= link_to user_profil_path(current_user) do %>
+  <%= link_to user_profil_path(current_user), class: "on-active" do %>
     <i class="ri-user-line"></i>
   <% end %>
 </div>
