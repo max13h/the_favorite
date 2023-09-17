@@ -6,12 +6,11 @@
         <%= task.title %>
         (<%= task.content %>)
         <div class="task-options">
-          <% if task.user_id.nil? %>
+          <% if task.user.nil? %>
             <span class="unassigned-task">Not Assigned</span>
-            <%= link_to 'Add To To-Do List', add_to_todo_list_root_path(task), method: :post, class: 'add-to-do-link' %>
-            <% else %>
-              User <%= task.user_id %> is assigned to this event.
-            <% end %>
+            <%= link_to 'Add To To-Do List', root_path, method: :post, class: 'add-to-do-link' %>
+          <% else %>
+            User <%= task.user_id %> is assigned to this event.
           <% end %>
         </div>
       </li>
