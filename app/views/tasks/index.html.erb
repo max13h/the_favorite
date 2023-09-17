@@ -3,12 +3,15 @@
   <ul>
     <% @tasks.each do |task| %>
       <li>
-        <%= task.task_title %>
-        (<%= task.task_content %>)
+        <%= task.title %>
+        (<%= task.content %>)
         <div class="task-options">
           <% if task.user_id.nil? %>
             <span class="unassigned-task">Not Assigned</span>
-            <%= link_to 'Add To To-Do List', add_to_todo_list_task_path(task), method: :post, class: 'add-to-do-link' %>
+            <%= link_to 'Add To To-Do List', add_to_todo_list_root_path(task), method: :post, class: 'add-to-do-link' %>
+            <% else %>
+              User <%= task.user_id %> is assigned to this event.
+            <% end %>
           <% end %>
         </div>
       </li>
