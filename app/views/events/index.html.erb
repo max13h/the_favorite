@@ -1,0 +1,19 @@
+<div>
+  <h1>Events</h1>
+  <ul>
+    <% @events.each do |event| %>
+      <li>
+        <%= event.title %>
+        (<%= event.content %>)
+        <div class="event-options">
+          <% if event.user_id.nil? %>
+            <span class="unassigned-event">Not Assigned</span>
+            <%= link_to 'Add To Calendar', root_path, method: :post, class: 'add-calendar-link' %>
+          <% else %>
+            User <%= event.user_id %> is assigned to this event.
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</div>
