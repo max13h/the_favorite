@@ -48,6 +48,33 @@ class TasksController < ApplicationController
     redirect_to task_url, notice: 'Your task was successfully deleted.'
   end
 
+  def assign_task
+    @competition_task = CompetitionsTask.find(params[:id])
+
+    if @competition_task && @competition_task.user.nil?
+      @competition_task.user = current_user
+      @competition_task.save!
+    end
+    redirect_back(fallback_location: root_path)
+  end
+
+  def mark_as_done
+    @competition_task = CompetitionsTask.find(params[:id])
+    if @competition_task && @competition_task.user == current_user
+      @competition_task.is_done = true
+      @competition_task.save!
+    end
+    redirect_back(fallback_location: root_path, anchor: "todo")
+  end
+  def unmark_as_done
+    @competition_task = CompetitionsTask.find(params[:id])
+    if @competition_task && @competition_task.user == current_user
+      @competition_task.is_done = false
+      @competition_task.save!
+    end
+    redirect_back(fallback_location: root_path, anchor: "todo")
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
