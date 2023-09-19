@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   resources :competitions, only: [:index, :show, :destroy]
 
   resources :kids, only: [:index]
+
+  get '/increase-score', to: 'scores#increase_score'
+  get '/decrease-score', to: 'scores#decrease_score'
   # Defines the root path route ("/")
   # root "articles#index"
 end
