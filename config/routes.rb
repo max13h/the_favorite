@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/home', to: 'pages#home'
   get '/profil', to: 'users#show', as: "user_profil"
 
-  resources :competitions, only: [:index, :show, :destroy]
+  resources :competitions, only: [:index, :show, :destroy, :new, :create]
 
   resources :kids, only: [:index]
 
