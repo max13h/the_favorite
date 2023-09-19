@@ -7,7 +7,7 @@
     <p><%= @current_competition.reward %></p>
   <% else %>
     <p class="fst-italic">No current competition</p>
-    <%= link_to "New competition", root_path, class: "btn btn-secondary fw-bold" %>
+    <%= link_to "New competition", new_competition_path, class: "btn btn-secondary fw-bold" %>
   <% end %>
 </div>
 
