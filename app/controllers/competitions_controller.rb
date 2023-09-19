@@ -26,15 +26,50 @@ class CompetitionsController < ApplicationController
     end
 
     @competition.destroy
-    redirect_to competitions_path, notice: 'Your task was successfully deleted.'
+    redirect_to competitions_path, notice: 'Your competition was successfully deleted.'
   end
 
   def show
+  end
+
+  def new
+    couple = current_user.couple
+    current_competition = Competition.where(couple: couple).where("end_date > ?", Time.now)
+
+    unless current_competition.empty?
+      redirect_to home_path, alert: "You already have a competition running"
+    end
+
+    @default_end_date = 2.weeks.from_now.to_date
+    @competition = Competition.new(couple: couple, start_date: Date.current)
+  end
+
+  def create
+    @couple = current_user.couple
+
+    @competition = Competition.new(competition_params)
+    @competition.couple = @couple
+    @competition.start_date = Time.now
+
+    if @competition.save
+      @couple.users.each do |user|
+        @score = Score.new(competition: @competition, user: user)
+        @score.save!
+      end
+
+      redirect_to competitions_path, notice: 'Competition successfully created'
+    else
+      render :new
+    end
   end
 
   private
 
   def set_competition
     @competition = Competition.find(params[:id])
+  end
+
+  def competition_params
+    params.require(:competition).permit(:end_date, :reward)
   end
 end

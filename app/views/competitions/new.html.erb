@@ -1,0 +1,22 @@
+<h1 class="mb-5">Create a new competition</h1>
+
+<%= simple_form_for(@competition, html: {class: "d-flex align-items-center flex-column"}) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :end_date,
+                order: [:day, :month, :year],
+                required: true,
+                autofocus: true,
+                input_html: { class: "bg-white" },
+                default: @default_end_date %>
+    <%= f.input :reward,
+                required: true,
+                autofocus: true,
+                input_html: { class: "bg-white" }%>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Save", class: "btn btn-primary" %>
+  </div>
+<% end %>
