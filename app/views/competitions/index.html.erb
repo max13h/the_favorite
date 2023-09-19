@@ -1,1 +1,45 @@
-<h1>hello from /competitions</h1>
+<div class="border-dotted rounded border-secondary d-flex align-items-center flex-column mb-5 p-3">
+
+  <% if @current_competition %>
+    <h2 class="d-inline-block w-100 text-center">Current competition <i class="ri-trophy-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i></h2>
+    <%= render "shared/scores", couple: @couple, current_competition: @current_competition %>
+    <h3 class="mt-5">Reward:</h3>
+    <p><%= @current_competition.reward %></p>
+  <% else %>
+    <p class="fst-italic">No current competition</p>
+    <%= link_to "New competition", root_path, class: "btn btn-secondary fw-bold" %>
+  <% end %>
+</div>
+
+
+<div>
+  <h2>Previous competitions</h2>
+  <% @competitions.each do |competition| %>
+    <% if @competitions.empty?%>
+
+      <p class="fst-italic text-ligth">No previous competition</p>
+
+    <% else %>
+
+      <div class="task border mb-3 bg-white d-flex justify-content-between p-3 rounded-1 w-100">
+        <%= link_to competition_path(competition), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
+          <p class="text-truncate mb-3"><%= competition.start_date.strftime "%d/%m/%y" %> - <%= competition.end_date.strftime "%d/%m/%y" %></p>
+
+          <div class="d-flex justify-content-evenly align-items-center">
+            <% @couple.users.each do |user| %>
+              <%= render "shared/user_winner", user: user, competition: competition %>
+
+            <% end %>
+          </div>
+        <% end %>
+
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+<% if @current_competition %>
+  <div class="d-flex justify-content-center mt-5 mb-4">
+    <%= link_to "Delete current competition", competition_path(@current_competition), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
+  </div>
+<% end %>
