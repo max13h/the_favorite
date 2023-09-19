@@ -30,3 +30,16 @@ p {
 .border-dotted {
   border: 5px dotted black;
 }
+
+/* Progress bar design. To use it on the scoreboard, please take the HTML below.
+Exemple for a 25% progress:
+<div class="progress">
+  <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+</div> */
+.progress {
+  border-radius: 10px;
+  background: $primary;
+}
+.progress-bar {
+ background: $secondary;
+}
