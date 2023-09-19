@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   get '/home', to: 'pages#home'
   get '/profil', to: 'users#show', as: "user_profil"
 
-  resources :competitions, only: [:index]
+  resources :competitions, only: [:index, :show, :destroy]
+
   resources :kids, only: [:index]
   # Defines the root path route ("/")
   # root "articles#index"
