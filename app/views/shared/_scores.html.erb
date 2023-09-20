@@ -1,5 +1,5 @@
 <div class="scores d-flex align-items-center justify-content-evenly w-100">
-  <% couple.users.each do |user| %>
+  <% family.users.each do |user| %>
     <div class="d-flex align-items-around flex-column text-center">
       <p><strong><%= user.first_name %></strong></p>
       <i class="ri-account-circle-line " style="font-size: 3rem"></i>
@@ -9,7 +9,7 @@
         </strong>
       </p>
     </div>
-    <% unless user == couple.users.last %>
+    <% unless user == family.users.last %>
       <%= image_tag "crown.svg", alt: "crown image", style: "width: 50px; transform: rotate(20deg)" %>
     <% end %>
   <% end %>
