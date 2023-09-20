@@ -77,14 +77,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_133203) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "scores", force: :cascade do |t|
+  create_table "scoreboards", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "competition_id", null: false
     t.integer "score", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["competition_id"], name: "index_scores_on_competition_id"
-    t.index ["user_id"], name: "index_scores_on_user_id"
+    t.index ["competition_id"], name: "index_scoreboards_on_competition_id"
+    t.index ["user_id"], name: "index_scoreboards_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -124,8 +124,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_17_133203) do
   add_foreign_key "events", "users"
   add_foreign_key "kids", "couples"
   add_foreign_key "notifications", "users"
-  add_foreign_key "scores", "competitions"
-  add_foreign_key "scores", "users"
+  add_foreign_key "scoreboards", "competitions"
+  add_foreign_key "scoreboards", "users"
   add_foreign_key "tasks", "kids"
   add_foreign_key "users", "couples"
 end
