@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :redirect_if_signed_in_and_no_couple
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
@@ -11,6 +12,18 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    home_path()
+    home_path
+  end
+
+  private
+
+  def redirect_if_signed_in_and_no_couple
+    if user_signed_in? && current_user.couple.nil? && !on_allowed_path?
+      redirect_to profile_path, alert: "Add your family to get full access to the app"
+    end
+  end
+
+  def on_allowed_path?
+    request.path == root_path || request.path == profile_path || request.path == destroy_user_session_path || request.path == edit_user_registration_path
   end
 end

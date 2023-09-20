@@ -1,6 +1,40 @@
-<%= @user.first_name %>
+<div class="user d-flex flex-column align-items-center">
+  <%= link_to "Edit my profile", edit_user_registration_path, class: "align-self-end me-3" %>
+  <div class="profile-picture position-relative">
+    <%= image_tag "crown.svg", alt: "crown image", class: "position-absolute", style: "width: 70px; transform: rotate(20deg); vertical-align: unset; top: 0px; left: 6px" %>
+    <i class="ri-account-circle-line " style="font-size: 6rem"></i>
+  </div>
+  <p class="fs-3 fw-bold"><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
+</div>
 
-<div>
- <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete} %>
+<div class="family border-dotted border-secondary rounded d-flex flex-column align-items-center p-3 mt-5">
 
+  <% if @couple %>
+    <h2>Your family</h2>
+    <div class="rival d-flex flex-column align-items-center w-100 mt-3">
+      <h3 class="fs-5 align-self-start">Rival:</h3>
+      <i class="ri-account-circle-line d-flex justify-content-center align-items-center" style="height: 70px; font-size: 4rem"></i>
+      <p class="fs-5 fw-bold"><%= "#{@rival.first_name} #{@rival.last_name}" %></p>
+    </div>
+    <div class="kids mt-3 w-100 border-top-dotted pt-3">
+      <h3 class="fs-5">Kids:</h3>
+      <div class="kids d-flex justify-content-evenly">
+        <% @couple.kids.each do |kid| %>
+          <div class="kid me-3">
+             <i class="ri-account-circle-line d-flex justify-content-center align-items-center" style="height: 40px; font-size: 3rem"></i>
+            <p><%= kid.name %></p>
+          </div>
+        <% end %>
+      </div>
+
+
+    </div>
+  <% else %>
+    <p class="fst-italic ">No family yet</p>
+    <%= link_to "Add you family", root_path, class: "btn btn-secondary fw-bold mt-2 fs-4" %>
+  <% end %>
+</div>
+
+<div class="d-flex justify-content-center mt-5">
+ <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-outline-danger" %>
 </div>

@@ -5,7 +5,8 @@ Rails.application.routes.draw do
   get '/home', to: 'pages#home'
   get '/common-pot', to: 'pages#common_pot'
 
-  get '/profil', to: 'users#show', as: "user_profil"
+  get '/profile', to: 'users#show'
+
 
   resources :tasks
   get '/assign-task', to: 'tasks#assign_task'
