@@ -9,7 +9,7 @@
 
 <div class="family border-dotted border-secondary rounded d-flex flex-column align-items-center p-3 mt-5">
 
-  <% if @couple %>
+  <% if @family %>
     <h2>Your family</h2>
     <div class="rival d-flex flex-column align-items-center w-100 mt-3">
       <h3 class="fs-5 align-self-start">Rival:</h3>
@@ -19,7 +19,7 @@
     <div class="kids mt-3 w-100 border-top-dotted pt-3">
       <h3 class="fs-5">Kids:</h3>
       <div class="kids d-flex justify-content-evenly">
-        <% @couple.kids.each do |kid| %>
+        <% @family.kids.each do |kid| %>
           <div class="kid me-3">
              <i class="ri-account-circle-line d-flex justify-content-center align-items-center" style="height: 40px; font-size: 3rem"></i>
             <p><%= kid.name %></p>

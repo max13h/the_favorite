@@ -6,8 +6,8 @@ class PagesController < ApplicationController
   end
 
   def home
-    @couple = current_user.couple
-    @current_competition = @couple.competitions.where("end_date > ?", Time.now).first
+    @family = current_user.family
+    @current_competition = @family.competitions.where("end_date > ?", Time.now).first
 
     if @current_competition
       @pending_competitions_tasks = @current_competition.competitions_tasks.where(user: nil)
@@ -22,8 +22,8 @@ class PagesController < ApplicationController
   end
 
   def common_pot
-    @couple = current_user.couple
-    @current_competition = @couple.competitions.where("end_date > ?", Time.now).first
+    @family = current_user.family
+    @current_competition = @family.competitions.where("end_date > ?", Time.now).first
 
     if @current_competition
       @pending_competitions_tasks = @current_competition.competitions_tasks.where(user: nil)

@@ -2,7 +2,7 @@ require "faker"
 
 u = User.count
 n = Notification.count
-c = Couple.count
+c = Family.count
 k = Kid.count
 e = Event.count
 t = Task.count
@@ -11,7 +11,7 @@ co = Competition.count
 co_t = CompetitionsTask.count
 
 
-puts "There is #{u} Users, #{n} Notifications, #{c} Couples, #{k} Kids, #{e} Events, #{t} Tasks, #{s} Scores, #{co} Competitions and #{co_t} Competitions_tasks in you database"
+puts "There is #{u} Users, #{n} Notifications, #{c} Families, #{k} Kids, #{e} Events, #{t} Tasks, #{s} Scores, #{co} Competitions and #{co_t} Competitions_tasks in you database"
 puts "Do you want to continue (y/n)"
 input = gets.chomp
 
@@ -28,32 +28,32 @@ Kid.destroy_all
 Score.destroy_all
 Competition.destroy_all
 User.destroy_all
-Couple.destroy_all
+Family.destroy_all
 
 puts "Database empty"
 puts ""
 
 # ==================================================================
-# Couples creation
+# Families creation
 # ==================================================================
 
-Couple.create!(name: "Smith")
-Couple.create!(name: "Dupont")
+Family.create!(name: "Smith")
+Family.create!(name: "Dupont")
 
-puts "2 couples created"
+puts "2 families created"
 puts ""
 
 # ==================================================================
 # Kids creation
 # ==================================================================
 
-Couple.all.each do |couple|
+Family.all.each do |family|
   rand(2..4).times do
     Kid.create!(
     name: Faker::Name.first_name,
     blood_type: Faker::Blood.group,
     doctor_number: Faker::PhoneNumber.cell_phone,
-    couple: couple)
+    family: family)
   end
 end
 
@@ -66,14 +66,14 @@ puts ""
 
 user_nb = 1
 
-Couple.all.each do |couple|
+Family.all.each do |family|
   2.times do
     User.create!(
       email: "user#{user_nb}@gmail.com",
       password: "1234567890",
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
-      couple_id: couple.id
+      family_id: family.id
     )
     user_nb += 1
   end
@@ -124,23 +124,23 @@ reward_list = [
   "A special dessert or treat of their choice",
 ]
 
-Couple.all.each do |couple|
+Family.all.each do |family|
   Competition.create!(
-    couple: couple,
+    family: family,
     start_date: Faker::Date.between(from: 4.month.ago, to: 15.week.ago),
     end_date: Faker::Date.between(from: 3.month.ago, to: 10.week.ago),
     reward: reward_list.sample,
-    user: couple.users.sample
+    user: family.users.sample
   )
   Competition.create!(
-    couple: couple,
+    family: family,
     start_date: Faker::Date.between(from: 2.month.ago, to: 7.week.ago),
     end_date: Faker::Date.between(from: 1.month.ago, to: 3.week.ago),
     reward: reward_list.sample,
-    user: couple.users.sample
+    user: family.users.sample
   )
   Competition.create!(
-    couple: couple,
+    family: family,
     start_date: Faker::Date.between(from: 1.week.ago, to: 3.days.ago),
     end_date: Faker::Date.between(from: 3.week.from_now, to: 1.month.from_now),
     reward: reward_list.sample,
@@ -202,8 +202,8 @@ events_list = [
   "Bring to theater"
 ]
 
-Couple.all.each do |couple|
-  Competition.where(couple: couple).each do |competition|
+Family.all.each do |family|
+  Competition.where(family: family).each do |competition|
 
     event_date = Faker::Date.between(from: competition.start_date, to: competition.end_date)
 
@@ -213,7 +213,7 @@ Couple.all.each do |couple|
         content: Faker::Lorem.paragraph(sentence_count: rand(2..8)),
         date: event_date,
         user: nil,
-        kid: couple.kids.sample,
+        kid: family.kids.sample,
         competition: competition
       )
     end
@@ -252,8 +252,8 @@ tasks_list = [
   "Shopping for Baby Supplies"
 ]
 
-Couple.all.each do |couple|
-  Competition.where(couple: couple).each do |competition|
+Family.all.each do |family|
+  Competition.where(family: family).each do |competition|
 
     task_deadline = Faker::Date.between(from: competition.start_date, to: competition.end_date)
     winner = competition.user if competition.user
@@ -264,7 +264,7 @@ Couple.all.each do |couple|
         content: Faker::Lorem.paragraph(sentence_count: rand(2..8)),
         deadline: task_deadline,
         is_recurent: rand(5).zero?,
-        kid: couple.kids.sample
+        kid: family.kids.sample
       )
 
       CompetitionsTask.create!(
