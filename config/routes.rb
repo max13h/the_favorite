@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#root"
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get '/home', to: 'pages#home'
+  get '/common-pot', to: 'pages#common_pot'
+
+  get '/profil', to: 'users#show', as: "user_profil"
+
   resources :tasks
   get '/assign-task', to: 'tasks#assign_task'
   get '/mark-as-done', to: 'tasks#mark_as_done'
@@ -11,8 +15,6 @@ Rails.application.routes.draw do
   resources :events
   get '/assign-event', to: 'events#assign_event'
 
-  get '/home', to: 'pages#home'
-  get '/profil', to: 'users#show', as: "user_profil"
 
   resources :competitions, only: [:index, :show, :destroy, :new, :create]
 

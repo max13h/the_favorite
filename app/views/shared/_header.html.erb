@@ -1,3 +1,4 @@
-<header class="d-flex justify-content-center py-1 shadow-sm">
-  <%= image_tag "the-favorite-logo-svg.svg", alt: "the favorite logo", style: "width: 125px;" %>
+<header class="d-flex justify-content-end align-items-center shadow-sm position-relative">
+  <%= image_tag "the-favorite-logo-svg.svg", alt: "the favorite logo", class: "position-absolute top-50 start-50 translate-middle",style: "width: 125px;" %>
+  <%= link_to "", new_task_path, class: "ri-add-circle-line fs-1 me-3" %>
 </header>
