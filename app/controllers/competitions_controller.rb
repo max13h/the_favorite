@@ -2,12 +2,12 @@ class CompetitionsController < ApplicationController
   before_action :set_competition, only: [:destroy, :show]
 
   def index
-    @couple = current_user.couple
-    @current_competition = @couple.competitions.where("end_date > ?", Time.now).first
+    @family = current_user.family
+    @current_competition = @family.competitions.where("end_date > ?", Time.now).first
     if @current_competition
-      @competitions = @couple.competitions.where.not(id: @current_competition.id).order(end_date: :desc)
+      @competitions = @family.competitions.where.not(id: @current_competition.id).order(end_date: :desc)
     else
-      @competitions = @couple.competitions.order(end_date: :desc)
+      @competitions = @family.competitions.order(end_date: :desc)
     end
 
   end
@@ -33,26 +33,26 @@ class CompetitionsController < ApplicationController
   end
 
   def new
-    couple = current_user.couple
-    current_competition = Competition.where(couple: couple).where("end_date > ?", Time.now)
+    family = current_user.family
+    current_competition = Competition.where(family: family).where("end_date > ?", Time.now)
 
     unless current_competition.empty?
       redirect_to home_path, alert: "You already have a competition running"
     end
 
     @default_end_date = 2.weeks.from_now.to_date
-    @competition = Competition.new(couple: couple, start_date: Date.current)
+    @competition = Competition.new(family: family, start_date: Date.current)
   end
 
   def create
-    @couple = current_user.couple
+    @family = current_user.family
 
     @competition = Competition.new(competition_params)
-    @competition.couple = @couple
+    @competition.family = @family
     @competition.start_date = Time.now
 
     if @competition.save
-      @couple.users.each do |user|
+      @family.users.each do |user|
         @score = Score.new(competition: @competition, user: user)
         @score.save!
       end
