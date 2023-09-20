@@ -15,14 +15,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_100001) do
   enable_extension "plpgsql"
 
   create_table "competitions", force: :cascade do |t|
-    t.bigint "couple_id", null: false
+    t.bigint "family_id", null: false
     t.date "start_date"
     t.date "end_date"
     t.string "reward"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["couple_id"], name: "index_competitions_on_couple_id"
+    t.index ["family_id"], name: "index_competitions_on_family_id"
     t.index ["user_id"], name: "index_competitions_on_user_id"
   end
 
@@ -36,12 +36,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_100001) do
     t.index ["competition_id"], name: "index_competitions_tasks_on_competition_id"
     t.index ["task_id"], name: "index_competitions_tasks_on_task_id"
     t.index ["user_id"], name: "index_competitions_tasks_on_user_id"
-  end
-
-  create_table "couples", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "events", force: :cascade do |t|
@@ -58,14 +52,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_100001) do
     t.index ["user_id"], name: "index_events_on_user_id"
   end
 
+  create_table "families", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "kids", force: :cascade do |t|
     t.string "name"
     t.string "blood_type"
     t.string "doctor_number"
-    t.bigint "couple_id", null: false
+    t.bigint "family_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["couple_id"], name: "index_kids_on_couple_id"
+    t.index ["family_id"], name: "index_kids_on_family_id"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -77,14 +77,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_100001) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "scoreboards", force: :cascade do |t|
+  create_table "scores", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "competition_id", null: false
     t.integer "score", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["competition_id"], name: "index_scoreboards_on_competition_id"
-    t.index ["user_id"], name: "index_scoreboards_on_user_id"
+    t.index ["competition_id"], name: "index_scores_on_competition_id"
+    t.index ["user_id"], name: "index_scores_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -108,13 +108,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_100001) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "couple_id"
-    t.index ["couple_id"], name: "index_users_on_couple_id"
+    t.bigint "family_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["family_id"], name: "index_users_on_family_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "competitions", "couples"
+  add_foreign_key "competitions", "families"
   add_foreign_key "competitions", "users"
   add_foreign_key "competitions_tasks", "competitions"
   add_foreign_key "competitions_tasks", "tasks"
@@ -122,10 +122,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_100001) do
   add_foreign_key "events", "competitions"
   add_foreign_key "events", "kids"
   add_foreign_key "events", "users"
-  add_foreign_key "kids", "couples"
+  add_foreign_key "kids", "families"
   add_foreign_key "notifications", "users"
-  add_foreign_key "scoreboards", "competitions"
-  add_foreign_key "scoreboards", "users"
+  add_foreign_key "scores", "competitions"
+  add_foreign_key "scores", "users"
   add_foreign_key "tasks", "kids"
-  add_foreign_key "users", "couples"
+  add_foreign_key "users", "families"
 end
