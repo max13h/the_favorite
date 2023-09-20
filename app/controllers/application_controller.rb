@@ -24,6 +24,6 @@ class ApplicationController < ActionController::Base
   end
 
   def on_allowed_path?
-    request.path == root_path || request.path == profile_path || request.path == destroy_user_session_path || request.path == edit_user_registration_path
+    request.path == root_path || request.path == profile_path || request.path == destroy_user_session_path || request.path == edit_user_registration_path || request.path == new_family_path || request.path == join_family_path || request.path == create_family_path
   end
 end
