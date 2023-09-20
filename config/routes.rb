@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users#show'
 
+  resources :families, only: [:new]
+  get '/join-family', to: 'families#join_family'
+  get '/families/create', to: 'families#create', as: 'create_family'
+
 
   resources :tasks
   get '/assign-task', to: 'tasks#assign_task'
