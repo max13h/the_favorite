@@ -8,7 +8,7 @@
         <div class="task-options">
           <% if task.user.nil? %>
             <span class="unassigned-task">Not Assigned</span>
-            <%= link_to 'Add To To-Do List', root_path, method: :post, class: 'add-to-do-link' %>
+            <%= button_to 'Add To To-Do List', assign_task_path(task), remote: true, method: :post, class: 'add-to-do-link' %>
           <% else %>
             User <%= task.user_id %> is assigned to this event.
           <% end %>
