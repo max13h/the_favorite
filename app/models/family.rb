@@ -1,4 +1,4 @@
-class Couple < ApplicationRecord
+class Family < ApplicationRecord
   has_many :events
   has_many :users
   has_many :tasks

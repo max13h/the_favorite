@@ -1,6 +1,6 @@
 <div class="d-flex flex-column justify-content-center align-items-center">
   <% score = user.scores.where(competition: competition).first.score %>
-  <% other_user = User.where(couple: user.couple).where.not(id: user.id).first %>
+  <% other_user = User.where(family: user.family).where.not(id: user.id).first %>
   <% other_score = other_user.scores.where(competition: competition).first.score %>
   <p>
     <strong><%= user.first_name %></strong>

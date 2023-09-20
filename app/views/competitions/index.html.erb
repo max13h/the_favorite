@@ -2,7 +2,7 @@
 
   <% if @current_competition %>
     <h2 class="d-inline-block w-100 text-center">Current competition <i class="ri-trophy-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i></h2>
-    <%= render "shared/scores", couple: @couple, current_competition: @current_competition %>
+    <%= render "shared/scores", family: @family, current_competition: @current_competition %>
     <h3 class="mt-5">Reward:</h3>
     <p><%= @current_competition.reward %></p>
   <% else %>
@@ -26,7 +26,7 @@
           <p class="text-truncate mb-3"><%= competition.start_date.strftime "%d/%m/%y" %> - <%= competition.end_date.strftime "%d/%m/%y" %></p>
 
           <div class="d-flex justify-content-evenly align-items-center">
-            <% @couple.users.each do |user| %>
+            <% @family.users.each do |user| %>
               <%= render "shared/user_winner", user: user, competition: competition %>
 
             <% end %>
