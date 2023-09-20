@@ -11,5 +11,5 @@ class User < ApplicationRecord
   has_many :tasks
   has_many :competitions_tasks
 
-  belongs_to :couple, optional: true
+  belongs_to :family, optional: true
 end

@@ -4,7 +4,7 @@ class CreateKids < ActiveRecord::Migration[7.0]
       t.string :name
       t.string :blood_type
       t.string :doctor_number
-      t.references :couple, null: false, foreign_key: true
+      t.references :family, null: false, foreign_key: true
 
       t.timestamps
     end
