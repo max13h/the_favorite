@@ -1,77 +1,41 @@
 <% if @current_competition %>
-  <div class="common-pot mb-5">
-    <h2 class="d-inline-block w-100 text-center">Commont pot <i class="ri-archive-fill d-inline-block text-secondary" style="transform: rotate(10deg)"></i></h2>
-    <div class="commont-pot overflow-y-scroll p-4 rounded d-flex flex-column align-items-center border-dotted border-secondary" style="max-height: 66vh">
+  <div class="todo-list d-flex align-items-center flex-column" >
+    <h2>To-do list <i class="ri-todo-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i></h2>
 
-      <% if @pending_competitions_tasks.empty? && @pending_events.empty? %>
+    <div id="todo" class="overflow-y-scroll d-flex align-items-center flex-column mb-5 border-dotted border-secondary rounded p-3 w-100" style="max-height: 66vh">
 
-        <p class="fst-italic text-ligth">No pending task or event</p>
+      <% unless @user_todo.empty? && @user_tasks_completed.empty? %>
+
+          <% @user_todo.each do |competition_task|%>
+            <div class="competition_task border mb-3 bg-white d-flex justify-content-between p-3 rounded-1 w-100">
+              <%= link_to task_path(competition_task.task), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
+                <p class="text-truncate"><%= competition_task.task.title %></p>
+                <p style="font-size: 0.8rem"><strong>for <%= competition_task.task.kid.name %></strong></p>
+                <%= competition_task.is_done %>
+              <% end %>
+
+              <%= link_to "", mark_as_done_path(id: competition_task, competition_id: @current_competition), class: "ri-checkbox-blank-line d-flex align-items-center", style: "font-size: 3rem" %>
+            </div>
+          <% end %>
+
+          <% @user_tasks_completed.each do |competition_task|%>
+            <div class="competition_task border mb-3 bg-white d-flex justify-content-between p-3 rounded-1 w-100">
+              <%= link_to task_path(competition_task.task), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
+                <p class="text-truncate"><%= competition_task.task.title %></p>
+                <p style="font-size: 0.8rem"><strong>for <%= competition_task.task.kid.name %></strong></p>
+                <%= competition_task.is_done %>
+              <% end %>
+
+              <i class=" d-flex align-items-center" ></i>
+              <%= link_to "", unmark_as_done_path(id: competition_task, competition_id: @current_competition), class: "d-flex align-items-center ri-checkbox-line", style: "font-size: 3rem"  %>
+            </div>
+          <% end %>
 
       <% else %>
-
-        <% @pending_competitions_tasks.each do |competitions_task|%>
-          <div class="task border mb-3 bg-white d-flex justify-content-between p-3 rounded-1 w-100">
-            <%= link_to task_path(competitions_task.task), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
-              <p class="text-truncate"><%= competitions_task.task.title %></p>
-              <p style="font-size: 0.8rem"><strong>for <%= competitions_task.task.kid.name %></strong></p>
-            <% end %>
-
-            <%= link_to "Take for me", assign_task_path(id: competitions_task.task), class: "btn btn-secondary fw-bold text-nowrap d-flex align-items-center", style: "font-size: 0.8rem" %>
-          </div>
-        <% end %>
-
-        <% @pending_events.each do |event|%>
-          <div class="event border mb-3 bg-white d-flex justify-content-between p-3 rounded-1 w-100">
-            <%= link_to event_path(event), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
-              <p class="text-truncate"><%= event.title %></p>
-              <p style="font-size: 0.8rem"><strong>for <%= event.kid.name %></strong> <%= event.date.strftime "%d/%m/%y" %></p>
-            <% end %>
-
-            <%= link_to "Take for me", assign_event_path(id: event), class: "btn btn-secondary fw-bold text-nowrap d-flex align-items-center", style: "font-size: 0.8rem" %>
-          </div>
-        <% end %>
-      <% end %>
-
-    </div>
-  </div>
-
-  <div class="current-competition">
-    <h2 class="d-inline-block w-100 text-center">Current competition <i class="ri-trophy-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i></h2>
-    <%= link_to competitions_path do %>
-      <div class="d-flex align-items-center flex-column mb-5 border-dotted border-secondary rounded p-3">
-        <%= render "shared/scores", couple: @couple, current_competition: @current_competition %>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="todo-list" >
-    <h2 class="d-inline-block w-100 text-center">To-do list <i class="ri-todo-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i></h2>
-    <div id="todo" class="overflow-y-scroll d-flex align-items-center flex-column mb-5 border-dotted border-secondary rounded p-3" style="max-height: 66vh">
-      <% @user_todo.each do |competition_task|%>
-        <div class="competition_task border mb-3 bg-white d-flex justify-content-between p-3 rounded-1 w-100">
-          <%= link_to task_path(competition_task.task), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
-            <p class="text-truncate"><%= competition_task.task.title %></p>
-            <p style="font-size: 0.8rem"><strong>for <%= competition_task.task.kid.name %></strong></p>
-            <%= competition_task.is_done %>
-          <% end %>
-
-          <%= link_to "", mark_as_done_path(id: competition_task, competition_id: @current_competition), class: "ri-checkbox-blank-line d-flex align-items-center", style: "font-size: 3rem" %>
-        </div>
-      <% end %>
-
-      <% @user_tasks_completed.each do |competition_task|%>
-        <div class="competition_task border mb-3 bg-white d-flex justify-content-between p-3 rounded-1 w-100">
-          <%= link_to task_path(competition_task.task), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
-            <p class="text-truncate"><%= competition_task.task.title %></p>
-            <p style="font-size: 0.8rem"><strong>for <%= competition_task.task.kid.name %></strong></p>
-            <%= competition_task.is_done %>
-          <% end %>
-
-          <i class=" d-flex align-items-center" ></i>
-          <%= link_to "", unmark_as_done_path(id: competition_task, competition_id: @current_competition), class: "d-flex align-items-center ri-checkbox-line", style: "font-size: 3rem"  %>
-        </div>
+        <p class="fst-italic">No task picked yet</p>
       <% end %>
     </div>
+      <%= link_to "Pick tasks", common_pot_path, class: "btn btn-secondary fw-bold" %>
   </div>
 
 <% else %>
