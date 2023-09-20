@@ -45,3 +45,17 @@ Exemple for a 25% progress:
 .progress-bar {
  background: $secondary;
 }
+
+hr.divider {
+  height: 0.2rem;
+  max-width: 3.25rem;
+  margin: 1.5rem auto;
+  background-color: $secondary;
+  opacity: 1;
+}
+
+p.landing {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 24px;
+}
