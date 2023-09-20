@@ -11,7 +11,7 @@ class PagesController < ApplicationController
 
     if @current_competition
       @pending_competitions_tasks = @current_competition.competitions_tasks.where(user: nil)
-    @pending_events = @current_competition.events.where(user: nil)
+      @pending_events = @current_competition.events.where(user: nil)
     else
       @pending_competitions_tasks = nil
       @pending_events = nil
@@ -21,4 +21,16 @@ class PagesController < ApplicationController
     @user_tasks_completed = CompetitionsTask.where(is_done: true).where(competition: @current_competition).where(user: current_user)
   end
 
+  def common_pot
+    @couple = current_user.couple
+    @current_competition = @couple.competitions.where("end_date > ?", Time.now).first
+
+    if @current_competition
+      @pending_competitions_tasks = @current_competition.competitions_tasks.where(user: nil)
+      @pending_events = @current_competition.events.where(user: nil)
+    else
+      @pending_competitions_tasks = nil
+      @pending_events = nil
+    end
+  end
 end
