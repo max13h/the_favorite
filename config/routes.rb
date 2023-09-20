@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get '/profile', to: 'users#show'
 
+
   resources :tasks
   get '/assign-task', to: 'tasks#assign_task'
   get '/mark-as-done', to: 'tasks#mark_as_done'
