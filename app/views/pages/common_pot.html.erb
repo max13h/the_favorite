@@ -1,0 +1,45 @@
+<% if @current_competition %>
+  <div class="common-pot mb-5">
+    <h2 class="d-inline-block w-100 text-center">Commont pot <i class="ri-archive-fill d-inline-block text-secondary" style="transform: rotate(10deg)"></i></h2>
+    <div class="commont-pot overflow-y-scroll p-4 rounded d-flex flex-column align-items-center border-dotted border-secondary" style="max-height: 66vh">
+
+      <% if @pending_competitions_tasks.empty? && @pending_events.empty? %>
+
+        <p class="fst-italic text-ligth">No pending task or event</p>
+
+      <% else %>
+
+        <% @pending_competitions_tasks.each do |competitions_task|%>
+          <div class="task border mb-3 bg-white d-flex justify-content-between p-3 rounded-1 w-100">
+            <%= link_to task_path(competitions_task.task), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
+              <p class="text-truncate"><%= competitions_task.task.title %></p>
+              <p style="font-size: 0.8rem"><strong>for <%= competitions_task.task.kid.name %></strong></p>
+            <% end %>
+
+            <%= link_to "Take for me", assign_task_path(id: competitions_task.task), class: "btn btn-secondary fw-bold text-nowrap d-flex align-items-center", style: "font-size: 0.8rem" %>
+          </div>
+        <% end %>
+
+        <% @pending_events.each do |event|%>
+          <div class="event border mb-3 bg-white d-flex justify-content-between p-3 rounded-1 w-100">
+            <%= link_to event_path(event), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
+              <p class="text-truncate"><%= event.title %></p>
+              <p style="font-size: 0.8rem"><strong>for <%= event.kid.name %></strong> <%= event.date.strftime "%d/%m/%y" %></p>
+            <% end %>
+
+            <%= link_to "Take for me", assign_event_path(id: event), class: "btn btn-secondary fw-bold text-nowrap d-flex align-items-center", style: "font-size: 0.8rem" %>
+          </div>
+        <% end %>
+      <% end %>
+
+    </div>
+  </div>
+
+<% else %>
+
+  <div class="position-absolute top-50 start-50 translate-middle d-flex align-items-center flex-column">
+    <p class="fst-italic mb-3">No current competition</p>
+  <%= link_to "New competition", new_competition_path, class: "btn btn-secondary fw-bold" %>
+  </div>
+
+<% end %>
