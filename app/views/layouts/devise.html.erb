@@ -12,6 +12,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "shared/flashes" %>
+    <div class="position-absolute top-0 start-50 translate-middle-x">
+      <%= link_to root_path  do %>
+        <%= image_tag("the-favorite-logo-svg.svg", class: "pt-5", style: "width: 10rem") %>
+      <% end %>
+    </div>
+    <div class="position-absolute top-50 start-50 translate-middle p-3 container">
+      <%= yield %>
+    </div>
   </body>
 </html>
