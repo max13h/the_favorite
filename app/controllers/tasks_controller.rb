@@ -20,13 +20,17 @@ class TasksController < ApplicationController
   # GET /tasks/new
   def new
     @task = Task.new
+    @kids = current_user.family.kids
   end
 
   # POST /tasks
   def create
     @task = Task.new(task_params)
+    kid_selected = Kid.find(params[:task][:kid].to_i)
+    @task.kid = kid_selected
 
     if @task.save
+      create_competitions_task(@task)
       redirect_to task_path(@task), notice: 'Your task was successfully added to the commun pot.'
     else
       render :new
@@ -87,6 +91,17 @@ class TasksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def task_params
-    params.require(:task).permit(:title, :content, :deadline, :kid, :user)
+    params.require(:task).permit(:title, :content, :deadline, :user)
+  end
+
+  def create_competitions_task(task)
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+
+    if @current_competition
+      @competitions_task = CompetitionsTask.new(task: task, competition: @current_competition)
+      unless @competitions_task.save
+        redirect_to common_pot_path, notice: 'Error during the creation of your task'
+      end
+    end
   end
 end
