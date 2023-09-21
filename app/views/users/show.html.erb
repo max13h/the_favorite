@@ -11,30 +11,52 @@
 
   <% if @family %>
     <h2>Your family</h2>
-    <div class="rival d-flex flex-column align-items-center w-100 mt-3">
-      <h3 class="fs-5 align-self-start">Rival:</h3>
-      <i class="ri-account-circle-line d-flex justify-content-center align-items-center" style="height: 70px; font-size: 4rem"></i>
-      <p class="fs-5 fw-bold"><%= "#{@rival.first_name} #{@rival.last_name}" %></p>
-    </div>
-    <div class="kids mt-3 w-100 border-top-dotted pt-3">
-      <h3 class="fs-5">Kids:</h3>
-      <div class="kids d-flex justify-content-evenly">
-        <% @family.kids.each do |kid| %>
-          <div class="kid me-3">
-             <i class="ri-account-circle-line d-flex justify-content-center align-items-center" style="height: 40px; font-size: 3rem"></i>
-            <p><%= kid.name %></p>
-          </div>
-        <% end %>
+    <% if @rival %>
+      <div class="rival d-flex flex-column align-items-center w-100 mt-3">
+        <h3 class="fs-5 align-self-start">Rival:</h3>
+        <i class="ri-account-circle-line d-flex justify-content-center align-items-center" style="height: 70px; font-size: 4rem"></i>
+        <p class="fs-5 fw-bold"><%= "#{@rival.first_name} #{@rival.last_name}" %></p>
       </div>
+    <% else %>
+      <div class="d-flex flex-column align-items-center w-100">
+        <p>Invite your rival to join your family:</p>
+        <div class="copytoclipboard mt-3 d-flex justify-content-evenly align-items-center w-100" data-controller="clipboard">
+          <%= text_field_tag(:code, @family.code, class: "text-center fs-4 border rounded py-1 border-2 border-primary", data: {"clipboard-target": "text"}, readonly: true) %>
+          <button class="btn btn-outline-secondary fs-3 border-2" data-action="click->clipboard#copy"><i class="ri-file-copy-line" data-clipboard-target="icon"></i></button>
+        </div>
+      </div>
+    <% end %>
+
+    <% unless @family.kids.empty? %>
+      <div class="kids mt-3 w-100 border-top-dotted pt-3">
+        <h3 class="fs-5">Kids:</h3>
+        <div class="kids d-flex justify-content-evenly">
+          <% @family.kids.each do |kid| %>
+            <div class="kid me-3">
+              <i class="ri-account-circle-line d-flex justify-content-center align-items-center" style="height: 40px; font-size: 3rem"></i>
+              <p><%= kid.name %></p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% else %>
+      <p class="fst-italic kids mt-3 w-100 border-top-dotted pt-4 text-center">No kid yet</p>
+      <%= link_to "Add kids", kids_path, class: "btn btn-outline-primary mt-3" %>
+    <% end %>
 
 
-    </div>
   <% else %>
     <p class="fst-italic ">No family yet</p>
-    <%= link_to "Add you family", root_path, class: "btn btn-secondary fw-bold mt-2 fs-4" %>
+    <%= link_to "Add you family", new_family_path, class: "btn btn-secondary fw-bold mt-2 fs-4" %>
   <% end %>
 </div>
 
-<div class="d-flex justify-content-center mt-5">
- <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-outline-danger" %>
+<div class="d-flex flex-column align-items-center mt-5">
+  <h3>Danger zone</h3>
+  <div class="mt-3 w-100 d-flex flex-column align-items-center">
+    <%# if current_user.family %>
+      <%#= link_to "Leave family", leave_family_path, data: {turbo_confirm: "Are you sure you want to leave you family ?"}, class: "mb-3 btn btn-outline-danger" %>
+    <%# end %>
+    <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-outline-danger" %>
+  </div>
 </div>

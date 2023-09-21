@@ -16,8 +16,10 @@
       <%= f.input :deadline,
                   required: true,
                   autofocus: true,
+                  order: [:day, :month, :year],
                   input_html: { class: "bg-white" }%>
       <%= f.input :kid,
+                  collection: @kids,
                   required: true,
                   autofocus: true,
                   input_html: { class: "bg-white" }%>
