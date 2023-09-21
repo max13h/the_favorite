@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :families, only: [:new]
   get '/join-family', to: 'families#join_family'
   get '/families/create', to: 'families#create', as: 'create_family'
+  get '/families/leave', to: 'families#leave', as: 'leave_family'
 
 
   resources :tasks
