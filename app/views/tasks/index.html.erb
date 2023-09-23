@@ -10,7 +10,7 @@
             <span class="unassigned-task">Not Assigned</span>
             <%= button_to 'Add To To-Do List', assign_task_path(task), remote: true, method: :post, class: 'add-to-do-link' %>
           <% else %>
-            User <%= task.user_id %> is assigned to this event.
+            User <%= task.user_id %> is assigned to this task.
           <% end %>
         </div>
       </li>
@@ -27,7 +27,7 @@
                 <span class="unassigned-task">Not Assigned</span>
                 <%= button_to 'Add To To-Do List', assign_task_path(task), remote: true, method: :post, class: 'add-to-do-link' %>
               <% else %>
-                User <%= task.user_id %> is assigned to this event.
+                User <%= task.user_id %> is assigned to this task.
               <% end %>
             </div>
           </li>
