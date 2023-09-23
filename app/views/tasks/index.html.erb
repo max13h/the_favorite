@@ -15,5 +15,26 @@
         </div>
       </li>
     <% end %>
+
+    <% @kids_tasks.each do |kid, tasks| %>
+      <h2><%= kid.name %>'s Tasks</h2>
+      <% if tasks.present? %>
+        <% tasks.each do |task| %>
+          <li>
+            <%= task.title %> (Assigned to: <%= task.kid.name %>)
+            <div class="task-options">
+              <% if task.user.nil? %>
+                <span class="unassigned-task">Not Assigned</span>
+                <%= button_to 'Add To To-Do List', assign_task_path(task), remote: true, method: :post, class: 'add-to-do-link' %>
+              <% else %>
+                User <%= task.user_id %> is assigned to this event.
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+      <% else %>
+        <p>No tasks assigned to <%= kid.name %>.</p>
+      <% end %>
+    <% end %>
   </ul>
 </div>
