@@ -12,7 +12,11 @@
           <%= event_count %> event<%= "s" if event_count > 1 %> soon
         </p>
       </div>
-      <i class="ri-user-line me-3" style="font-size: 2.5rem"></i>
+      <% if kid.picture.key %>
+        <%= cl_image_tag kid.picture.key, crop: :scale, class: "d-flex justify-content-center align-items-center rounded-circle me-3", style: "width: 3rem" %>
+      <% else %>
+        <%= image_tag "default_kid.png", class: "d-flex justify-content-center align-items-center rounded-circle me-3", style: "width: 3rem" %>
+      <% end %>
     <% end %>
 
   <% end %>
