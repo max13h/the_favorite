@@ -28,6 +28,18 @@ class KidsController < ApplicationController
     end
   end
 
+  def edit
+    @kid = Kid.find(params[:id])
+  end
+
+  def update
+    if @kid.update(kid_params)
+      redirect_to @kid, notice: "Your kid's informations were successfully updated."
+    else
+      render :edit
+    end
+  end
+
   private
 
   def set_kid
