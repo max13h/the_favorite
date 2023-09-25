@@ -22,7 +22,7 @@ class KidsController < ApplicationController
     @kid.family = current_user.family
 
     if @kid.save
-      redirect_to kid_path(@kid), notice: 'Kid successfully added'
+      redirect_to kid_path(@kid), notice: 'Kid successfully added to your family'
     else
       render :new
     end
