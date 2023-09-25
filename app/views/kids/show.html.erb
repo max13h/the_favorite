@@ -1,0 +1,16 @@
+<div class="container d-flex flex-column align-items-center mt-5">
+
+  <%= render "shared/picture", user: @kid, size: "4rem", kid_or_parent: "kid" %>
+
+  <p class="fs-3"><%= @kid.name %></p>
+  <div class="informations mt-5 w-100">
+    <h2>Informations:</h2>
+    <div class="mt-3">
+      <p>Blood type: <%= @kid.blood_type.blank? ? "not specified" : @kid.blood_type %></p>
+      <p>Doctor number: <%= @kid.doctor_number.blank? ? "not specified" : @kid.doctor_number %></p>
+    </div>
+  </div>
+  <div class="tasks">
+
+  </div>
+</div>

@@ -12,4 +12,6 @@ class User < ApplicationRecord
   has_many :competitions_tasks
 
   belongs_to :family, optional: true
+
+  has_one_attached :picture
 end

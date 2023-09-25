@@ -1,0 +1,5 @@
+<% if user.picture.key %>
+  <%= cl_image_tag user.picture.key, crop: :thumb, gravity: :face, class: "d-flex justify-content-center align-items-center rounded-circle", style: "width: #{size}" %>
+<% else %>
+  <%= image_tag "default_#{kid_or_parent}.png", class: "d-flex justify-content-center align-items-center rounded-circle", style: "width: #{size}" %>
+<% end %>

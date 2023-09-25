@@ -9,6 +9,7 @@ class CompetitionsController < ApplicationController
     else
       @competitions = @family.competitions.order(end_date: :desc)
     end
+    authorize @competitions
 
   end
 
@@ -42,6 +43,8 @@ class CompetitionsController < ApplicationController
 
     @default_end_date = 2.weeks.from_now.to_date
     @competition = Competition.new(family: family, start_date: Date.current)
+
+    authorize @competition
   end
 
   def create
@@ -50,6 +53,7 @@ class CompetitionsController < ApplicationController
     @competition = Competition.new(competition_params)
     @competition.family = @family
     @competition.start_date = Time.now
+    authorize @competition
 
     if @competition.save
       @family.users.each do |user|
@@ -67,6 +71,7 @@ class CompetitionsController < ApplicationController
 
   def set_competition
     @competition = Competition.find(params[:id])
+    authorize @competition
   end
 
   def competition_params
