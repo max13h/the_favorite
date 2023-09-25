@@ -12,11 +12,7 @@
           <%= event_count %> event<%= "s" if event_count > 1 %> soon
         </p>
       </div>
-      <% if kid.picture.key %>
-        <%= cl_image_tag kid.picture.key, crop: :scale, class: "d-flex justify-content-center align-items-center rounded-circle me-3", style: "width: 3rem" %>
-      <% else %>
-        <%= image_tag "default_kid.png", class: "d-flex justify-content-center align-items-center rounded-circle me-3", style: "width: 3rem" %>
-      <% end %>
+      <%= render "shared/picture", user: kid, size: "3rem", kid_or_parent: "kid" %>
     <% end %>
 
   <% end %>
