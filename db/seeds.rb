@@ -49,11 +49,14 @@ puts ""
 
 Family.all.each do |family|
   rand(2..4).times do
-    Kid.create!(
+    kid = Kid.new(
     name: Faker::Name.first_name,
     blood_type: Faker::Blood.group,
     doctor_number: Faker::PhoneNumber.cell_phone,
     family: family)
+
+    kid.picture.attach(io: URI.open("https://api.dicebear.com/7.x/fun-emoji/svg?backgroundColor=1fbf56&seed=#{rand 1000}"), filename: "kid.png")
+    kid.save!
   end
 end
 
@@ -68,13 +71,16 @@ user_nb = 1
 
 Family.all.each do |family|
   2.times do
-    User.create!(
+    user = User.create!(
       email: "user#{user_nb}@gmail.com",
       password: "1234567890",
       first_name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       family_id: family.id
     )
+
+    user.picture.attach(io: URI.open("https://api.dicebear.com/7.x/fun-emoji/svg?seed=#{rand 1000}"), filename: "parent.png")
+    user.save!
     user_nb += 1
   end
 end
