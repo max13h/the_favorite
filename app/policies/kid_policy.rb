@@ -9,4 +9,12 @@ class KidPolicy < ApplicationPolicy
   def index?
     true
   end
+
+  def show?
+    record.family == user.family
+  end
+
+  def create?
+    true
+  end
 end
