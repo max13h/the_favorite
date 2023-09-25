@@ -30,11 +30,13 @@ class KidsController < ApplicationController
 
   def edit
     @kid = Kid.find(params[:id])
+    authorize @kid
   end
 
   def update
     if @kid.update(kid_params)
       redirect_to @kid, notice: "Your kid's informations were successfully updated."
+      authorize @kid
     else
       render :edit
     end
