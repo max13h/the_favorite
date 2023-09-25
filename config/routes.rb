@@ -25,7 +25,7 @@ Rails.application.routes.draw do
 
   resources :competitions, only: [:index, :show, :destroy, :new, :create]
 
-  resources :kids, only: [:index]
+  resources :kids, only: [:index, :show, :new, :create]
 
   get '/increase-score', to: 'scores#increase_score'
   get '/decrease-score', to: 'scores#decrease_score'
