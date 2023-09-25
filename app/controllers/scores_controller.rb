@@ -18,5 +18,6 @@ class ScoresController < ApplicationController
   def set_competition_and_score
     @current_competition = Competition.find(params[:id])
     @score = Score.where(user: current_user, competition: @current_competition).first
+    authorize @score
   end
 end
