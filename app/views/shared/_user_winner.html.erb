@@ -7,9 +7,11 @@
   </p>
   <div class="position-relative">
     <% if other_score < score %>
-      <%= image_tag "crown.svg", alt: "user's crown", style: "width: 20px;", class: "position-absolute", style: "top: -2px; left: -10px" %>
+      <%= image_tag "crown.svg", alt: "user's crown", class: "position-absolute", style: "top: -2px; left: -10px; filter: drop-shadow(1px 1px 0px rgb(0 0 0 / 0.2)); width: 30px;" %>
     <% end %>
-    <i class="ri-account-circle-line " style="font-size: 3rem"></i>
+    <div class="mt-3">
+      <%= render "shared/picture", user: user, size: "2.3rem", kid_or_parent: "parent" %>
+    </div>
   </div>
   <p>
     <strong><%= user.scores.where(competition: competition).first.score %></strong>

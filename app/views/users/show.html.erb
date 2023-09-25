@@ -1,8 +1,10 @@
 <div class="user d-flex flex-column align-items-center">
   <%= link_to "Edit my profile", edit_user_registration_path, class: "align-self-end me-3" %>
-  <div class="profile-picture position-relative">
-    <%= image_tag "crown.svg", alt: "crown image", class: "position-absolute", style: "width: 70px; transform: rotate(20deg); vertical-align: unset; top: 0px; left: 6px" %>
-    <i class="ri-account-circle-line " style="font-size: 6rem"></i>
+
+  <div class="profile-picture position-relative mt-5">
+    <%= image_tag "crown.svg", alt: "crown image", class: "position-absolute", style: "width: 70px; vertical-align: unset; top: -44px; left: -24px; filter: drop-shadow(1px 1px 0px rgb(0 0 0 / 0.2))" %>
+
+    <%= render "shared/picture", user: current_user, size: "5rem", kid_or_parent: "parent" %>
   </div>
   <p class="fs-3 fw-bold"><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
 </div>
@@ -14,7 +16,9 @@
     <% if @rival %>
       <div class="rival d-flex flex-column align-items-center w-100 mt-3">
         <h3 class="fs-5 align-self-start">Rival:</h3>
-        <i class="ri-account-circle-line d-flex justify-content-center align-items-center" style="height: 70px; font-size: 4rem"></i>
+
+        <%= render "shared/picture", user: @rival, size: "4rem", kid_or_parent: "parent" %>
+
         <p class="fs-5 fw-bold"><%= "#{@rival.first_name} #{@rival.last_name}" %></p>
       </div>
     <% else %>
@@ -30,10 +34,11 @@
     <% unless @family.kids.empty? %>
       <div class="kids mt-3 w-100 border-top-dotted pt-3">
         <h3 class="fs-5">Kids:</h3>
-        <div class="kids d-flex justify-content-evenly">
+        <div class="kids d-flex justify-content-evenly flex-wrap">
           <% @family.kids.each do |kid| %>
-            <div class="kid me-3">
-              <i class="ri-account-circle-line d-flex justify-content-center align-items-center" style="height: 40px; font-size: 3rem"></i>
+            <div class="kid d-flex flex-column align-items-center">
+              <%= render "shared/picture", user: kid, size: "2rem", kid_or_parent: "kid" %>
+
               <p><%= kid.name %></p>
             </div>
           <% end %>

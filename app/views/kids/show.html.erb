@@ -1,5 +1,7 @@
-<div class="container d-flex flex-column align-items-center">
-  <i class="ri-user-line" style="font-size: 3rem"></i>
+<div class="container d-flex flex-column align-items-center mt-5">
+
+  <%= render "shared/picture", user: @kid, size: "4rem", kid_or_parent: "kid" %>
+
   <p class="fs-3"><%= @kid.name %></p>
   <div class="informations mt-5 w-100">
     <h2>Informations:</h2>
