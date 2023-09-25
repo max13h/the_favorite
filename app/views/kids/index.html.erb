@@ -1,1 +1,21 @@
-<h1>hello from /kids</h1>
+<div class="d-flex flex-column align-items-center">
+  <% @kids.each do |kid| %>
+    <%= link_to kid_path(kid), class: "border-dotted border-secondary mb-3 w-100 d-flex justify-content-around align-items-center rounded p-3" do %>
+      <div class="flex-grow-1">
+        <p class="fs-3 mb-3"><%= kid.name %></p>
+        <% task_count = kid.tasks.joins(:competitions_tasks).where(competitions_tasks: { is_done: false }).count %>
+        <% event_count = kid.events.where("date > ?", Date.current).count %>
+        <p>
+          <%= task_count %> task<%= "s" if task_count > 1 %> pending
+        </p>
+        <p>
+          <%= event_count %> event<%= "s" if event_count > 1 %> soon
+        </p>
+      </div>
+      <i class="ri-user-line me-3" style="font-size: 2.5rem"></i>
+    <% end %>
+
+  <% end %>
+
+  <%= link_to "Add a kid", new_kid_path, class: "btn btn-secondary fw-bold mt-3" %>
+</div>
