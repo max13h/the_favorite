@@ -3,6 +3,13 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :redirect_if_signed_in_and_no_family
 
+  include Pundit::Authorization
+
+  after_action :verify_authorized, unless: :skip_pundit?
+  # after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
+
+
+
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name])
@@ -25,5 +32,10 @@ class ApplicationController < ActionController::Base
 
   def on_allowed_path?
     request.path == root_path || request.path == profile_path || request.path == destroy_user_session_path || request.path == edit_user_registration_path || request.path == new_family_path || request.path == join_family_path || request.path == create_family_path
+  end
+
+  def skip_pundit?
+    pages_actions = ["root", "home", "common_pot"]
+    devise_controller? || pages_actions.include?(params[:action])
   end
 end

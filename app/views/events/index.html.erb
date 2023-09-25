@@ -15,5 +15,21 @@
         </div>
       </li>
     <% end %>
+
+    <%= event.title %> (Assigned to: <%= event.kid.name %>)
+            <div class="event-options">
+              <% if event.user.nil? %>
+                <span class="unassigned-event">Not Assigned</span>
+                <%= link_to 'Add To Calendar', root_path, method: :post, class: 'add-calendar-link' %>
+              <% else %>
+                User <%= event.user_id %> is assigned to this event.
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+      <% else %>
+        <p>No events assigned to <%= kid.name %>.</p>
+      <% end %>
+    <% end %>
   </ul>
 </div>
