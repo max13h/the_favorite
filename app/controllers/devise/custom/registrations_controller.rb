@@ -1,12 +1,4 @@
 class Devise::Custom::RegistrationsController < Devise::RegistrationsController
-  def edit
-    super
-  end
-
-  def update
-    super
-  end
-
   private
 
   def account_update_params
