@@ -13,13 +13,13 @@
 
   <body>
     <%= render "shared/flashes" %>
-    <div class="position-absolute top-0 start-50 translate-middle-x">
-      <%= link_to root_path  do %>
-        <%= image_tag("the-favorite-logo-svg.svg", class: "pt-5", style: "width: 10rem") %>
+    <div class="container d-flex flex-column align-items-center">
+      <%= link_to root_path, class: "my-5"  do %>
+        <%= image_tag("the-favorite-logo-svg.svg", class: "py-3", style: "width: 10rem") %>
       <% end %>
-    </div>
-    <div class="position-absolute top-50 start-50 translate-middle p-3 container">
-      <%= yield %>
+      <div class="">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>
