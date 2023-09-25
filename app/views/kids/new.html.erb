@@ -1,32 +1,3 @@
 <h1 class="mb-5">Add a new kid</h1>
 
-<%= simple_form_for(@kid, html: {class: "d-flex align-items-center flex-column"}) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :name,
-                label: "Name",
-                required: true,
-                autofocus: true,
-                input_html: { class: "form-control", placeholder: "Enter name" } %>
-    <%= f.input :blood_type,
-                label: "Blood Type",
-                collection: ["A", "B", "AB", "O"],
-                include_blank: "Select Blood Type",
-                autofocus: true,
-                input_html: { class: "form-control" } %>
-    <%= f.input :doctor_number,
-                label: "Doctor Number",
-                placeholder: "Enter doctor number",
-                autofocus: true,
-                input_html: { class: "form-control", type: "tel" } %>
-    <%= f.input :picture,
-                required: false,
-                as: :file,
-                label: "Picture"  %>
-  </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Save", class: "btn btn-primary" %>
-  </div>
-<% end %>
+<%= render 'form', kid: @kid %>
