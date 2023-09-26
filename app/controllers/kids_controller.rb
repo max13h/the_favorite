@@ -22,9 +22,23 @@ class KidsController < ApplicationController
     @kid.family = current_user.family
 
     if @kid.save
-      redirect_to kid_path(@kid), notice: 'Kid successfully added'
+      redirect_to kid_path(@kid), notice: 'Kid successfully added to your family'
     else
       render :new
+    end
+  end
+
+  def edit
+    @kid = Kid.find(params[:id])
+    authorize @kid
+  end
+
+  def update
+    if @kid.update(kid_params)
+      redirect_to @kid, notice: "Your kid's informations were successfully updated."
+      authorize @kid
+    else
+      render :edit
     end
   end
 
