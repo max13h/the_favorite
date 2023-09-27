@@ -59,3 +59,16 @@ p.landing {
   font-weight: 800;
   line-height: 24px;
 }
+
+.active-link {
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 2px;
+    background-color: $secondary;
+    top: -4px;
+  }
+}

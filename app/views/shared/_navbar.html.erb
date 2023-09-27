@@ -1,21 +1,21 @@
 <div class="navbar d-flex justify-content-around p-0" style="font-size: 2.2rem">
-  <%= link_to home_path, class: "on-active d-flex flex-column align-items-center my-1" do %>
+  <%= link_to home_path, class: "on-active d-flex flex-column align-items-center my-1 #{'active-link' if current_page?(home_path)}" do %>
     <i class="ri-home-4-line d-flex justify-content-center align-items-center" style="height: 40px; font-size: 1.9rem"></i>
     <p style="font-size: 0.9rem" class="fw-bold">Home</p>
   <% end %>
-  <%= link_to competitions_path, class: "on-active d-flex flex-column align-items-center my-1" do %>
+  <%= link_to competitions_path, class: "on-active d-flex flex-column align-items-center my-1 #{'active-link' if current_page?(competitions_path)}" do %>
     <i class="ri-trophy-line d-flex justify-content-center align-items-center" style="height: 40px; font-size: 1.9rem"></i>
     <p style="font-size: 0.9rem" class="fw-bold">Score</p>
   <% end %>
-  <%= link_to common_pot_path, class: "on-active d-flex flex-column align-items-center my-1" do %>
+  <%= link_to common_pot_path, class: "on-active d-flex flex-column align-items-center my-1 #{'active-link' if current_page?(common_pot_path)}" do %>
     <i class="ri-archive-2-line d-flex justify-content-center align-items-center" style="height: 40px; font-size: 1.9rem"></i>
     <p style="font-size: 0.9rem" class="fw-bold">Pot</p>
   <% end %>
-  <%= link_to kids_path, class: "on-active d-flex flex-column align-items-center my-1" do %>
+  <%= link_to kids_path, class: "on-active d-flex flex-column align-items-center my-1 #{'active-link' if current_page?(kids_path)}" do %>
     <i class="ri-bear-smile-line d-flex justify-content-center align-items-center" style="height: 40px; font-size: 1.9rem"></i>
     <p style="font-size: 0.9rem" class="fw-bold">Kids</p>
   <% end %>
-  <%= link_to profile_path, class: "on-active d-flex flex-column align-items-center my-1" do %>
+  <%= link_to profile_path, class: "on-active d-flex flex-column align-items-center my-1 #{'active-link' if current_page?(profile_path)}" do %>
     <div class="d-flex justify-content-center align-items-center" style="height: 40px;">
 
       <%= render "shared/picture", user: current_user, size: "30px", kid_or_parent: "parent" %>
