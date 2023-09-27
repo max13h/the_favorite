@@ -8,21 +8,22 @@
       <%= f.input :title,
                   required: true,
                   autofocus: true,
-                  input_html: { class: "bg-white" }%>
+                  input_html: { class: "form-control" }%>
       <%= f.input :content,
                   required: true,
                   autofocus: true,
-                  input_html: { class: "bg-white" }%>
+                  input_html: { class: "form-control" }%>
       <%= f.input :deadline,
                   required: true,
                   autofocus: true,
                   order: [:day, :month, :year],
-                  input_html: { class: "bg-white" }%>
+                  input_html: { class: "form-control" }%>
       <%= f.input :kid,
                   collection: @kids,
+                  include_blank: "Select a kid",
                   required: true,
                   autofocus: true,
-                  input_html: { class: "bg-white" }%>
+                  input_html: { class: "form-control" }%>
     </div>
 
     <div class="form-actions">
