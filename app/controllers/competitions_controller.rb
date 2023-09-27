@@ -38,7 +38,7 @@ class CompetitionsController < ApplicationController
     current_competition = Competition.where(family: family).where("end_date > ?", Time.now)
 
     unless current_competition.empty?
-      redirect_to home_path, alert: "You already have a competition running"
+      redirect_to home_tasks_path, alert: "You already have a competition running"
     end
 
     @default_end_date = 2.weeks.from_now.to_date

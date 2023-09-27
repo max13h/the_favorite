@@ -1,0 +1,15 @@
+<%= link_to event_path(event), class: "bg-canceled border-dotted h-100 rounded p-3 d-flex flex-column align-items-center", style: "border-color: #b8b6b6"  do %>
+  <div class="w-100 text-center">
+    <p class="text-break fw-bold fs-3"><%= event.title.capitalize %></p>
+    <div class="d-flex justify-content-center align-items-center mt-3">
+      <p class="me-3">for <%= event.kid.name %></p>
+      <%= render 'shared/picture', user: event.kid, size: "2rem", kid_or_parent: "kid" %>
+    </div>
+  </div>
+  <p class="mt-5 flex-grow-1"><%= event.content %></p>
+
+  <% days_left = (event.date - Date.current).to_i %>
+
+  <p class="fw-bold fs-1">Event DONE</p>
+
+<% end %>
