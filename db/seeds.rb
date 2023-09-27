@@ -211,9 +211,10 @@ events_list = [
 Family.all.each do |family|
   Competition.where(family: family).each do |competition|
 
-    event_date = Faker::Date.between(from: competition.start_date, to: competition.end_date)
 
     5.times do
+      event_date = Faker::Date.between(from: competition.start_date, to: competition.end_date)
+
       Event.create!(
         title: events_list.sample,
         content: Faker::Lorem.paragraph(sentence_count: rand(2..8)),
