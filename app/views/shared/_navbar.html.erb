@@ -1,5 +1,5 @@
 <div class="navbar d-flex justify-content-around p-0" style="font-size: 2.2rem">
-  <%= link_to home_tasks_path, class: "on-active d-flex flex-column align-items-center my-1 #{'active-link' if current_page?(home_path)}" do %>
+  <%= link_to home_tasks_path, class: "on-active d-flex flex-column align-items-center my-1 #{'active-link' if (current_page?(home_tasks_path) || current_page?(home_events_path))}" do %>
     <i class="ri-home-4-line d-flex justify-content-center align-items-center" style="height: 40px; font-size: 1.9rem"></i>
     <p style="font-size: 0.9rem" class="fw-normal">Home</p>
   <% end %>
