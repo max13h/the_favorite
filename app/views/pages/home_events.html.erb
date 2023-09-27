@@ -1,0 +1,50 @@
+<div class="h-100 overflow-x-hidden d-flex flex-column">
+  <%= link_to "Tasks", home_tasks_path, class: "btn btn-secondary" %>
+
+  <% if @current_competition %>
+    <div class="events d-flex align-items-center flex-column h-100" >
+      <h2>Events <i class="ri-todo-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i></h2>
+
+      <div class="flex-grow-1 d-flex align-items-center flex-column rounded p-3 w-100">
+
+        <% unless @pending_events.empty? %>
+          <div data-controller="swiper" class="w-100 h-100">
+            <swiper-container class="mySwiper h-100"
+                              pagination="true"
+                              pagination-dynamic-bullets="true"
+                              effect="cards"
+                              cards-effect-per-slide-offset="4"
+                              cards-effect-slide-shadows="false"
+
+            >
+              <% @pending_events.each do |event|%>
+                <swiper-slide class="p-1" style="height: 90%">
+                  <%= render 'shared/event_cards/active_event_card', event: event %>
+                </swiper-slide>
+              <% end %>
+
+              <% @completed_events.each do |event|%>
+                <swiper-slide class="p-1" style="height: 90%">
+                  <%= render 'shared/event_cards/inactive_event_card', event: event %>
+                </swiper-slide>
+              <% end %>
+            </swiper-container>
+            </div>
+          </div>
+
+        <% else %>
+          <p class="fst-italic">No event picked yet</p>
+        <% end %>
+      </div>
+    </div>
+
+  <% else %>
+
+    <div class="position-absolute top-50 start-50 translate-middle d-flex align-items-center flex-column">
+      <p class="fst-italic mb-3">No current competition</p>
+    <%= link_to "New competition", new_competition_path, class: "btn btn-secondary fw-bold" %>
+    </div>
+
+  <% end %>
+
+</div>
