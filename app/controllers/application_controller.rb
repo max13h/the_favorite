@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(_resource)
-    home_path
+    home_tasks_path
   end
 
   private
@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def skip_pundit?
-    pages_actions = ["root", "home", "common_pot"]
+    pages_actions = ["root", "home_tasks", "home_events", "common_pot"]
     devise_controller? || pages_actions.include?(params[:action])
   end
 end
