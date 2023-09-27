@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   root to: "pages#root"
 
-  get '/home', to: 'pages#home'
+  get '/home/tasks', to: 'pages#home_tasks'
+  get '/home/events', to: 'pages#home_events'
   get '/common-pot', to: 'pages#common_pot'
 
   get '/profile', to: 'users#show'
