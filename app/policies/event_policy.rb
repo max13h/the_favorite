@@ -9,4 +9,8 @@ class EventPolicy < ApplicationPolicy
   def assign_event?
     record.kid.family == user.family
   end
+
+  def show?
+    record.user.family == user.family
+  end
 end

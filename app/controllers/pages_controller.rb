@@ -5,7 +5,7 @@ class PagesController < ApplicationController
     render layout: "landing"
   end
 
-  def home
+  def home_tasks
     @family = current_user.family
     @current_competition = @family.competitions.where("end_date > ?", Time.now).first
 
@@ -19,6 +19,18 @@ class PagesController < ApplicationController
 
     @user_todo = CompetitionsTask.where(is_done: false).where(competition: @current_competition).where(user: current_user)
     @user_tasks_completed = CompetitionsTask.where(is_done: true).where(competition: @current_competition).where(user: current_user)
+  end
+
+  def home_events
+    @family = current_user.family
+    @current_competition = @family.competitions.where("end_date > ?", Time.now).first
+
+    if @current_competition
+      @pending_events = @current_competition.events.where(user: current_user).where("date >=  ?", Date.current).order(date: :asc)
+      @completed_events = @current_competition.events.where(user: current_user).where("date <  ?", Date.current).order(date: :asc)
+    else
+      @pending_events = []
+    end
   end
 
   def common_pot
