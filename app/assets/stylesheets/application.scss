@@ -83,8 +83,6 @@ p.landing {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%23FFFFFF' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%23FFFFFF' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-
-
 .switch-btn-inactive {
   background-color: black;
   color: black;
@@ -146,4 +144,11 @@ p.landing {
     border-radius: 10px;
     background-color: $light-gray;
   }
+}
+
+.site-content {
+  padding-top: 80px; /* Ajustez la valeur selon vos besoins */
+  padding-bottom: 80px; /* Ajustez la valeur selon vos besoins */
+  padding-left: 20px;
+  padding-right: 20px;
 }
