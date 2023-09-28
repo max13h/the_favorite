@@ -1,10 +1,11 @@
-<div class="h-100 overflow-x-hidden d-flex flex-column">
-  <%= link_to "Tasks", home_tasks_path, class: "btn btn-secondary" %>
+<div class="switch w-100 d-flex justify-content-center align-items-center mt-2 mb-4 ">
+  <%= link_to "Tasks", home_tasks_path, class: "switch-btn-inactive me-3", data: { btn: "Tasks" }  %>
+  <%= link_to "Events", home_events_path, class: "switch-btn-active", data: { btn: "Events" }  %>
+</div>
 
+<div class="h-100 overflow-x-hidden d-flex flex-column">
   <% if @current_competition %>
     <div class="events d-flex align-items-center flex-column h-100" >
-      <h2>Events <i class="ri-todo-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i></h2>
-
       <div class="flex-grow-1 d-flex align-items-center flex-column rounded p-3 w-100">
 
         <% unless @pending_events.empty? %>
