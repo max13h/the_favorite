@@ -1,10 +1,12 @@
-<%= link_to "events", home_events_path, class: "btn btn-secondary" %>
+<div class="h-100 d-flex flex-column align-items-center">
+  <div class="switch w-100 d-flex justify-content-center align-items-center mt-2 mb-4 ">
+    <%= link_to "Tasks", home_events_path, class: "switch-btn-active me-3", data: { btn: "Tasks" }  %>
+    <%= link_to "Events", home_events_path, class: "switch-btn-inactive", data: { btn: "Events" }  %>
+  </div>
 
-<% if @current_competition %>
-  <div class="todo-list d-flex align-items-center flex-column" >
-    <h2>To-do list <i class="ri-todo-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i></h2>
+  <% if @current_competition %>
 
-    <div id="todo" class="overflow-y-scroll d-flex align-items-center flex-column mb-5 border-dotted border-secondary rounded p-3 w-100" style="max-height: 66vh">
+    <div id="todo" class="overflow-y-scroll d-flex align-items-center flex-column border-dotted border-secondary rounded p-3 w-100 flex-grow-1">
 
       <% unless @user_todo.empty? && @user_tasks_completed.empty? %>
 
@@ -35,14 +37,13 @@
         <p class="fst-italic">No task picked yet</p>
       <% end %>
     </div>
-      <%= link_to "Pick tasks", common_pot_path, class: "btn btn-secondary fw-bold" %>
-  </div>
 
-<% else %>
+  <% else %>
 
-  <div class="position-absolute top-50 start-50 translate-middle d-flex align-items-center flex-column">
-    <p class="fst-italic mb-3">No current competition</p>
-  <%= link_to "New competition", new_competition_path, class: "btn btn-secondary fw-bold" %>
-  </div>
+    <div class="position-absolute top-50 start-50 translate-middle d-flex align-items-center flex-column">
+      <p class="fst-italic mb-3">No current competition</p>
+    <%= link_to "New competition", new_competition_path, class: "btn btn-secondary fw-bold" %>
+    </div>
 
-<% end %>
+  <% end %>
+</div>
