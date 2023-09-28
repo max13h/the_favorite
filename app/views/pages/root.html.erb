@@ -7,14 +7,15 @@
 
       <div class="col-lg-8 p-1 align-self-center">
         <p class="landing">Every kid has a favorite parent.<br/>Are you sure it’s you?</p>
-        <hr class="divider" />
-        <p class="text-black-75">Take care of your child, organize his activities and much more... And above all, collect points to beat the other parent and become the favorite!</p>
+         <hr class="divider" />
+        <p class="text-black-75">Take care of your child, organize their activities and much more... And above all, collect points to beat the other parent and become the favorite!</p>
       </div>
 
       <div class="col-lg-8 p-1 align-self-start">
-        <%= link_to "Get started", new_user_registration_path, class: "btn btn-secondary" %>
-        <%= link_to "Login", new_user_session_path, class: "link" %>
+        <div class="mb-2">
+          <%= link_to "Get started", new_user_registration_path, class: "btn btn-secondary" %>
+        </div>
+        <div>
+          <%= link_to "Login", new_user_session_path, class: "link" %>
+        </div>
       </div>
-    </div>
-  </div>
-</header>
