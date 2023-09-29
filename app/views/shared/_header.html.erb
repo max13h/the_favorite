@@ -1,4 +1,10 @@
 <header class="d-flex justify-content-end align-items-center shadow-sm fixed-top">
   <%= image_tag "the-favorite-logo-svg.svg", alt: "the favorite logo", class: "position-absolute top-50 start-50 translate-middle",style: "width: 147.937px; height: 40px;" %>
-  <%= link_to "", new_task_path, class: "ri-add-circle-line fs-1 me-3" %>
+  <%# <%= link_to "", new_task_path, class: "ri-add-circle-line fs-1 me-3" %>
+  <%= link_to profile_path, class: "on-active d-flex flex-column align-items-center my-1 #{'active-link' if current_page?(profile_path)}" do %>
+    <div class="d-flex justify-content-center align-items-center" style="height: 40px;">
+
+      <%= render "shared/picture", user: current_user, size: "30px", kid_or_parent: "parent" %>
+    </div>
+  <% end %>
 </header>
