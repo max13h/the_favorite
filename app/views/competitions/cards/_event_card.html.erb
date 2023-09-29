@@ -1,0 +1,8 @@
+<%= link_to event_path(event), class: "d-block w-100 border-dotted border-secondary bg-disable rounded-1 p-3" do %>
+  <div class="d-flex justify-content-between align-items-center mb-3 fs-7">
+    <p><%= event.date.strftime "#{event.date.day.ordinalize} %B %y" %></p>
+    <p>Took by <%= event.user.first_name %></p>
+  </div>
+  <p class="fs-5 text-truncate"><%= event.title %></p>
+  <p class="fw-bold fs-7">for <%= event.kid.name %></p>
+<% end %>

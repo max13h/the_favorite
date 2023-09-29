@@ -5,11 +5,11 @@ class CompetitionsController < ApplicationController
     @family = current_user.family
     @current_competition = @family.competitions.where("end_date > ?", Time.now).first
     if @current_competition
-      @competitions = @family.competitions.where.not(id: @current_competition.id).order(end_date: :desc)
+      @old_competitions = @family.competitions.where.not(id: @current_competition.id).order(end_date: :desc)
     else
-      @competitions = @family.competitions.order(end_date: :desc)
+      @old_competitions = @family.competitions.order(end_date: :desc)
     end
-    authorize @competitions
+    authorize @old_competitions
 
   end
 
@@ -31,6 +31,10 @@ class CompetitionsController < ApplicationController
   end
 
   def show
+    @competitions_tasks = CompetitionsTask.where(competition: @competition)
+    @events = Event.where(competition: @competition).order(date: :asc)
+    render layout: "focus"
+
   end
 
   def new
