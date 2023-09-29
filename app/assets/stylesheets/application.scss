@@ -17,6 +17,7 @@ a {
 p {
   margin: 0px ;
 }
+
 .navbar {
   box-shadow: 0px 0px 10px 3.2px rgba(134, 132, 128, 0.25);
 }
@@ -32,6 +33,9 @@ p {
 }
 .border-top-dotted {
   border-top: 5px dotted black;
+}
+.border-bottom-dotted {
+  border-bottom: 2px dotted black;
 }
 /* Progress bar design. To use it on the scoreboard, please take the HTML below.
 Exemple for a 25% progress:
@@ -78,72 +82,97 @@ p.landing {
   --swiper-pagination-color: #FFBE2F;
 }
 
-.bg-canceled {
+.bg-disable {
   background-color: #F3F3F3;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%23FFFFFF' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%23FFFFFF' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-.switch-btn-inactive {
-  background-color: black;
-  color: black;
-  border-radius: 10px;
-  font-weight: bold;
-  position: relative;
-  cursor: pointer;
-  padding: 0.7rem;
-  width: 100px;
-
-  &:before {
-    content: attr(data-btn);
+.switch {
+  .switch-btn-inactive {
+    background-color: black;
     color: black;
-    position: absolute;
-    top: -3px;
-    left: -3px;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
     border-radius: 10px;
-    background-color: $secondary;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+    padding: 0.7rem;
+    width: 100px;
+
+    &:before {
+      content: attr(data-btn);
+      color: black;
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background-color: $secondary;
+    }
+
+    &:active:before {
+      top: 0;
+      left: 0;
+      box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.815) inset;
+    }
+
   }
 
-  &:active:before {
-    top: 0;
-    left: 0;
-    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.815) inset;
-  }
+  .switch-btn-active {
+    background-color: black;
+    color: black;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    position: relative;
+    cursor: pointer;
+    padding: 0.7rem;
+    width: 100px;
 
+    &:before {
+      content: attr(data-btn);
+      color: black;
+      position: absolute;
+      top: 0;
+      left: 0;
+      box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.815) inset;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background-color: $light-gray;
+    }
+  }
 }
 
-.switch-btn-active {
-  background-color: black;
-  color: black;
-  border: none;
-  border-radius: 10px;
-  font-weight: bold;
-  position: relative;
-  cursor: pointer;
-  padding: 0.7rem;
-  width: 100px;
+.max-width-sm {
+  max-width: 400px;
+}
+.max-width-md {
+  max-width: 600px;
+}
+.max-width-lg {
+  max-width: 800px;
+}
 
-  &:before {
-    content: attr(data-btn);
-    color: black;
-    position: absolute;
-    top: 0;
-    left: 0;
-    box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.815) inset;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-    background-color: $light-gray;
-  }
+.fs-7 {
+  font-size: 0.9rem !important;
+}
+
+.check-box {
+  flex-shrink: 0;
+  display: block;
+  width: 50px;
+  height: 50px;
+  border: 2px solid black;
+  border-radius: 10px;
 }
 
 .site-content {
