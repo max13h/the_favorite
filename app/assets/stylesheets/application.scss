@@ -181,3 +181,12 @@ p.landing {
   padding-left: 20px;
   padding-right: 20px;
 }
+
+.branded-header {
+display: flex;
+height: 65px;
+padding: 8px 24px;
+justify-content: space-between;
+align-items: center;
+flex-shrink: 0;
+}
