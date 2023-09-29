@@ -176,17 +176,13 @@ p.landing {
 }
 
 .site-content {
-  padding-top: 80px; /* Ajustez la valeur selon vos besoins */
-  padding-bottom: 80px; /* Ajustez la valeur selon vos besoins */
+  padding-top: 16px; /* Ajustez la valeur selon vos besoins */
+  padding-bottom: 16px; /* Ajustez la valeur selon vos besoins */
   padding-left: 20px;
   padding-right: 20px;
 }
 
 .branded-header {
-display: flex;
 height: 65px;
 padding: 8px 24px;
-justify-content: space-between;
-align-items: center;
-flex-shrink: 0;
 }
