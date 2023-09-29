@@ -1,0 +1,27 @@
+<div class="container border-dotted rounded border-secondary d-flex align-items-center flex-column p-3 w-100 max-width-lg
+            <%= competition.end_date < Time.now ? "bg-disable" : "" %>">
+
+  <div class="scores d-flex align-items-center justify-content-evenly w-100">
+    <% current_user.family.users.each do |user| %>
+      <%= render "competitions/users_scores/user_big", user: user, competition: competition, counter: counter %>
+      <% unless user == current_user.family.users.last || competition.user %>
+        <%= image_tag "crown.svg", alt: "crown image", style: "width: 50px; transform: rotate(20deg);" %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <p class="mt-3">
+    <% if competition.user %>
+
+      <strong><%= (Date.current - competition.end_date).to_i %> days ago</strong>
+    <% else %>
+      <strong><%= (competition.end_date - Date.current).to_i %> days remaining</strong>
+    <% end %>
+  </p>
+
+  <h3 class="mt-5 ">
+    Reward
+    <i class="ri-award-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i>
+  </h3>
+  <p class="text-center fst-italic"><%= competition.reward %></p>
+</div>

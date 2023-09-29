@@ -1,12 +1,11 @@
 <div class="d-flex flex-column justify-content-center align-items-center">
   <% score = user.scores.where(competition: competition).first.score %>
   <% other_user = User.where(family: user.family).where.not(id: user.id).first %>
-  <% other_score = other_user.scores.where(competition: competition).first.score %>
   <p>
     <strong><%= user.first_name %></strong>
   </p>
   <div class="position-relative">
-    <% if other_score < score %>
+    <% if user == competition.user %>
       <%= image_tag "crown.svg", alt: "user's crown", class: "position-absolute", style: "top: -2px; left: -10px; filter: drop-shadow(1px 1px 0px rgb(0 0 0 / 0.2)); width: 30px;" %>
     <% end %>
     <div class="mt-3">

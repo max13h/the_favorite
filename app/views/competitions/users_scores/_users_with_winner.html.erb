@@ -1,0 +1,5 @@
+<div class=" w-100 d-flex justify-content-evenly align-items-center mt-3">
+  <% current_user.family.users.each do |user| %>
+    <%= render "competitions/users_scores/user_small", user: user, competition: competition %>
+  <% end %>
+</div>
