@@ -56,6 +56,7 @@ hr.divider {
   margin: 1.5rem auto;
   background-color: $secondary;
   opacity: 1;
+  border-color: transparent;
 }
 
 p.landing {
@@ -172,4 +173,11 @@ p.landing {
   height: 50px;
   border: 2px solid black;
   border-radius: 10px;
+}
+
+.site-content {
+  padding-top: 80px; /* Ajustez la valeur selon vos besoins */
+  padding-bottom: 80px; /* Ajustez la valeur selon vos besoins */
+  padding-left: 20px;
+  padding-right: 20px;
 }
