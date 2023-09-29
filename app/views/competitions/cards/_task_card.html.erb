@@ -1,0 +1,17 @@
+<div class="border-dotted border-primary rounded-1 p-3 <%= "mb-3" unless last %>" style="border-width: 2px">
+  <p class="fs-7 text-end w-100">Taken by <%= competitions_task.user.first_name %></p>
+  <div class="d-flex justify-content-between align-items-center w-100">
+    <div class="overflow-hidden flex-grow-1 me-3">
+      <p class="fs-5 text-truncate"><%= competitions_task.task.title %></p>
+      <p class="fw-bold fs-7">For <%= competitions_task.task.kid.name %></p>
+    </div>
+    <div class="check-box d-flex justify-content-center align-items-center bg-disable">
+      <i class="ri-check-line fs-1"></i>
+    </div>
+  </div>
+  <% if competitions_task.task.deadline %>
+    <p class="fs-7 fst-italic mt-2 w-100 text-center">Deadline: <%= competitions_task.task.deadline.strftime "#{competitions_task.task.deadline.day.ordinalize} %B %y" %></p>
+  <% else %>
+    <p>No deadline</p>
+  <% end %>
+</div>

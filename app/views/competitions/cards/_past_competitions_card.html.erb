@@ -1,0 +1,7 @@
+<%= link_to competition_path(competition), class: "bg-disable d-block p-3 rounded border-dotted border-secondary w-100 max-width-sm mx-auto" do %>
+  <div class="w-100 mb-3">
+    <p class="text-truncate fw-bold"><%= (Date.current - competition.end_date).to_i %> days ago</p>
+
+    <%= render "competitions/users_scores/users_with_winner", competition: competition, size: "small" %>
+  </div>
+<% end %>
