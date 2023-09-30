@@ -65,7 +65,9 @@ p.landing {
   line-height: 24px;
 }
 
-.active-link {
+.nav-active-link {
+  font-variation-settings: 'wght' 266;
+  font-weight: 500;
   position: relative;
 
   &::after {
@@ -166,13 +168,18 @@ p.landing {
   font-size: 0.9rem !important;
 }
 
-.check-box {
-  flex-shrink: 0;
-  display: block;
-  width: 50px;
-  height: 50px;
-  border: 2px solid black;
+.todo-check-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
   border-radius: 10px;
+}
+
+.material-symbols-outlined {
+  font-size: 40px !important
 }
 
 .site-content {
@@ -185,4 +192,19 @@ p.landing {
 .branded-header {
 height: 65px;
 padding: 8px 24px;
+}
+
+.heading-container {
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+}
+
+.heading-illustration-icons {
+  display: inline-block;
+  transform: rotate(10deg);
+  color: $secondary;
+  font-size: 30px !important;
+  margin-left: 0.5rem;
+  font-variation-settings: 'FILL' 1;
 }

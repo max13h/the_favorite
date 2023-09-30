@@ -1,7 +1,9 @@
 <div class="current-competition d-flex flex-column align-items-center">
-  <h2 class="text-center">
+  <h2 class="heading-container">
     Current competition
-    <i class="ri-trophy-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i>
+    <span class="material-symbols-outlined heading-illustration-icons">
+      trophy
+    </span>
   </h2>
 
   <% if @current_competition %>
@@ -13,13 +15,15 @@
 </div>
 
 <div class="old-competitions mt-4 d-flex flex-column align-items-center">
-  <h2 class="text-center">
+  <h2 class="heading-container">
     Old competitions
-    <i class="ri-history-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i>
+    <span class="material-symbols-outlined heading-illustration-icons">
+      history
+    </span>
   </h2>
 
   <% unless @old_competitions.empty? %>
-    <div data-controller="swiper" class="w-100 overflow-hidden" style="height: 230px">
+    <div data-controller="swiper" class="w-100" style="height: 230px">
       <swiper-container class="mySwiper h-100 max-width-sm"
                         pagination="true"
                         pagination-dynamic-bullets="true"
@@ -43,7 +47,7 @@
 
 
 <% if @current_competition %>
-  <div class="d-flex justify-content-center mt-5 mb-4">
+  <div class="d-flex justify-content-center py-5">
     <%= link_to "Delete current competition", competition_path(@current_competition), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn-outline-danger" %>
   </div>
 <% end %>

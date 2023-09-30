@@ -1,21 +1,33 @@
-<div class="d-flex flex-column align-items-center">
-  <% @kids.each do |kid| %>
-    <%= link_to kid_path(kid), class: "border-dotted border-secondary mb-3 w-100 d-flex justify-content-around align-items-center rounded p-3" do %>
-      <div class="flex-grow-1">
-        <p class="fs-3 mb-3"><%= kid.name %></p>
-        <% task_count = kid.tasks.joins(:competitions_tasks).where(competitions_tasks: { is_done: false }).count %>
-        <% event_count = kid.events.where("date > ?", Date.current).count %>
-        <p>
-          <%= task_count %> task<%= "s" if task_count > 1 %> pending
-        </p>
-        <p>
-          <%= event_count %> event<%= "s" if event_count > 1 %> soon
-        </p>
-      </div>
-      <%= render "shared/picture", user: kid, size: "3rem", kid_or_parent: "kid" %>
+<div class="d-flex flex-column align-items-center h-100 w-100">
+
+  <h2 class="heading-container">
+    Your kids
+    <span class="material-symbols-outlined heading-illustration-icons">
+      child_care
+    </span>
+  </h2>
+
+  <div class="overflow-y-scroll d-flex align-items-center flex-column border-dotted border-secondary rounded p-3 w-100 flex-grow-1 position-relative">
+
+    <% @kids.each do |kid| %>
+      <%= link_to kid_path(kid), class: "border mb-3 w-100 d-flex justify-content-around align-items-center rounded p-3" do %>
+        <div class="flex-grow-1">
+          <p class="fs-3 mb-3"><%= kid.name %></p>
+          <% task_count = kid.tasks.joins(:competitions_tasks).where(competitions_tasks: { is_done: false }).count %>
+          <% event_count = kid.events.where("date > ?", Date.current).count %>
+          <p>
+            <%= task_count %> task<%= "s" if task_count > 1 %> pending
+          </p>
+          <p>
+            <%= event_count %> event<%= "s" if event_count > 1 %> soon
+          </p>
+        </div>
+        <%= render "shared/picture", user: kid, size: "3rem", kid_or_parent: "kid" %>
+      <% end %>
+
     <% end %>
 
-  <% end %>
+  </div>
 
   <%= link_to "Add a kid", new_kid_path, class: "btn btn-secondary mt-3" %>
 </div>

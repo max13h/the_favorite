@@ -1,4 +1,4 @@
-<div class="container border-dotted rounded border-secondary d-flex align-items-center flex-column p-3 w-100 max-width-lg
+<div class="border-dotted rounded border-secondary d-flex align-items-center flex-column p-3 w-100 max-width-lg
             <%= competition.end_date < Time.now ? "bg-disable" : "" %>">
 
   <div class="scores d-flex align-items-center justify-content-evenly w-100">
@@ -19,9 +19,11 @@
     <% end %>
   </p>
 
-  <h3 class="mt-5 ">
+  <h3 class="mt-5 heading-container ">
     Reward
-    <i class="ri-award-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i>
+    <span class="material-symbols-outlined heading-illustration-icons">
+      workspace_premium
+    </span>
   </h3>
   <p class="text-center fst-italic"><%= competition.reward %></p>
 </div>
