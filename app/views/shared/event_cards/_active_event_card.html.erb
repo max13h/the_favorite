@@ -8,7 +8,7 @@
   </div>
   <p class="mt-5 flex-grow-1"><%= event.content %></p>
 
-  <% days_left = (event.date - Date.current).to_i %>
+  <% days_left = (event.date - DateTime.current).to_i %>
 
   <p class="fw-bold fs-1">
     <% if days_left == 1 %>

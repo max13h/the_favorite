@@ -6,24 +6,36 @@
 
     <div class="form-inputs">
       <%= f.input :title,
+                  label: "What's the task ?",
                   required: true,
                   autofocus: true,
                   input_html: { class: "form-control" }%>
       <%= f.input :content,
-                  required: true,
+                  label: "Add some context",
                   autofocus: true,
                   input_html: { class: "form-control" }%>
-      <%= f.input :deadline,
-                  required: true,
-                  autofocus: true,
-                  order: [:day, :month, :year],
-                  input_html: { class: "form-control" }%>
-      <%= f.input :kid,
-                  collection: @kids,
-                  include_blank: "Select a kid",
-                  required: true,
-                  autofocus: true,
-                  input_html: { class: "form-control" }%>
+      <%= f.association :kid,
+                        collection: @kids,
+                        label: "Who is it for?",
+                        include_blank: "Select a kid",
+                        required: true,
+                        autofocus: true,
+                        input_html: { class: "form-control" }%>
+
+
+      <%= f.simple_fields_for :competitions_tasks do |m| %>
+        <%= m.input :deadline,
+                    as: :datetime,
+                    label: "Optional deadline:",
+                    required: false,
+                    autofocus: true,
+                    html5: true,
+                    input_html: { class: "form-control",
+                                  min: @current_competition.start_date.strftime('%Y-%m-%dT%H:%M'),
+                                  max: @current_competition.end_date.strftime('%Y-%m-%dT%H:%M') } %>
+
+        <%= m.input :competition_id, as: :hidden, input_html: {value: @current_competition.id} %>
+      <% end %>
     </div>
 
     <div class="form-actions">
