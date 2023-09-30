@@ -15,16 +15,13 @@ Rails.application.routes.draw do
   get '/families/create', to: 'families#create', as: 'create_family'
   get '/families/leave', to: 'families#leave', as: 'leave_family'
 
-
   resources :tasks
   get '/assign-task', to: 'competitions_tasks#assign_task'
   get '/mark-as-done', to: 'competitions_tasks#mark_as_done'
   get '/unmark-as-done', to: 'competitions_tasks#unmark_as_done'
-  get '/create-competitions-task', to: 'competitions_tasks#create_competitions_task'
 
   resources :events
   get '/assign-event', to: 'events#assign_event'
-
 
   resources :competitions, only: [:index, :show, :destroy, :new, :create]
 

@@ -33,18 +33,4 @@ class CompetitionsTasksController < ApplicationController
     redirect_to decrease_score_path(id: @current_competition)
   end
 
-  def create_competitions_task
-    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
-
-    if @current_competition
-      task = Task.find(params[:id])
-      @competitions_task = CompetitionsTask.new(task: task, competition: @current_competition)
-      authorize @competitions_task
-      if @competitions_task.save
-        redirect_to task_path(task), notice: 'Your task was successfully added to the commun pot.'
-      else
-        redirect_to common_pot_path, notice: 'Error during the creation of your task'
-      end
-    end
-  end
 end

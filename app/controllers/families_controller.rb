@@ -6,7 +6,7 @@ class FamiliesController < ApplicationController
   end
 
   def create
-    @family = Family.new(name: "aa", code: SecureRandom.urlsafe_base64(4))
+    @family = Family.new(code: SecureRandom.urlsafe_base64(4))
     authorize @family
     if @family.save
       current_user.family = @family
