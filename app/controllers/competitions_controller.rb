@@ -46,7 +46,7 @@ class CompetitionsController < ApplicationController
     end
 
     @default_end_date = 2.weeks.from_now.to_date
-    @competition = Competition.new(family: family, start_date: Date.current)
+    @competition = Competition.new(family: family, start_date: DateTime.current)
 
     authorize @competition
   end

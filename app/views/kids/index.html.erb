@@ -14,7 +14,7 @@
         <div class="flex-grow-1">
           <p class="fs-3 mb-3"><%= kid.name %></p>
           <% task_count = kid.tasks.joins(:competitions_tasks).where(competitions_tasks: { is_done: false }).count %>
-          <% event_count = kid.events.where("date > ?", Date.current).count %>
+          <% event_count = kid.events.where("date > ?", DateTime.current).count %>
           <p>
             <%= task_count %> task<%= "s" if task_count > 1 %> pending
           </p>

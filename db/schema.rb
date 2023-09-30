@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_25_131735) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_30_074419) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,8 +44,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_131735) do
 
   create_table "competitions", force: :cascade do |t|
     t.bigint "family_id", null: false
-    t.date "start_date"
-    t.date "end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.string "reward"
     t.bigint "user_id"
     t.datetime "created_at", null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_131735) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.datetime "deadline"
     t.index ["competition_id"], name: "index_competitions_tasks_on_competition_id"
     t.index ["task_id"], name: "index_competitions_tasks_on_task_id"
     t.index ["user_id"], name: "index_competitions_tasks_on_user_id"
@@ -97,15 +98,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_131735) do
     t.index ["family_id"], name: "index_kids_on_family_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
-    t.string "title"
-    t.string "content"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_notifications_on_user_id"
-  end
-
   create_table "scores", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "competition_id", null: false
@@ -119,7 +111,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_131735) do
   create_table "tasks", force: :cascade do |t|
     t.string "title"
     t.string "content"
-    t.date "deadline"
     t.boolean "is_recurent", default: false
     t.bigint "kid_id", null: false
     t.datetime "created_at", null: false
@@ -154,7 +145,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_25_131735) do
   add_foreign_key "events", "kids"
   add_foreign_key "events", "users"
   add_foreign_key "kids", "families"
-  add_foreign_key "notifications", "users"
   add_foreign_key "scores", "competitions"
   add_foreign_key "scores", "users"
   add_foreign_key "tasks", "kids"
