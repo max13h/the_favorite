@@ -19,7 +19,14 @@ class TasksController < ApplicationController
 
   # GET /tasks/new
   def new
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+
+    unless @current_competition
+      redirect_back(fallback_location: root_path, alert: 'You need to start a competition.')
+    end
+
     @task = Task.new
+    @task.competitions_tasks.build
     authorize @task
     @kids = current_user.family.kids
   end
@@ -27,13 +34,18 @@ class TasksController < ApplicationController
   # POST /tasks
   def create
     @task = Task.new(task_params)
-    kid_selected = Kid.find(params[:task][:kid].to_i)
-    @task.kid = kid_selected
+
+    unless task_params[:kid_id].empty?
+      kid_selected = Kid.find(task_params[:kid_id])
+      @task.kid = kid_selected
+    end
+
     authorize @task
     if @task.save
-      redirect_to create_competitions_task_path(id: @task)
+      redirect_to common_pot_path
     else
-      render :new
+      @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -60,7 +72,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :deadline, :user)
+    params.require(:task).permit(:title, :content, :kid_id, competitions_tasks_attributes: [:deadline, :competition_id])
   end
-
 end
