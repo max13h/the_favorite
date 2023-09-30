@@ -44,6 +44,11 @@
     line-height: 33.6px;
   }
 
+  a {
+  text-decoration: none;
+  color: inherit;
+  }
+
   .lost-button {
     display: inline-flex;
     padding: 6px 12px;
@@ -66,7 +71,8 @@
   <!-- This file lives in public/404.html -->
   <div class="lost_content">
     <div class="lost-title">Oh no! <br/>You are lost all alone on a 404 page...</div>
-    <div class="lost-button">Back home</div>
+    <a class="lost-button" href="/home/tasks">Back home</a>
+    <!-- <div class="lost-button">Back home</div> -->
   </div>
   </div>
     <img src="/images/lost-404.gif" class="fixed-bottom-image"/>
