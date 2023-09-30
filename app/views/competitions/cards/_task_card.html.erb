@@ -5,8 +5,10 @@
       <p class="fs-5 text-truncate"><%= competitions_task.task.title %></p>
       <p class="fw-bold fs-7">For <%= competitions_task.task.kid.name %></p>
     </div>
-    <div class="check-box d-flex justify-content-center align-items-center bg-disable">
-      <i class="ri-check-line fs-1"></i>
+    <div class="todo-check-box flex-shrink-0 bg-disable">
+      <span class="material-symbols-outlined" style="font-size: 40px">
+        done
+      </span>
     </div>
   </div>
   <% if competitions_task.task.deadline %>

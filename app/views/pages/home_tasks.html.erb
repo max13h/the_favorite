@@ -6,7 +6,7 @@
 
   <% if @current_competition %>
 
-    <div id="todo" class="overflow-y-scroll d-flex align-items-center flex-column border-dotted border-secondary rounded p-3 w-100 flex-grow-1">
+    <div id="todo" class="overflow-y-scroll d-flex align-items-center flex-column border-dotted border-secondary rounded p-3 w-100 flex-grow-1 position-relative">
 
       <% unless @user_todo.empty? && @user_tasks_completed.empty? %>
 
@@ -17,7 +17,9 @@
                 <p style="font-size: 0.8rem"><strong>for <%= competition_task.task.kid.name %></strong></p>
               <% end %>
 
-              <%= link_to "", mark_as_done_path(id: competition_task, competition_id: @current_competition), class: "ri-checkbox-blank-line d-flex align-items-center", style: "font-size: 3rem" %>
+              <%= link_to mark_as_done_path(id: competition_task, competition_id: @current_competition), class: "todo-check-box flex-shrink-0" do %>
+                <span></span>
+              <% end %>
             </div>
           <% end %>
 
@@ -28,13 +30,16 @@
                 <p style="font-size: 0.8rem"><strong>for <%= competition_task.task.kid.name %></strong></p>
               <% end %>
 
-              <i class=" d-flex align-items-center" ></i>
-              <%= link_to "", unmark_as_done_path(id: competition_task, competition_id: @current_competition), class: "d-flex align-items-center ri-checkbox-line", style: "font-size: 3rem"  %>
+              <%= link_to unmark_as_done_path(id: competition_task, competition_id: @current_competition), class: "todo-check-box flex-shrink-0" do %>
+                <span class="material-symbols-outlined" style="font-size: 40px">
+                  done
+                </span>
+              <% end %>
             </div>
           <% end %>
 
       <% else %>
-        <p class="fst-italic">No task picked yet</p>
+        <p class="fst-italic position-absolute top-50 start-50 translate-middle">No task picked yet</p>
       <% end %>
     </div>
 

@@ -1,51 +1,52 @@
-<div class="switch w-100 d-flex justify-content-center align-items-center mt-2 mb-4 ">
-  <%= link_to "Tasks", home_tasks_path, class: "switch-btn-inactive me-3", data: { btn: "Tasks" }  %>
-  <%= link_to "Events", home_events_path, class: "switch-btn-active", data: { btn: "Events" }  %>
-</div>
+<div class="d-flex flex-column h-100">
+  <div class="switch w-100 d-flex justify-content-center align-items-center mt-2 mb-4 ">
+    <%= link_to "Tasks", home_tasks_path, class: "switch-btn-inactive me-3", data: { btn: "Tasks" }  %>
+    <%= link_to "Events", home_events_path, class: "switch-btn-active", data: { btn: "Events" }  %>
+  </div>
 
-<div class="h-100 overflow-x-hidden d-flex flex-column">
-  <% if @current_competition %>
-    <div class="events d-flex align-items-center flex-column h-100" >
-      <div class="flex-grow-1 d-flex align-items-center flex-column rounded p-3 w-100">
+  <div class="flex-grow-1">
+    <% if @current_competition %>
+      <div class="events d-flex align-items-center flex-column h-100" >
+        <div class="flex-grow-1 d-flex align-items-center flex-column rounded p-3 w-100">
 
-        <% unless @pending_events.empty? %>
-          <div data-controller="swiper" class="w-100 h-100">
-            <swiper-container class="mySwiper h-100"
-                              pagination="true"
-                              pagination-dynamic-bullets="true"
-                              effect="cards"
-                              cards-effect-per-slide-offset="4"
-                              cards-effect-slide-shadows="false"
+          <% unless @pending_events.empty? %>
+            <div data-controller="swiper" class="w-100 h-100">
+              <swiper-container class="mySwiper h-100"
+                                pagination="true"
+                                pagination-dynamic-bullets="true"
+                                effect="cards"
+                                cards-effect-per-slide-offset="4"
+                                cards-effect-slide-shadows="false"
 
-            >
-              <% @pending_events.each do |event|%>
-                <swiper-slide class="p-1" style="height: 90%">
-                  <%= render 'shared/event_cards/active_event_card', event: event %>
-                </swiper-slide>
-              <% end %>
+              >
+                <% @pending_events.each do |event|%>
+                  <swiper-slide class="p-1" style="height: 90%">
+                    <%= render 'shared/event_cards/active_event_card', event: event %>
+                  </swiper-slide>
+                <% end %>
 
-              <% @completed_events.each do |event|%>
-                <swiper-slide class="p-1" style="height: 90%">
-                  <%= render 'shared/event_cards/inactive_event_card', event: event %>
-                </swiper-slide>
-              <% end %>
-            </swiper-container>
+                <% @completed_events.each do |event|%>
+                  <swiper-slide class="p-1" style="height: 90%">
+                    <%= render 'shared/event_cards/inactive_event_card', event: event %>
+                  </swiper-slide>
+                <% end %>
+              </swiper-container>
+              </div>
             </div>
-          </div>
 
-        <% else %>
-          <p class="fst-italic">No event picked yet</p>
-        <% end %>
+          <% else %>
+            <p class="fst-italic">No event picked yet</p>
+          <% end %>
+        </div>
       </div>
-    </div>
 
-  <% else %>
+    <% else %>
+      <div class="position-absolute top-50 start-50 translate-middle d-flex align-items-center flex-column">
+        <p class="fst-italic mb-3">No current competition</p>
+        <%= link_to "New competition", new_competition_path, class: "btn btn-secondary fw-bold" %>
+      </div>
 
-    <div class="position-absolute top-50 start-50 translate-middle d-flex align-items-center flex-column">
-      <p class="fst-italic mb-3">No current competition</p>
-    <%= link_to "New competition", new_competition_path, class: "btn btn-secondary fw-bold" %>
-    </div>
+    <% end %>
 
-  <% end %>
-
+  </div>
 </div>

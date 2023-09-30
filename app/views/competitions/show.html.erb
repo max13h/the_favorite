@@ -1,16 +1,23 @@
 <div class="w-100 d-flex flex-column align-items-center">
-  <h2 class="mb-3 text-center">
+  <h2 class="mb-3 heading-container">
     Competition overview
-    <i class="ri-search-eye-fill text-secondary d-inline-block" style="transform: rotate(10deg)"></i>
+    <span class="material-symbols-outlined heading-illustration-icons">
+      search
+    </span>
   </h2>
 
   <%= render 'competitions/cards/competition_card', competition: @competition, counter: false %>
 
   <p class="d-inline-block w-100 max-width-lg fst-italic mt-2 fs-7">
-    From <span class="mx-3 border-bottom-dotted border-secondary"><%= @competition.start_date.strftime "#{@competition.start_date.day.ordinalize} %B %y" %></span> To <span class="ms-3 border-bottom-dotted border-secondary"><%= @competition.end_date.strftime "#{@competition.end_date.day.ordinalize} %B %y" %></span>
+    From <span class="mx-3 border-secondary"><%= @competition.start_date.strftime "#{@competition.start_date.day.ordinalize} %B %y" %></span> To <span class="ms-3 border-secondary"><%= @competition.end_date.strftime "#{@competition.end_date.day.ordinalize} %B %y" %></span>
   </p>
 
-  <h3 class="mt-5">Competition's tasks</h3>
+  <h3 class="mt-5 heading-container">
+    Competition's tasks
+    <span class="material-symbols-outlined heading-illustration-icons">
+      task_alt
+    </span>
+  </h3>
 
   <div class="competitions_tasks border-dotted border-secondary rounded p-3 w-100 max-width-sm overflow-y-scroll" style="max-height: 66vh">
     <% @competitions_tasks.each do |competitions_task| %>
@@ -20,12 +27,17 @@
     <% end %>
   </div>
 
-  <h3 class="mt-5">Competition's events</h3>
+  <h3 class="mt-5 heading-container">
+    Competition's events
+    <span class="material-symbols-outlined heading-illustration-icons">
+      calendar_month
+    </span>
+  </h3>
 
   <div class="competitions_tasks p-3 w-100 max-width-sm overflow-hidden" style="max-height: 66vh">
 
     <% unless @events.empty? %>
-      <div data-controller="swiper" class="w-100 overflow-hidden" style="height: 190px">
+      <div data-controller="swiper" class="w-100" style="height: 190px">
         <swiper-container class="mySwiper h-100 max-width-sm"
                           pagination="true"
                           pagination-dynamic-bullets="true"
