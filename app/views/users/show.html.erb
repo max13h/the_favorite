@@ -1,12 +1,16 @@
 <div class="user d-flex flex-column align-items-center">
-  <%= link_to "Edit my profile", edit_user_registration_path, class: "align-self-end me-3" %>
-
   <div class="profile-picture position-relative mt-5">
     <%= image_tag "crown.svg", alt: "crown image", class: "position-absolute", style: "width: 70px; vertical-align: unset; top: -44px; left: -24px; filter: drop-shadow(1px 1px 0px rgb(0 0 0 / 0.2))" %>
 
     <%= render "shared/picture", user: current_user, size: "5rem", kid_or_parent: "parent" %>
   </div>
   <p class="fs-3 fw-bold"><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
+  <%= link_to edit_user_registration_path, class: "d-flex align-items-center me-3 mb-4" do %>
+    <span class="material-symbols-outlined me-1" style="font-variation-settings: 'FILL' 1; font-size: 1rem !important">
+      edit
+    </span>
+    <p class="btn-link"> Edit my profile </p>
+  <% end %>
 </div>
 
 <div class="family border-dotted border-secondary rounded d-flex flex-column align-items-center p-3 mt-5">
