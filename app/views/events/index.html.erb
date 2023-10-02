@@ -5,6 +5,7 @@
       <li>
         <%= event.title %>
         (<%= event.content %>)
+        (<%= event.location %>)
         <div class="event-options">
           <% if event.user_id.nil? %>
             <span class="unassigned-event">Not Assigned</span>

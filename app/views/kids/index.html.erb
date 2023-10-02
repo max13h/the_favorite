@@ -1,7 +1,8 @@
 <div class="d-flex flex-column align-items-center">
   <% @kids.each do |kid| %>
     <%= link_to kid_path(kid), class: "border-dotted border-secondary mb-3 w-100 d-flex justify-content-around align-items-center rounded p-3" do %>
-      <div class="flex-grow-1">
+       <%= render "shared/picture", user: kid, size: "3rem", kid_or_parent: "kid" %>
+      <div class="flex-grow-1 text-center">
         <p class="fs-3 mb-3"><%= kid.name %></p>
         <% task_count = kid.tasks.joins(:competitions_tasks).where(competitions_tasks: { is_done: false }).count %>
         <% event_count = kid.events.where("date > ?", Date.current).count %>
@@ -12,7 +13,6 @@
           <%= event_count %> event<%= "s" if event_count > 1 %> soon
         </p>
       </div>
-      <%= render "shared/picture", user: kid, size: "3rem", kid_or_parent: "kid" %>
     <% end %>
 
   <% end %>
