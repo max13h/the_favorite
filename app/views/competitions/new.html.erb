@@ -1,22 +1,29 @@
-<h1 class="mb-5">Create a new competition</h1>
+<h2 class="heading-container my-4">
+  Create your next competition
+  <span class="material-symbols-outlined heading-illustration-icons">
+    trophy
+  </span>
+</h2>
 
-<%= simple_form_for(@competition, html: {class: "d-flex align-items-center flex-column"}) do |f| %>
+<%= simple_form_for(@competition, html: {class: "container max-width-sm px-5"}) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
     <%= f.input :end_date,
-                order: [:day, :month, :year],
-                required: true,
+                as: :datetime,
+                label: "End of the competition",
+                required: false,
                 autofocus: true,
-                input_html: { class: "form-control" },
-                default: @default_end_date %>
+                html5: true,
+                input_html: { class: "form-control", min: DateTime.current.strftime('%Y-%m-%dT%H:%M') } %>
     <%= f.input :reward,
+                label: "Winner's reward",
                 required: true,
                 autofocus: true,
                 input_html: { class: "form-control" }%>
   </div>
 
-  <div class="form-actions">
+  <div class="form-actions d-flex justify-content-center">
     <%= f.button :submit, "Save", class: "btn btn-primary" %>
   </div>
 <% end %>

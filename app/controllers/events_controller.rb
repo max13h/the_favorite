@@ -12,24 +12,30 @@ class EventsController < ApplicationController
   end
 
   # GET /events/1
-  def show; end
+  def show
+  end
 
   # GET /events/1/edit
-  def edit; end
+  def edit
+  end
 
   # GET /events/new
   def new
     @event = Event.new
+    @kids = current_user.family.kids
+    authorize @event
   end
 
   # POST /event
   def create
     @event = Event.new(event_params)
+    authorize @event
 
     if @event.save
-      redirect_to event_path(@event), notice: 'Your event was successfully added to the commun pot.'
+      redirect_to common_pot_path, notice: 'Your event was successfully added to the commun pot.'
     else
-      render :new
+      @kids = current_user.family.kids
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -38,7 +44,7 @@ class EventsController < ApplicationController
     if @event.update(event_params)
       redirect_to @event, notice: 'Your event was successfully updated.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -66,6 +72,6 @@ class EventsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def event_params
-    params.require(:event).permit(:title, :content, :date, :kid, :user)
+    params.require(:event).permit(:title, :content, :date, :kid_id)
   end
 end

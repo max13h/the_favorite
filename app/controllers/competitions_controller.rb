@@ -67,7 +67,7 @@ class CompetitionsController < ApplicationController
 
       redirect_to competitions_path, notice: 'Competition successfully created'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
