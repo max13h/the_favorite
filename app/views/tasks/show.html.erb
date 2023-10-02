@@ -1,17 +1,171 @@
-<div class="container d-flex flex-column align-items-center">
-  <h1 class="mt-3 mb-5 fw-bold"><%= @task.title %></h1>
+<div class="w-100 d-flex flex-column align-items-center">
+  <h2 class="mb-3 heading-container">
+    Task overview
+    <span class="material-symbols-outlined heading-illustration-icons">
+      search
+    </span>
+  </h2>
 
-  <div class="bg-white p-4 rounded shadow mb-4 d-flex justify-content-between align-items-center">
-    <div class="details mb-3">
-      <p class="mb-3">
-        <%= @task.content %>
-      </p>
-      <p>
-        This task is for <strong><%= @task.kid.name %></strong>
-      </p>
+  <div class="border-dotted border-secondary p-4 rounded mb-4 d-flex flex-column align-items-center w-100 max-width-md position-relative">
+
+    <div class="dropdown position-absolute top-0 end-0 me-2 mt-2">
+      <i class="dropdown-toggle material-symbols-outlined" style="font-size:2rem !important" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        more_horiz
+      </i>
+      <ul class="dropdown-menu rounded-1 p-3 border-secondary" style="width: 200px">
+        <li class="mb-">
+          <% if @task.is_recurent %>
+            <%= link_to "Unmark as recurent", unmark_as_recurent_path(id: @task) %>
+          <% else %>
+            <%= link_to "Mark as recurent", mark_as_recurent_path(id: @task) %>
+          <% end %>
+        </li>
+        <% if @current_competition == @competition %>
+          <li class="mt-2"><%= link_to "Edit task", edit_task_path %></li>
+        <% end %>
+      </ul>
     </div>
+
+
+    <div class="mb-4 text-center">
+      <p class="fs-3 fw-bold"><%= @task.title %></p>
+      <p>for <strong><%= @task.kid.name %></strong></p>
+    </div>
+
+    <div class="w-100">
+      <% if @task.content.blank? %>
+        <p class="w-100 text-center fst-italic mb-3">No additional info</p>
+      <% else %>
+        <p class="w-100 text-center mb-3"><%= @task.content %></p>
+      <% end %>
+    </div>
+
+    <p class="fs-7 me-4 fst-italic position-absolute bottom-0 end-0"><%= @task.is_recurent ? "Recurrent" : "Not recurent" %></p>
 
   </div>
 
-    <%= link_to "Back to my tasks", home_tasks_path, class: "btn btn-outline-secondary fw-bold"  %>
+  <div class="d-flex flex-column align-items-center border-dotted border-secondary rounded p-4 w-100 max-width-md <%= @competition.end_date < DateTime.current ? 'bg-disable' : "bg-white" %>">
+
+    <% if @competition == @current_competition %>
+
+      <h3 class="mb-3 w-100 text-center">In the current competition:</h3>
+
+      <div class="d-flex flex-column align-items-center w-100 fs-5">
+        <% if @competitions_task.is_done %>
+          <p class="mb-3">Completed</p>
+          <% if @competitions_task.user == current_user %>
+
+            <%= link_to unmark_as_done_path(id: @competitions_task, competition_id: @competition), class: "todo-check-box" do %>
+              <span class="material-symbols-outlined">
+                done
+              </span>
+            <% end %>
+
+          <% else %>
+
+            <span class="material-symbols-outlined">
+              done
+            </span>
+
+          <% end %>
+        <% else %>
+          <p class="mb-3">Not completed</p>
+
+          <% if @competitions_task.user == current_user %>
+
+            <%= link_to mark_as_done_path(id: @competitions_task, competition_id: @competition), class: "todo-check-box" do %>
+              <span></span>
+            <% end %>
+
+          <% else %>
+            <span class="material-symbols-outlined">
+              close
+            </span>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="my-5 d-flex flex-column align-items-center">
+        <% if @competitions_task.user %>
+          <p><span class="fw-bold fs-5"><%= @competitions_task.user == current_user ? "You" : @competitions_task.user.first_name.capitalize %></span></p>
+          <p class="fs-5 ">picked the task</p>
+        <% else %>
+          <p class="fs-5 ">Nobody</p>
+          <p class="fs-5 ">picked the task</p>
+        <% end %>
+
+        <% if @competitions_task.user == current_user %>
+        <%= link_to "Unassign me the task", unassign_task_path(id: @competitions_task), class: "btn btn-outline-primary mt-3" %>
+        <% elsif @competitions_task.user.nil? %>
+          <%= link_to "Assign me the task", assign_task_path(id: @competitions_task), class: "btn btn-outline-primary mt-3" %>
+        <% end %>
+
+      </div>
+
+
+      <div class="d-flex flex-column align-items-center">
+        <% if @competitions_task.deadline %>
+          <p class="mt-3">
+            <%= link_to edit_competitions_task_path(@competitions_task), class: "material-symbols-outlined", style: "font-variation-settings: 'FILL' 1; font-size: 1rem !important" do %>
+              edit
+            <% end %>
+            Deadline:
+          </p>
+          <p class="text-center"><%= @competitions_task.deadline.strftime "#{@competitions_task.deadline.day.ordinalize} %B %y at %H : %M" %></p>
+
+        <% else %>
+          <p class="fst-italic">
+            <%= link_to edit_competitions_task_path(@competitions_task), class: "material-symbols-outlined", style: "font-variation-settings: 'FILL' 1; font-size: 1rem !important" do %>
+              edit
+            <% end %>
+            No deadline
+          </p>
+        <% end %>
+      </div>
+
+    <% else %>
+      <h3>Competition's dates</h3>
+      <p><span class="fw-bold"><%= @competition.start_date.strftime "%d/%m/%y" %></span> - <span class="fw-bold"><%= @competition.end_date.strftime "%d/%m/%y" %></span></p>
+
+      <div class="d-flex flex-column align-items-center w-100 fs-5">
+        <% if @competitions_task.is_done %>
+          <p class="mt-3">Completed</p>
+          <span class="material-symbols-outlined">
+            done
+          </span>
+        <% else %>
+          <p class="mt-3">Not completed</p>
+
+          <span class="material-symbols-outlined">
+            close
+          </span>
+        <% end %>
+      </div>
+
+      <div class="my-5 d-flex flex-column align-items-center">
+        <% if @competitions_task.user %>
+          <p><span class="fw-bold fs-5"><%= @competitions_task.user == current_user ? "You" : @competitions_task.user.first_name.capitalize %></span></p>
+          <p class="fs-5 ">picked the task</p>
+        <% else %>
+          <p class="fs-5 ">Nobody</p>
+          <p class="fs-5 ">picked the task</p>
+        <% end %>
+      </div>
+
+
+      <div class="d-flex flex-column align-items-center">
+        <% if @competitions_task.deadline %>
+          <p class="mt-3">
+            Deadline:
+          </p>
+          <p class="text-center"><%= @competitions_task.deadline.strftime "#{@competitions_task.deadline.day.ordinalize} %B %y at %H : %M" %></p>
+
+        <% else %>
+          <p class="fst-italic">
+            No deadline
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>

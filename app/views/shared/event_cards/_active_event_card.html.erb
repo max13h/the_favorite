@@ -1,4 +1,4 @@
-<%= link_to event_path(event), class: "bg-white border-dotted border-secondary h-100 rounded p-4 d-flex flex-column align-items-center" do %>
+<%= link_to event_path(event, competition: @current_competition), class: "bg-white border-dotted border-secondary h-100 rounded p-4 d-flex flex-column align-items-center" do %>
   <div class="w-100 text-center">
     <p class="text-break fw-bold fs-3"><%= event.title.capitalize %></p>
     <div class="d-flex justify-content-center align-items-center mt-3">

@@ -1,0 +1,33 @@
+<div class="d-flex flex-column align-items-center">
+  <h2 class="heading-container my-4">
+    Edit task's deadline
+    <span class="material-symbols-outlined heading-illustration-icons">
+      hourglass_bottom
+    </span>
+  </h2>
+
+  <%= simple_form_for(@competitions_task, html: {class: "container max-width-sm px-5"}) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :deadline,
+                  as: :datetime,
+                  label: "Optional deadline:",
+                  required: false,
+                  autofocus: true,
+                  html5: true,
+                  order: [:day, :month, :year, :hour, :minute],
+                  input_html: { class: "form-control",
+                                min: DateTime.current,
+                                max: @current_competition.end_date.strftime('%Y-%m-%dT%H:%M') } %>
+
+      <%= f.input :competition_id, as: :hidden, input_html: {value: @current_competition.id} %>
+    </div>
+
+    <div class="form-actions d-flex flex-column align-items-center">
+      <%= f.button :submit, "Save", class: "btn btn-primary" %>
+      <%= link_to "Cancel", :back || root_path, class: "btn btn-outline-primary mt-2" %>
+    </div>
+  <% end %>
+
+</div>

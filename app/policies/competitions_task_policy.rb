@@ -10,6 +10,10 @@ class CompetitionsTaskPolicy < ApplicationPolicy
     record.task.kid.family == user.family
   end
 
+  def unassign_task?
+    record.task.kid.family == user.family
+  end
+
   def mark_as_done?
     record.user == user
   end
@@ -20,5 +24,9 @@ class CompetitionsTaskPolicy < ApplicationPolicy
 
   def create_competitions_task?
     record.task.kid.family == user.family
+  end
+
+  def update?
+    record.competition.family == user.family
   end
 end

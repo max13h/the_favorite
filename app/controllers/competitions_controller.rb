@@ -31,9 +31,15 @@ class CompetitionsController < ApplicationController
   end
 
   def show
-    @competitions_tasks = CompetitionsTask.where(competition: @competition)
-    @events = Event.where(competition: @competition).order(date: :asc)
-    render layout: "focus"
+    current_competition = Competition.where(family: current_user.family).where("end_date > ?", DateTime.now).first
+
+    if @competition == current_competition
+      redirect_back(fallback_location: root_path, alert: "You're not allow to show this page")
+    else
+      @competitions_tasks = CompetitionsTask.where(competition: @competition)
+      @events = Event.where(competition: @competition).order(date: :asc)
+      render layout: "focus"
+    end
 
   end
 
