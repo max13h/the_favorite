@@ -11,6 +11,10 @@ class EventPolicy < ApplicationPolicy
   end
 
   def show?
-    record.user.family == user.family
+    record.kid.family == user.family
+  end
+
+  def create?
+    true
   end
 end

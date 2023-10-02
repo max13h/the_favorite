@@ -24,7 +24,7 @@ class KidsController < ApplicationController
     if @kid.save
       redirect_to kid_path(@kid), notice: 'Kid successfully added to your family'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -38,7 +38,7 @@ class KidsController < ApplicationController
       redirect_to @kid, notice: "Your kid's informations were successfully updated."
       authorize @kid
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

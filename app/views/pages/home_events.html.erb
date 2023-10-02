@@ -7,7 +7,7 @@
   <div class="flex-grow-1">
     <% if @current_competition %>
       <div class="events d-flex align-items-center flex-column h-100" >
-        <div class="flex-grow-1 d-flex align-items-center flex-column rounded p-3 w-100">
+        <div class="flex-grow-1 d-flex align-items-center flex-column rounded p-3 w-100 position-relative">
 
           <% unless @pending_events.empty? %>
             <div data-controller="swiper" class="w-100 h-100">
@@ -21,13 +21,13 @@
               >
                 <% @pending_events.each do |event|%>
                   <swiper-slide class="p-1" style="height: 90%">
-                    <%= render 'shared/event_cards/active_event_card', event: event %>
+                    <%= render 'events/cards/active_event_card', event: event %>
                   </swiper-slide>
                 <% end %>
 
                 <% @completed_events.each do |event|%>
                   <swiper-slide class="p-1" style="height: 90%">
-                    <%= render 'shared/event_cards/inactive_event_card', event: event %>
+                    <%= render 'events/cards/inactive_event_card', event: event %>
                   </swiper-slide>
                 <% end %>
               </swiper-container>
@@ -35,16 +35,16 @@
             </div>
 
           <% else %>
+          <div class="position-absolute top-50 start-50 translate-middle">
             <p class="fst-italic">No event picked yet</p>
+          </div>
           <% end %>
         </div>
       </div>
 
     <% else %>
-      <div class="position-absolute top-50 start-50 translate-middle d-flex align-items-center flex-column">
-        <p class="fst-italic mb-3">No current competition</p>
-        <%= link_to "New competition", new_competition_path, class: "btn btn-secondary fw-bold" %>
-      </div>
+
+      <%= render "shared/no_current_competition" %>
 
     <% end %>
 
