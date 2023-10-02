@@ -20,7 +20,7 @@
 
           <% @pending_competitions_tasks.each do |competitions_task|%>
             <div class="task border mb-3 bg-white d-flex justify-content-between p-3 rounded-1 w-100">
-              <%= link_to task_path(competitions_task.task), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
+              <%= link_to task_path(competitions_task.task, competition: @current_competition), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
                 <p class="text-truncate"><%= competitions_task.task.title %></p>
                 <p style="font-size: 0.8rem"><strong>for <%= competitions_task.task.kid.name %></strong></p>
               <% end %>
@@ -35,7 +35,7 @@
 
           <% @pending_events.each do |event|%>
             <div class="event border mb-3 bg-white d-flex justify-content-between p-3 rounded-1 w-100">
-              <%= link_to event_path(event), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
+              <%= link_to event_path(event, competition: @current_competition), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
                 <p class="text-truncate"><%= event.title %></p>
                 <p style="font-size: 0.8rem"><strong>for <%= event.kid.name %></strong> <%= event.date.strftime "%d/%m/%y" %></p>
               <% end %>

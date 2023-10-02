@@ -10,7 +10,16 @@ class EventPolicy < ApplicationPolicy
     record.kid.family == user.family
   end
 
-  def show?
-    record.user.family == user.family
+  def unassign_event?
+    record.kid.family == user.family
   end
+
+  def show?
+    record.kid.family == user.family
+  end
+
+  def update?
+    record.kid.family == user.family
+  end
+
 end

@@ -18,10 +18,6 @@ class KidPolicy < ApplicationPolicy
     true
   end
 
-  def edit?
-    record.family == user.family
-  end
-
   def update?
     record.family == user.family
   end

@@ -14,7 +14,15 @@ class TaskPolicy < ApplicationPolicy
     true
   end
 
-  def mark_as_done?
-    true
+  def mark_as_recurent?
+    record.kid.family == user.family
+  end
+
+  def unmark_as_recurent?
+    record.kid.family == user.family
+  end
+
+  def update?
+    record.kid.family == user.family
   end
 end

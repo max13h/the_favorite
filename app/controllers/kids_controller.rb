@@ -1,5 +1,5 @@
 class KidsController < ApplicationController
-  before_action :set_kid, only: [:show]
+  before_action :set_kid, only: [:show, :edit]
 
   def index
     @kids = Kid.where(family: current_user.family)
@@ -9,6 +9,12 @@ class KidsController < ApplicationController
   end
 
   def show
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+
+    @competitions_tasks = CompetitionsTask.joins(task: :kid).where(competition: @current_competition, tasks: { kid: @kid })
+    @events = Event.where(kid: @kid).where('date > ?', DateTime.current)
+
+    render layout: "focus"
   end
 
   def new
@@ -29,8 +35,6 @@ class KidsController < ApplicationController
   end
 
   def edit
-    @kid = Kid.find(params[:id])
-    authorize @kid
   end
 
   def update

@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_task, only: [:show, :edit, :update, :destroy, :mark_as_recurent, :unmark_as_recurent]
 
   # GET /tasks
   def index
@@ -12,10 +12,17 @@ class TasksController < ApplicationController
   end
 
   # GET /tasks/1
-  def show; end
+  def show
+    @competition = Competition.find(params[:competition])
+    @competitions_task = CompetitionsTask.where(task: @task, competition: @competition).first
+
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+
+    render layout: 'focus'
+  end
 
   # GET /tasks/1/edit
-  def edit; end
+
 
   # GET /tasks/new
   def new
@@ -42,17 +49,24 @@ class TasksController < ApplicationController
 
     authorize @task
     if @task.save
-      redirect_to common_pot_path
+      redirect_to common_pot_path, notice: 'Your task has been successfully added to the common pot.'
     else
       @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
       render :new, status: :unprocessable_entity
     end
   end
 
+  def edit
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+    @kids = current_user.family.kids
+  end
+
   # PATCH/PUT /tasks/1
   def update
+    competition = Competition.find(params[:task][:competition_id])
+
     if @task.update(task_params)
-      redirect_to @task, notice: 'Your task was successfully updated.'
+      redirect_to(task_path(@task, competition: competition), notice: 'Your task was successfully updated')
     else
       render :edit
     end
@@ -62,6 +76,26 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     redirect_to task_url, notice: 'Your task was successfully deleted.'
+  end
+
+  def mark_as_recurent
+    @task.is_recurent = true
+
+    if @task.save
+      redirect_back(fallback_location: root_path, notice: "Task successfully marked as recurent")
+    else
+      redirect_back(fallback_location: root_path, alert: "Error, something went wrong")
+    end
+  end
+
+  def unmark_as_recurent
+    @task.is_recurent = false
+
+    if @task.save
+      redirect_back(fallback_location: root_path, notice: "Task successfully unmarked as recurent")
+    else
+      redirect_back(fallback_location: root_path, alert: "Error, something went wrong")
+    end
   end
 
   private

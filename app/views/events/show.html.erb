@@ -1,19 +1,62 @@
-<div class="container d-flex flex-column align-items-center">
-  <h1 class="mt-3 mb-5 fw-bold"><%= @event.title %></h1>
+<div class="w-100 d-flex flex-column align-items-center">
+  <h2 class="mb-3 heading-container">
+    Event overview
+    <span class="material-symbols-outlined heading-illustration-icons">
+      search
+    </span>
+  </h2>
 
-  <div class="bg-white p-4 rounded shadow mb-4 d-flex justify-content-between align-items-center">
-    <div class="details mb-3">
-      <p class="mb-3">
-        <%= @event.content %>
-      </p>
-      <p class="mb-3">
-        Date: <%= @event.date.strftime "%d/%m/%y" %>
-      </p>
-      <p>
-        This task is for <strong><%= @event.kid.name %></strong>
-      </p>
+  <div class="p-4 rounded mb-4 d-flex flex-column align-items-center w-100 max-width-md position-relative border-dotted border-secondary <%= @event.date < DateTime.current ? "bg-disable" : "bg-white" %>">
+
+    <% if @current_competition == @competition %>
+      <div class="dropdown position-absolute top-0 end-0 me-2 mt-2">
+        <i class="dropdown-toggle material-symbols-outlined" style="font-size:2rem !important" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          more_horiz
+        </i>
+        <ul class="dropdown-menu rounded-1 p-3 border-secondary" style="width: 200px">
+          <li><%= link_to "Edit event", edit_event_path %></li>
+        </ul>
+      </div>
+    <% end %>
+
+
+    <div class="mb-4 text-center">
+      <p class="fs-3 fw-bold"><%= @event.title %></p>
+      <p>for <strong><%= @event.kid.name %></strong></p>
     </div>
-  </div>
 
-    <%= link_to "Back to my events", home_tasks_path, class: "btn btn-outline-secondary fw-bold"  %>
+    <div class="w-100 mb-3">
+      <% if @event.content.blank? %>
+        <p class="w-100 text-center fst-italic mb-3">No additional info</p>
+      <% else %>
+        <p class="w-100 text-center mb-3"><%= @event.content %></p>
+      <% end %>
+    </div>
+
+      <div class="my-3 d-flex flex-column align-items-center">
+        <% if @event.user %>
+          <p><span class="fw-bold fs-5"><%= @event.user == current_user ? "You" : @event.user.first_name.capitalize %></span></p>
+          <p class="fs-5 ">picked the event</p>
+        <% else %>
+          <p class="fs-5 ">Nobody</p>
+          <p class="fs-5 ">picked the event</p>
+        <% end %>
+
+        <% if @event.date < DateTime.current %>
+          <p class="mt-3">This event is finished</p>
+        <% else %>
+          <% if @event.user == current_user %>
+            <%= link_to "Unassign me the event", unassign_event_path(id: @event), class: "btn btn-outline-primary mt-3" %>
+          <% elsif @event.user.nil? %>
+            <%= link_to "Assign me the event", assign_event_path(id: @event), class: "btn btn-outline-primary mt-3" %>
+          <% end %>
+        <% end %>
+      </div>
+
+
+      <div class="d-flex flex-column align-items-center">
+        <p class="mt-3">Date:</p>
+        <p class="text-center"><%= @event.date.strftime "#{@event.date.day.ordinalize} %B %y at %H : %M" %></p>
+      </div>
+  </div>
 </div>
