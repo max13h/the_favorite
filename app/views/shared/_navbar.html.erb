@@ -1,38 +1,40 @@
-<div class="navbar d-flex justify-content-around p-0 position-relative" style="font-variation-settings: 'FILL' 0, 'wght' 200">
+<nav class="navbar d-flex justify-content-around p-0" style="font-variation-settings: 'FILL' 0, 'wght' 200">
 
-  <%= link_to home_tasks_path, class: "on-active d-flex flex-column align-items-center my-1 #{'nav-active-link' if (current_page?(home_tasks_path) || current_page?(home_events_path))}" do %>
-    <span class="material-symbols-outlined">
-      home
-    </span>
-    <p class="fs-7">home</p>
-  <% end %>
+  <div class="d-flex justify-content-around p-0 max-width-lg w-100">
+    <%= link_to home_tasks_path, class: "on-active d-flex flex-column align-items-center my-1 #{'nav-active-link' if (current_page?(home_tasks_path) || current_page?(home_events_path))}" do %>
+      <span class="material-symbols-outlined">
+        home
+      </span>
+      <p class="fs-7">home</p>
+    <% end %>
 
-  <%= link_to competitions_path, class: "on-active d-flex flex-column align-items-center my-1 #{'nav-active-link' if current_page?(competitions_path)}" do %>
-    <span class="material-symbols-outlined">
-      trophy
-    </span>
-    <p class="fs-7">score</p>
-  <% end %>
+    <%= link_to competitions_path, class: "on-active d-flex flex-column align-items-center my-1 #{'nav-active-link' if current_page?(competitions_path)}" do %>
+      <span class="material-symbols-outlined">
+        trophy
+      </span>
+      <p class="fs-7">score</p>
+    <% end %>
 
-  <%= link_to new_task_path, class: "on-active d-flex flex-column align-items-center my-1 #{'nav-active-link' if current_page?(new_task_path)}" do %>
-    <span class="material-symbols-outlined">
-      add_circle
-    </span>
-    <p class="fs-7">add</p>
-  <% end %>
+    <%= link_to new_task_path, class: "on-active d-flex flex-column align-items-center my-1 #{'nav-active-link' if current_page?(new_task_path)}" do %>
+      <span class="material-symbols-outlined">
+        add_circle
+      </span>
+      <p class="fs-7">add</p>
+    <% end %>
 
-  <%= link_to common_pot_path, class: "on-active d-flex flex-column align-items-center my-1 #{'nav-active-link' if current_page?(common_pot_path)}" do %>
-    <span class="material-symbols-outlined">
-      inventory_2
-    </span>
-    <p class="fs-7">pot</p>
-  <% end %>
+    <%= link_to common_pot_path, class: "on-active d-flex flex-column align-items-center my-1 #{'nav-active-link' if current_page?(common_pot_path)}" do %>
+      <span class="material-symbols-outlined">
+        inventory_2
+      </span>
+      <p class="fs-7">pot</p>
+    <% end %>
 
-  <%= link_to kids_path, class: "on-active d-flex flex-column align-items-center my-1 #{'nav-active-link' if current_page?(kids_path)}" do %>
-    <span class="material-symbols-outlined">
-      child_care
-    </span>
-    <p class="fs-7">kids</p>
-  <% end %>
+    <%= link_to kids_path, class: "on-active d-flex flex-column align-items-center my-1 #{'nav-active-link' if current_page?(kids_path)}" do %>
+      <span class="material-symbols-outlined">
+        child_care
+      </span>
+      <p class="fs-7">kids</p>
+    <% end %>
+  </div>
 
-</div>
+</nav>

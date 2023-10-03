@@ -209,9 +209,27 @@ padding: 8px 24px;
 
 .alert {
   position: absolute;
-  bottom: 1rem;
+  bottom: 5rem;
 }
 
 .dropdown-toggle::after {
   content: none;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;               /* width of the entire scrollbar */
+  height: 4px;               /* width of the entire scrollbar */
+}
+
+*::-webkit-scrollbar-track {
+  border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(224, 224, 224);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+}
+
+* {
+  scrollbar-width: thin;          /* "auto" or "thin" */
 }
