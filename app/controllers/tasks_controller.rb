@@ -98,6 +98,11 @@ class TasksController < ApplicationController
     end
   end
 
+  def add_recurent
+    @recurent_tasks = Task.joins(kid: :family).where(is_recurent: true).where(kid: {family: current_user.family})
+    authorize @recurent_tasks
+  end
+
   private
 
   def set_task

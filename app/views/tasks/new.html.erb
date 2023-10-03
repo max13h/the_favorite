@@ -1,14 +1,22 @@
 <div class="d-flex flex-column align-items-center">
-  <div class="switch w-100 d-flex justify-content-center align-items-center mt-2 mb-4 ">
+  <div class="switch w-100 d-flex justify-content-center align-items-center mt-2 mb-4">
     <%= link_to "New Task", new_task_path, class: "switch-btn-active me-3", data: { btn: "New Task" }  %>
     <%= link_to "New Event", new_event_path, class: "switch-btn-inactive", data: { btn: "New Event" }  %>
   </div>
 
-  <h2 class="heading-container mt-5 mb-4">
+  <h2 class="heading-container mt-5 mb-4 position-relative w-100">
     Add a Task
     <span class="material-symbols-outlined heading-illustration-icons">
       task_alt
     </span>
+    <div class="dropdown position-absolute body-font" style="top: 0px; right: 0px">
+      <i class="dropdown-toggle material-symbols-outlined" style="font-size:2rem !important" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        more_horiz
+      </i>
+      <ul class="dropdown-menu rounded-1 p-3 border-secondary" style="width: 200px">
+        <li><%= link_to "Add a recurent task", add_recurent_path %></li>
+      </ul>
+    </div>
   </h2>
 
   <%= simple_form_for(@task, html: {class: "container max-width-sm px-5"}) do |f| %>
