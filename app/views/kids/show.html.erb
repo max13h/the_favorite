@@ -1,6 +1,6 @@
-<div class="container d-flex flex-column align-items-center mt-5">
+<div class="container d-flex flex-column align-items-center mt-3">
 
-  <%= render "shared/picture", user: @kid, size: "4rem", kid_or_parent: "kid" %>
+  <%= render "shared/picture", user: @kid, size: "10rem", kid_or_parent: "kid" %>
 
   <p class="fs-3"><%= @kid.name %></p>
 
@@ -11,14 +11,63 @@
     <p class="btn-link"> Edit information </p>
   <% end %>
 
-  <div class="informations mt-5 w-100">
+  <div class="informations mt-3 w-100">
     <h2>Informations:</h2>
     <div class="mt-3">
       <p>Blood type: <%= @kid.blood_type.blank? ? "not specified" : @kid.blood_type %></p>
       <p>Doctor number: <%= @kid.doctor_number.blank? ? "not specified" : @kid.doctor_number %></p>
     </div>
   </div>
-  <div class="tasks">
 
+
+  <h3 class="mt-5 heading-container">
+    <%= @kid.name.capitalize %>'s tasks
+    <span class="material-symbols-outlined heading-illustration-icons">
+      task_alt
+    </span>
+  </h3>
+
+  <div class="competitions_tasks border-dotted border-secondary rounded p-3 w-100 max-width-sm overflow-y-scroll" style="max-height: 66vh">
+    <% if @competitions_tasks.empty? %>
+      <p class="fst-italic w-100 text-center">No task for <%= @kid.name %></p>
+    <% else %>
+      <% @competitions_tasks.each do |competitions_task| %>
+        <%= render "competitions/cards/task_card",
+          competitions_task: competitions_task,
+          last: competitions_task == @competitions_tasks.last ? true : false %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <h3 class="mt-5 heading-container">
+    <%= @kid.name.capitalize %>'s events
+    <span class="material-symbols-outlined heading-illustration-icons">
+      calendar_month
+    </span>
+  </h3>
+
+  <div class="competitions_tasks p-3 w-100 max-width-sm overflow-hidden" style="max-height: 66vh">
+
+    <% unless @events.empty? %>
+      <div data-controller="swiper" class="w-100" style="height: 190px">
+        <swiper-container class="mySwiper h-100 max-width-sm"
+                          pagination="true"
+                          pagination-dynamic-bullets="true"
+                          effect="cards"
+                          cards-effect-per-slide-offset="4"
+                          cards-effect-slide-shadows="false">
+
+          <% @events.each do |event| %>
+
+            <swiper-slide class="p-1">
+              <%= render "competitions/cards/event_card", event: event, competition: @competition %>
+            </swiper-slide>
+
+          <% end %>
+        </swiper-container>
+      </div>
+    <% else %>
+      <p class="fst-italic text-ligth">You don't have old competition</p>
+    <% end %>
   </div>
 </div>

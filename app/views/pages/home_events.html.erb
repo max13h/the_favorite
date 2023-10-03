@@ -21,7 +21,7 @@
               >
                 <% @pending_events.each do |event|%>
                   <swiper-slide class="p-1" style="height: 90%">
-                    <%= render 'events/cards/active_event_card', event: event %>
+                    <%= render 'shared/event_cards/active_event_card', event: event, competition: @current_competition %>
                   </swiper-slide>
                 <% end %>
 
