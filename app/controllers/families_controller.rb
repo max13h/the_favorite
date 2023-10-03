@@ -13,7 +13,7 @@ class FamiliesController < ApplicationController
       current_user.save!
       redirect_to profile_path, notice: "You're family as been successfully created"
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 

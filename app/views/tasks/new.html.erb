@@ -1,7 +1,17 @@
-<div class="container">
-  <h1 class="fw-bold my-5">Add a new Task</h1>
+<div class="d-flex flex-column align-items-center">
+  <div class="switch w-100 d-flex justify-content-center align-items-center mt-2 mb-4 ">
+    <%= link_to "New Task", new_task_path, class: "switch-btn-active me-3", data: { btn: "New Task" }  %>
+    <%= link_to "New Event", new_event_path, class: "switch-btn-inactive", data: { btn: "New Event" }  %>
+  </div>
 
-  <%= simple_form_for(@task, html: {class: "d-flex align-items-center flex-column"}) do |f| %>
+  <h2 class="heading-container mt-5 mb-4">
+    Add a Task
+    <span class="material-symbols-outlined heading-illustration-icons">
+      task_alt
+    </span>
+  </h2>
+
+  <%= simple_form_for(@task, html: {class: "container max-width-sm px-5"}) do |f| %>
     <%= f.error_notification %>
 
     <div class="form-inputs">
@@ -38,7 +48,7 @@
       <% end %>
     </div>
 
-    <div class="form-actions">
+    <div class="form-actions d-flex justify-content-center">
       <%= f.button :submit, "Save", class: "btn btn-primary" %>
     </div>
   <% end %>
