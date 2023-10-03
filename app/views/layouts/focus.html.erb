@@ -13,11 +13,10 @@
   </head>
 
   <body class="d-flex flex-column" style="height: 100vh">
-    <%= render "shared/flashes" %>
-    <div class="flex-grow-1 overflow-scroll site-content">
-      <%= link_to :back, class: "container d-flex align-items-center fs-5 p-0" do %>
+    <div class="flex-grow-1 overflow-scroll site-content position-relative">
+      <%= render "shared/flashes" %>
+      <%= link_to (session[:origin_path] ? session[:origin_path] : :back) || root_path, class: "container d-flex align-items-center fs-5 p-0" do %>
         <i class="ri-arrow-left-line fs-1"></i>
-
       <% end %>
       <%= yield %>
     </div>

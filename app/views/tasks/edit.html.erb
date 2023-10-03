@@ -1,0 +1,35 @@
+<div class="d-flex flex-column align-items-center">
+  <h2 class="heading-container my-4">
+    Edit the task
+    <span class="material-symbols-outlined heading-illustration-icons">
+      task
+    </span>
+  </h2>
+
+  <%= simple_form_for(@task, html: {class: "container max-width-sm px-5"}) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :title,
+                  label: "title",
+                  required: true,
+                  autofocus: true %>
+      <%= f.input :content,
+                  label: "title",
+                  required: true,
+                  autofocus: true %>
+      <%= f.association :kid,
+                        collection: @kids,
+                        label: "Who is it for?",
+                        required: true,
+                        autofocus: true %>
+      <%= f.input :competition_id, as: :hidden, input_html: {value: @current_competition.id} %>
+    </div>
+
+    <div class="form-actions d-flex flex-row justify-content-around align-items-center">
+      <%= f.button :submit, "Save", class: "btn btn-success my-2 mx-4" %>
+      <%= link_to 'Cancel', :back, class: "btn btn-outline-danger my-2 mx-4" %>
+    </div>
+  <% end %>
+
+</div>

@@ -206,3 +206,12 @@ padding: 8px 24px;
   font-size: 30px !important;
   font-variation-settings: 'FILL' 1;
 }
+
+.alert {
+  position: absolute;
+  bottom: 1rem;
+}
+
+.dropdown-toggle::after {
+  content: none;
+}

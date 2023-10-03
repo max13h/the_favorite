@@ -2,13 +2,58 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :redirect_if_signed_in_and_no_family
+  before_action :allow_set_session_origin_path
 
   include Pundit::Authorization
 
   after_action :verify_authorized, unless: :skip_pundit?
   # after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
+  def allow_set_session_origin_path
+    @allowed_previous_path = [
+      "/home/tasks",
+      "/home/events",
+      "/competitions",
+      "/common-pot",
+      "/kids"
+    ]
 
+    referrer = URI.parse(request.referrer).path if request.referrer
+    current = request.path if request.path
+
+    is_allowed = @allowed_previous_path.any? { |substring| referrer =~ /#{Regexp.escape(substring)}\z/ }
+
+    from_competition_show_to_event_show = (referrer =~ /\/competitions\/\d+\z/) && (current =~ /\/events\/\d+\z/)
+    from_event_show_to_competition_show = (referrer =~ /\/events\/\d+\z/) && (current =~ /\/competitions\/\d+\z/)
+
+    from_competition_show_to_task_show = (referrer =~ /\/competitions\/\d+\z/) && (current =~ /\/tasks\/\d+\z/)
+    from_task_show_to_competition_show = (referrer =~ /\/tasks\/\d+\z/) && (current =~ /\/competitions\/\d+\z/)
+
+    from_kid_show_to_task_show = (referrer =~ /\/kids\/\d+\z/) && (current =~ /\/tasks\/\d+\z/)
+    from_task_show_to_kid_show = (referrer =~ /\/tasks\/\d+\z/) && (current =~ /\/kids\/\d+\z/)
+
+    if from_competition_show_to_event_show
+      session[:top_origin_path] = session[:origin_path]
+      session[:origin_path] = request.referrer
+    elsif from_event_show_to_competition_show
+      session[:origin_path] = session[:top_origin_path]
+      session.delete(:top_origin_path)
+    elsif from_competition_show_to_task_show
+      session[:top_origin_path] = session[:origin_path]
+      session[:origin_path] = request.referrer
+    elsif from_task_show_to_competition_show
+      session[:origin_path] = session[:top_origin_path]
+      session.delete(:top_origin_path)
+    elsif from_kid_show_to_task_show
+      session[:top_origin_path] = session[:origin_path]
+      session[:origin_path] = request.referrer
+    elsif from_task_show_to_kid_show
+      session[:origin_path] = session[:top_origin_path]
+      session.delete(:top_origin_path)
+    elsif is_allowed
+      session[:origin_path] = request.referrer
+    end
+  end
 
   def configure_permitted_parameters
     # For additional fields in app/views/devise/registrations/new.html.erb

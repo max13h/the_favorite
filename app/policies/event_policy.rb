@@ -17,4 +17,12 @@ class EventPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def unassign_event?
+    record.kid.family == user.family
+  end
+
+  def update?
+    record.kid.family == user.family
+  end
 end

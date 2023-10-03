@@ -1,21 +1,22 @@
-<header class="masthead">
-  <div class="container px-5 px-lg-2 py-4 h-100 position-absolute top-50 start-50 translate-middle">
-    <div class="row gx-4 gx-lg-2 h-100 align-items-center justify-content-center text-center">
-      <div class="col-lg-8 p-1 align-self-center ">
-        <%= image_tag "the-favorite-logo-svg.svg", alt: "the favorite logo",style: "width: 200px;" %>
-      </div>
+<div class="container px-5 px-lg-2 py-4 h-100 position-absolute top-50 start-50 translate-middle">
+  <div class="row gx-4 gx-lg-2 h-100 align-items-center justify-content-center text-center">
+    <div class="col-lg-8 p-1 align-self-center ">
+      <%= image_tag "the-favorite-logo-svg.svg", alt: "the favorite logo",style: "width: 200px;" %>
+    </div>
 
-      <div class="col-lg-8 p-1 align-self-center">
-        <p class="landing">Every kid has a favorite parent.<br/>Are you sure it’s you?</p>
-         <hr class="divider" />
-        <p class="text-black-75">Take care of your child, organize their activities and much more... And above all, collect points to beat the other parent and become the favorite!</p>
-      </div>
+    <div class="col-lg-8 p-1 align-self-center">
+      <p class="landing">Every kid has a favorite parent.<br/>Are you sure it’s you?</p>
+        <hr class="divider" />
+      <p class="text-black-75">Take care of your child, organize their activities and much more... And above all, collect points to beat the other parent and become the favorite!</p>
+    </div>
 
-      <div class="col-lg-8 p-1 align-self-start">
-        <div class="mb-2">
-          <%= link_to "Get started", new_user_registration_path, class: "btn btn-secondary" %>
-        </div>
-        <div>
-          <%= link_to "Login", new_user_session_path, class: "link" %>
-        </div>
+    <div class="col-lg-8 p-1 align-self-start">
+      <div class="mb-2">
+        <%= link_to "Get started", new_user_registration_path, class: "btn btn-secondary" %>
       </div>
+      <div>
+        <%= link_to "Login", new_user_session_path, class: "btn btn-outline-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>

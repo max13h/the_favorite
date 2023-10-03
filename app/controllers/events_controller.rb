@@ -1,7 +1,6 @@
 class EventsController < ApplicationController
-  before_action :set_event, only: [:show, :edit, :update, :destroy, :assign_event]
+  before_action :set_event, only: [:show, :edit, :update, :destroy, :assign_event, :unassign_event]
 
-  # GET /events
   def index
     query = "#{params[:event]} #{params[:user]} #{params[:kid]}".strip
     if query.empty?
@@ -11,44 +10,46 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1
   def show
+    @competition = Competition.find(params[:competition])
+
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+
+    render layout: 'focus'
   end
 
-  # GET /events/1/edit
-  def edit
-  end
-
-  # GET /events/new
   def new
     @event = Event.new
     @kids = current_user.family.kids
     authorize @event
   end
 
-  # POST /event
   def create
     @event = Event.new(event_params)
     authorize @event
 
     if @event.save
-      redirect_to common_pot_path, notice: 'Your event was successfully added to the commun pot.'
+      redirect_to common_pot_path, notice: 'Your event has been successfully added to the common pot.'
     else
-      @kids = current_user.family.kids
       render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /events/1
+  def edit
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+    @kids = current_user.family.kids
+  end
+
   def update
+    competition = Competition.find(params[:event][:competition_id])
+
     if @event.update(event_params)
-      redirect_to @event, notice: 'Your event was successfully updated.'
+      redirect_to(event_path(@event, competition: competition), notice: 'Your event was successfully updated')
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /events/1
   def destroy
     @event.destroy
     redirect_to event_url, notice: 'Your event was successfully deleted.'
@@ -62,15 +63,21 @@ class EventsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
+  def unassign_event
+    if @event && @event.user
+      @event.user = nil
+      @event.save!
+    end
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.find(params[:id])
     authorize @event
   end
 
-  # Only allow a list of trusted parameters through.
   def event_params
     params.require(:event).permit(:title, :content, :date, :kid_id)
   end

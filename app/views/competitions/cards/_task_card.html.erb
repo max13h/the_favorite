@@ -1,14 +1,20 @@
-<div class="border-dotted border-primary rounded-1 p-3 <%= "mb-3" unless last %>" style="border-width: 2px">
-  <p class="fs-7 text-end w-100">Took by <%= competitions_task.user.first_name %></p>
+<%= link_to task_path(id: competitions_task.task, competition: competitions_task.competition), class: "d-block border-dotted border-primary #{competitions_task.competition.end_date < DateTime.current ? "bg-disable" : "bg-white"} rounded-1 p-3 #{'mb-3' unless last}", style: "border-width: 2px" do %>
+  <p class="fs-7 text-end w-100">Took by <%= competitions_task.user ? competitions_task.user.first_name.capitalize : "nobody..." %></p>
   <div class="d-flex justify-content-between align-items-center w-100">
     <div class="overflow-hidden flex-grow-1 me-3">
       <p class="fs-5 text-truncate"><%= competitions_task.task.title %></p>
       <p class="fw-bold fs-7">For <%= competitions_task.task.kid.name %></p>
     </div>
-    <div class="todo-check-box flex-shrink-0 bg-disable">
-      <span class="material-symbols-outlined" style="font-size: 40px">
-        done
-      </span>
+    <div class="flex-shrink-0">
+      <% if competitions_task.is_done %>
+        <span class="material-symbols-outlined" style="font-size: 40px">
+          done
+        </span>
+      <% else %>
+        <span class="material-symbols-outlined" style="font-size: 40px">
+          close
+        </span>
+      <% end %>
     </div>
   </div>
   <% if competitions_task.deadline %>
@@ -16,4 +22,4 @@
   <% else %>
     <p>No deadline</p>
   <% end %>
-</div>
+<% end %>
