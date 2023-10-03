@@ -54,7 +54,7 @@ class TasksController < ApplicationController
     if @task.update(task_params)
       redirect_to @task, notice: 'Your task was successfully updated.'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 

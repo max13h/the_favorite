@@ -9,8 +9,9 @@
   <% if @current_competition %>
     <%= render "competitions/cards/competition_card", competition: @current_competition, counter: true %>
   <% else %>
-    <p class="fst-italic">No current competition</p>
-    <%= link_to "New competition", new_competition_path, class: "btn btn-secondary fw-bold" %>
+    <div class="position-relative" style="min-height: 200px">
+      <%= render "shared/no_current_competition" %>
+    </div>
   <% end %>
 </div>
 

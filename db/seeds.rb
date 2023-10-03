@@ -163,9 +163,9 @@ Family.all.each do |family|
     event_nb = 0
 
     5.times do
-      event_date = Faker::Time.between_dates(from: competition.start_date, to: competition.end_date, period: :afternoon).to_datetime
+      event_date = competition.end_date < DateTime.current ? Faker::Time.between_dates(from: competition.start_date, to: competition.end_date, period: :afternoon).to_datetime : Faker::Time.between_dates(from: DateTime.current, to: competition.end_date, period: :afternoon).to_datetime
 
-      Event.create!(
+      e = Event.new(
         title: events_list[event_nb][0],
         content: events_list[event_nb][1],
         date: event_date,
@@ -173,6 +173,7 @@ Family.all.each do |family|
         kid: family.kids.sample,
         competition: competition
       )
+      e.save(validate: false)
 
       event_nb += 1
     end
@@ -210,13 +211,14 @@ Family.all.each do |family|
         kid: family.kids.sample
       )
 
-      CompetitionsTask.create!(
+      ct = CompetitionsTask.new(
         task: task,
         competition: competition,
         is_done: competition.end_date < DateTime.current,
         user: competition.end_date < DateTime.current ? family.users.sample : nil,
         deadline: tasks_list[task_nb][2]
       )
+      ct.save(validate: false)
 
       task_nb += 1
     end

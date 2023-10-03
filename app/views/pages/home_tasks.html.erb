@@ -4,9 +4,9 @@
     <%= link_to "Events", home_events_path, class: "switch-btn-inactive", data: { btn: "Events" }  %>
   </div>
 
-  <% if @current_competition %>
+  <div id="todo" class="overflow-y-scroll d-flex align-items-center flex-column border-dotted border-secondary rounded p-3 w-100 flex-grow-1 position-relative">
+    <% if @current_competition %>
 
-    <div id="todo" class="overflow-y-scroll d-flex align-items-center flex-column border-dotted border-secondary rounded p-3 w-100 flex-grow-1 position-relative">
 
       <% unless @user_todo.empty? && @user_tasks_completed.empty? %>
 
@@ -41,14 +41,11 @@
       <% else %>
         <p class="fst-italic position-absolute top-50 start-50 translate-middle">No task picked yet</p>
       <% end %>
-    </div>
 
-  <% else %>
+    <% else %>
 
-    <div class="position-absolute top-50 start-50 translate-middle d-flex align-items-center flex-column">
-      <p class="fst-italic mb-3">No current competition</p>
-    <%= link_to "New competition", new_competition_path, class: "btn btn-secondary fw-bold" %>
-    </div>
+      <%= render "shared/no_current_competition" %>
 
-  <% end %>
+    <% end %>
+  </div>
 </div>

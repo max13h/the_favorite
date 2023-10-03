@@ -98,7 +98,8 @@ p.landing {
     position: relative;
     cursor: pointer;
     padding: 0.7rem;
-    width: 100px;
+    width: 125px;
+    white-space: nowrap;
 
     &:before {
       content: attr(data-btn);
@@ -133,7 +134,8 @@ p.landing {
     position: relative;
     cursor: pointer;
     padding: 0.7rem;
-    width: 100px;
+    width: 125px;
+    white-space: nowrap;
 
     &:before {
       content: attr(data-btn);
@@ -196,15 +198,11 @@ padding: 8px 24px;
 
 .heading-container {
   text-align: center;
-  display: inline-flex;
-  align-items: center;
 }
 
 .heading-illustration-icons {
-  display: inline-block;
-  transform: rotate(10deg);
+  transform: rotate(10deg) translateY(5px);
   color: $secondary;
   font-size: 30px !important;
-  margin-left: 0.5rem;
   font-variation-settings: 'FILL' 1;
 }
