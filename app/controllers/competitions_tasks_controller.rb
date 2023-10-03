@@ -59,6 +59,21 @@ class CompetitionsTasksController < ApplicationController
     end
   end
 
+  def create
+    @task = Task.find(params[:id])
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+
+    competitions_task = CompetitionsTask.new(task: @task, competition: @current_competition)
+
+    authorize competitions_task
+
+    if competitions_task.save
+      redirect_to common_pot_path, notice: 'Your task has been successfully added to the common pot.'
+    else
+      redirect_to new_task_path, alert: 'An error occurred'
+    end
+  end
+
   private
 
   def set_competitions_task

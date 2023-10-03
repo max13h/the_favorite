@@ -29,4 +29,8 @@ class CompetitionsTaskPolicy < ApplicationPolicy
   def update?
     record.competition.family == user.family
   end
+
+  def create?
+    true
+  end
 end
