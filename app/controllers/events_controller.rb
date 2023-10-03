@@ -12,7 +12,6 @@ class EventsController < ApplicationController
 
   def show
     @competition = Competition.find(params[:competition])
-
     @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
 
     render layout: 'focus'

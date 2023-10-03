@@ -1,5 +1,5 @@
 class KidsController < ApplicationController
-  before_action :set_kid, only: [:show, :edit]
+  before_action :set_kid, only: [:show, :edit, :update]
 
   def index
     @kids = Kid.where(family: current_user.family)

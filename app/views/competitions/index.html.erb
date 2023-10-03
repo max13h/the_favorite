@@ -9,7 +9,7 @@
   <% if @current_competition %>
     <%= render "competitions/cards/competition_card", competition: @current_competition, counter: true %>
   <% else %>
-    <div class="position-relative" style="min-height: 200px">
+    <div class="position-relative border-dotted border-secondary rounded w-100 max-width-md" style="min-height: 200px">
       <%= render "shared/no_current_competition" %>
     </div>
   <% end %>

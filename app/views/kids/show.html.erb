@@ -1,4 +1,4 @@
-<div class="container d-flex flex-column align-items-center mt-3">
+<div class="container d-flex flex-column align-items-center mt-3 max-width-lg">
 
   <%= render "shared/picture", user: @kid, size: "10rem", kid_or_parent: "kid" %>
 
@@ -46,7 +46,7 @@
     </span>
   </h3>
 
-  <div class="competitions_tasks p-3 w-100 max-width-sm overflow-hidden" style="max-height: 66vh">
+  <div class="events p-3 w-100 max-width-sm overflow-hidden" style="max-height: 66vh">
 
     <% unless @events.empty? %>
       <div data-controller="swiper" class="w-100" style="height: 190px">
@@ -60,14 +60,14 @@
           <% @events.each do |event| %>
 
             <swiper-slide class="p-1">
-              <%= render "competitions/cards/event_card", event: event, competition: @competition %>
+              <%= render "competitions/cards/event_card", event: event, competition: @current_competition %>
             </swiper-slide>
 
           <% end %>
         </swiper-container>
       </div>
     <% else %>
-      <p class="fst-italic text-ligth">You don't have old competition</p>
+      <p class="fst-italic text-ligth w-100 text-center">No event for <%= @kid.name.capitalize %></p>
     <% end %>
   </div>
 </div>

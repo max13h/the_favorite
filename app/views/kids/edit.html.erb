@@ -1,5 +1,42 @@
-<h1>Edit information</h1>
+<div class="d-flex flex-column align-items-center">
 
-<%= render 'form', kid: @kid %>
+  <h2 class="heading-container mt-5 mb-4">
+    Edit kid's info
+    <span class="material-symbols-outlined heading-illustration-icons">
+      edit
+    </span>
+  </h2>
 
-<%= link_to '< Back to all', kids_path, class: "btn-link my-4" %>
+  <%= simple_form_for(@kid, html: {class: "container max-width-sm px-5"}) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :name,
+                  label: "Name",
+                  required: true,
+                  autofocus: true,
+                  input_html: { class: "form-control", placeholder: "Enter name" } %>
+      <%= f.input :blood_type,
+                  label: "Blood Type",
+                  collection: ["A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-"],
+                  include_blank: "Select Blood Type",
+                  autofocus: true,
+                  input_html: { class: "form-control" } %>
+      <%= f.input :doctor_number,
+                  label: "Doctor Number",
+                  placeholder: "Enter doctor number",
+                  autofocus: true,
+                  input_html: { class: "form-control", type: "tel" } %>
+      <%= f.input :picture,
+                  required: false,
+                  as: :file,
+                  label: "Picture"  %>
+    </div>
+
+    <div class="form-actions d-flex flex-row justify-content-around align-items-center">
+      <%= f.button :submit, "Save", class: "btn btn-success my-2 mx-4" %>
+      <%= link_to 'Cancel', @kid, class: "btn btn-outline-danger my-2 mx-4" %>
+    </div>
+  <% end %>
+
+</div>
