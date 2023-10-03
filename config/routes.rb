@@ -18,8 +18,9 @@ Rails.application.routes.draw do
   resources :tasks
   get '/mark-as-recurent', to: 'tasks#mark_as_recurent'
   get '/unmark-as-recurent', to: 'tasks#unmark_as_recurent'
+  get '/add-recurent', to: 'tasks#add_recurent'
 
-  resources :competitions_tasks, only: [:update, :edit]
+  resources :competitions_tasks, only: [:update, :edit, :create]
   get '/assign-task', to: 'competitions_tasks#assign_task'
   get '/unassign-task', to: 'competitions_tasks#unassign_task'
   get '/mark-as-done', to: 'competitions_tasks#mark_as_done'
