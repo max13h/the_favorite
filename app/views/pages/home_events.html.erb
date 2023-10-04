@@ -1,7 +1,7 @@
 <div class="d-flex flex-column h-100">
-  <div class="switch w-100 d-flex justify-content-center align-items-center mt-2 mb-4 ">
-    <%= link_to "Tasks", home_tasks_path, class: "switch-btn-inactive me-3", data: { btn: "Tasks" }  %>
-    <%= link_to "Events", home_events_path, class: "switch-btn-active", data: { btn: "Events" }  %>
+  <div class="btn-group btn-group-toggle w-100 d-flex justify-content-center align-items-center mt-2 mb-4" data-toggle="buttons">
+    <%= link_to "Tasks", home_tasks_path, class: "btn btn-outline-secondary", data: { btn: "Tasks" }  %>
+    <%= link_to "Events", home_events_path, class: "btn btn-secondary", data: { btn: "Events" }  %>
   </div>
 
   <div class="flex-grow-1">
