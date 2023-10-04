@@ -56,8 +56,9 @@
       <% end %>
     </div>
 
-    <div class="form-actions d-flex justify-content-center">
-      <%= f.button :submit, "Save", class: "btn btn-primary" %>
+    <div class="form-actions d-flex flex-row justify-content-around align-items-center">
+      <%= f.button :submit, "Save", class: "btn btn-success my-2 mx-4" %>
+      <%= link_to 'Cancel', common_pot_path, class: "btn btn-outline-danger my-2 mx-4" %>
     </div>
   <% end %>
 </div>
