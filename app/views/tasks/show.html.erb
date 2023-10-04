@@ -44,7 +44,7 @@
 
   </div>
 
-  <div class="d-flex flex-column align-items-center border-dotted border-secondary rounded p-4 w-100 max-width-md <%= @competition.end_date < DateTime.current ? 'bg-light' : "bg-white" %>">
+  <div class="d-flex flex-column align-items-center border-dotted border-secondary rounded p-4 w-100 max-width-md bg-white">
 
     <% if @competition == @current_competition %>
 
@@ -86,13 +86,13 @@
       </div>
 
       <div class="my-5 d-flex flex-column align-items-center">
-        <% if @competitions_task.user %>
-          <p><span class="fw-bold fs-5"><%= @competitions_task.user == current_user ? "You" : @competitions_task.user.first_name.capitalize %></span></p>
-          <p class="fs-5 ">picked the task</p>
-        <% else %>
-          <p class="fs-5 ">Nobody</p>
-          <p class="fs-5 ">picked the task</p>
-        <% end %>
+        <p class="fs-5 ">picked by
+          <% if @competitions_task.user %>
+            <p><span class="fw-bold fs-1"><%= @competitions_task.user == current_user ? "You" : @competitions_task.user.first_name.capitalize %></span></p>
+          <% else %>
+            <p class="fs-1 fw-bold">nobody...</p>
+          <% end %>
+        </p>
 
         <% if @competitions_task.user == current_user %>
         <%= link_to "Unassign me the task", unassign_task_path(id: @competitions_task), class: "btn btn-outline-primary mt-3" %>
