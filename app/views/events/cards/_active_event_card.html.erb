@@ -8,10 +8,10 @@
   </div>
   <p class="mt-5 flex-grow-1"><%= event.content %></p>
 
-  <% days_left = (event.date - DateTime.current).to_i %>
+  <% days_left = (event.date.to_date - Date.current).to_i %>
 
   <p class="fw-bold fs-1">
-    <% if days_left == 1 %>
+    <% if days_left == 0 %>
       Today at <%= event.date.strftime "%H:%M" %>
     <% else %>
       In <%= days_left %> days

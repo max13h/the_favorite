@@ -9,4 +9,8 @@ class FamilyPolicy < ApplicationPolicy
   def create?
     true
   end
+
+  def join_family?
+    true
+  end
 end
