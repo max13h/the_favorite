@@ -1,4 +1,4 @@
-<%= link_to task_path(id: competitions_task.task, competition: competitions_task.competition), class: "d-block border-dotted border-primary #{competitions_task.competition.end_date < DateTime.current ? "bg-disable" : "bg-white"} rounded-1 p-3 #{'mb-3' unless last}", style: "border-width: 2px" do %>
+<%= link_to task_path(id: competitions_task.task, competition: competitions_task.competition), class: "d-block border-dotted border-primary #{competitions_task.competition.end_date < DateTime.current ? "bg-light border-info" : "bg-white border-secondary"} rounded-1 p-3 #{'mb-3' unless last}", style: "border-width: 2px" do %>
   <p class="fs-7 text-end w-100">Took by <%= competitions_task.user ? competitions_task.user.first_name.capitalize : "nobody..." %></p>
   <div class="d-flex justify-content-between align-items-center w-100">
     <div class="overflow-hidden flex-grow-1 me-3">

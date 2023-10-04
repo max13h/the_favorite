@@ -26,7 +26,7 @@ class PagesController < ApplicationController
     @current_competition = @family.competitions.where("end_date > ?", Time.now).first
 
     if @current_competition
-      @pending_events = @current_competition.events.where(user: current_user).where("date >=  ?", DateTime.current).order(date: :asc)
+      @pending_events = @current_competition.events.where(user: current_user).where("date >  ?", DateTime.current).order(date: :asc)
       @completed_events = @current_competition.events.where(user: current_user).where("date <  ?", DateTime.current).order(date: :asc)
     else
       @pending_events = []

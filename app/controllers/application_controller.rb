@@ -15,7 +15,8 @@ class ApplicationController < ActionController::Base
       "/home/events",
       "/competitions",
       "/common-pot",
-      "/kids"
+      "/kids",
+      "/profile"
     ]
 
     referrer = URI.parse(request.referrer).path if request.referrer

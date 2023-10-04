@@ -14,7 +14,7 @@
         <%= link_to competitions_tasks_path(id: task), data: { turbo_method: "post" }, class: "d-flex justify-content-between border w-100 rounded-1 p-3 #{ task == @recurent_tasks.last ? '' : 'mb-3' }" do %>
           <div class="overflow-hidden flex-grow-1 me-2">
             <p class="text-truncate"><%= task.title %></p>
-            <p style="font-size: 0.8rem"><strong>for <%= task.kid.name %></strong></p>
+            <p class="fs-7"><strong>for <%= task.kid.name %></strong></p>
           </div>
 
           <div class="d-flex justify-content-center align-items-center">

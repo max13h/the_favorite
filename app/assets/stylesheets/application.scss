@@ -35,12 +35,7 @@ p {
 .border-dotted {
   border: 5px dotted black;
 }
-.border-top-dotted {
-  border-top: 5px dotted black;
-}
-.border-bottom-dotted {
-  border-bottom: 2px dotted black;
-}
+
 /* Progress bar design. To use it on the scoreboard, please take the HTML below.
 Exemple for a 25% progress:
 <div class="progress">
@@ -86,11 +81,6 @@ p.landing {
 
 :root {
   --swiper-pagination-color: #FFBE2F;
-}
-
-.bg-disable {
-  background-color: #F3F3F3;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='25' height='25' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%23FFFFFF' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%23FFFFFF' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .switch {

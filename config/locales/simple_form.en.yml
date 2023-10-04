@@ -9,7 +9,7 @@ en:
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
     error_notification:
-      default_message: "An error has occurred"
+      default_message: '<div class="alert alert-warning alert-dismissible fade show m-1" role="alert">An error has occurred<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>'
     # Examples
     # labels:
     #   defaults:

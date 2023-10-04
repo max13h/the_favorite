@@ -1,4 +1,4 @@
-<%= link_to event_path(event, competition: competition), class: "d-inline-block w-100 border-dotted border-secondary #{event.date < DateTime.current ? "bg-disable" : "bg-white"} rounded-1 p-3" do %>
+<%= link_to event_path(event, competition: competition), class: "d-inline-block w-100 border-dotted border-secondary #{event.date < DateTime.current ? "bg-light border-info" : "bg-white border-secondary"} rounded-1 p-3" do %>
   <div class="d-flex justify-content-between align-items-center mb-3 fs-7">
     <p><%= event.date.strftime "#{event.date.day.ordinalize} %B %y" %></p>
     <p>Took by <%= event.user ? event.user.first_name.capitalize : "nobody..." %></p>
