@@ -2,9 +2,24 @@ class KidsController < ApplicationController
   before_action :set_kid, only: [:show, :edit, :update]
 
   def index
-    @kids = Kid.where(family: current_user.family)
-    authorize @kids
+    @kids_dry = Kid.where(family: current_user.family)
+    authorize @kids_dry
 
+    @kids = []
+
+    @kids_dry.each do |kid|
+      task_count = kid.tasks.joins(:competitions_tasks).where(competitions_tasks: { is_done: false }).count
+      event_count = kid.events.where("date > ?", DateTime.current).count
+
+      kid = {
+        kid: kid,
+        task_count: task_count,
+        event_count: event_count
+      }
+
+      @kids << kid
+    end
+    @kids.sort_by! { |kid| -(kid[:task_count] + kid[:event_count]) }
     @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
   end
 

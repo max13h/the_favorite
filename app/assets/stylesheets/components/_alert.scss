@@ -1,12 +1,10 @@
 .alert {
   position: fixed;
-  bottom:80px;
+  bottom: 20px;
   right: 8px;
   left: 8px;
   z-index: 1000;
 }
-
-.fade-out {
-  opacity: 0;
-  transition: opacity 0.5s 2s ease-out;
+.alert-absolute {
+  bottom: 80px;
 }

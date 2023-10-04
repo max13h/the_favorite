@@ -15,8 +15,8 @@
 
   <body class="d-flex flex-column" style="height: 100vh">
     <%= render "shared/header" %>
-    <div class="flex-grow-1 overflow-x-hidden overflow-y-scroll d-flex flex-column align-items-center site-content">
-      <%= render "shared/flashes" %>
+    <div class="flex-grow-1 overflow-x-hidden overflow-y-scroll d-flex flex-column align-items-center site-content position-relative">
+      <%= render "shared/flashes_absolute" %>
       <div class="w-100 h-100 max-width-lg position-relative">
         <%= yield %>
       </div>
