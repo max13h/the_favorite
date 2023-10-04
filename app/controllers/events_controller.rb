@@ -19,6 +19,7 @@ class EventsController < ApplicationController
 
   def new
     @event = Event.new
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
     @kids = current_user.family.kids
     authorize @event
   end
@@ -26,6 +27,10 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
     authorize @event
+
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+
+    @event.date = nil if @event.date > @current_competition.end_date
 
     if @event.save
       redirect_to common_pot_path, notice: 'Your event has been successfully added to the common pot.'
@@ -78,6 +83,6 @@ class EventsController < ApplicationController
   end
 
   def event_params
-    params.require(:event).permit(:title, :content, :date, :kid_id)
+    params.require(:event).permit(:title, :content, :date, :kid_id, :competition_id)
   end
 end
