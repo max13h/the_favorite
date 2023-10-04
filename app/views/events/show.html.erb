@@ -6,7 +6,7 @@
     </span>
   </h2>
 
-  <div class="p-4 rounded mb-4 d-flex flex-column align-items-center w-100 max-width-md position-relative border-dotted border-secondary <%= @event.date < DateTime.current ? "bg-disable" : "bg-white" %>">
+  <div class="p-4 rounded mb-4 d-flex flex-column align-items-center w-100 max-width-md position-relative border-dotted <%= @event.date < DateTime.current ? "bg-light border-info" : "bg-white border-secondary" %>">
 
     <% if @current_competition == @competition %>
       <div class="dropdown position-absolute top-0 end-0 me-2 mt-2">
@@ -33,30 +33,30 @@
       <% end %>
     </div>
 
-      <div class="my-3 d-flex flex-column align-items-center">
-        <% if @event.user %>
-          <p><span class="fw-bold fs-5"><%= @event.user == current_user ? "You" : @event.user.first_name.capitalize %></span></p>
-          <p class="fs-5 ">picked the event</p>
-        <% else %>
-          <p class="fs-5 ">Nobody</p>
-          <p class="fs-5 ">picked the event</p>
+    <div class="my-3 d-flex flex-column align-items-center">
+      <% if @event.user %>
+        <p><span class="fw-bold fs-5"><%= @event.user == current_user ? "You" : @event.user.first_name.capitalize %></span></p>
+        <p class="fs-5 ">picked the event</p>
+      <% else %>
+        <p class="fs-5 ">Nobody</p>
+        <p class="fs-5 ">picked the event</p>
+      <% end %>
+
+      <% if @event.date < DateTime.current %>
+        <p class="mt-3">This event is finished</p>
+      <% else %>
+        <% if @event.user == current_user %>
+          <%= link_to "Unassign me the event", unassign_event_path(id: @event), class: "btn btn-outline-primary mt-3" %>
+        <% elsif @event.user.nil? %>
+          <%= link_to "Assign me the event", assign_event_path(id: @event), class: "btn btn-outline-primary mt-3" %>
         <% end %>
-
-        <% if @event.date < DateTime.current %>
-          <p class="mt-3">This event is finished</p>
-        <% else %>
-          <% if @event.user == current_user %>
-            <%= link_to "Unassign me the event", unassign_event_path(id: @event), class: "btn btn-outline-primary mt-3" %>
-          <% elsif @event.user.nil? %>
-            <%= link_to "Assign me the event", assign_event_path(id: @event), class: "btn btn-outline-primary mt-3" %>
-          <% end %>
-        <% end %>
-      </div>
+      <% end %>
+    </div>
 
 
-      <div class="d-flex flex-column align-items-center">
-        <p class="mt-3">Date:</p>
-        <p class="text-center"><%= @event.date.strftime "#{@event.date.day.ordinalize} %B %y at %H : %M" %></p>
-      </div>
+    <div class="d-flex flex-column align-items-center">
+      <p class="mt-3">Date:</p>
+      <p class="text-center"><%= @event.date.strftime "#{@event.date.day.ordinalize} %B %y at %H : %M" %></p>
+    </div>
   </div>
 </div>

@@ -14,7 +14,7 @@
             <div class="competitions_task border bg-white d-flex justify-content-between align-items-center px-3 py-2 rounded-1 w-100 <%= "mb-3" if (competitions_task != @user_todo.last) || ((competitions_task == @user_todo.last) && !@user_tasks_completed.empty?) %> ">
               <%= link_to task_path(competitions_task.task, competition: @current_competition), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
                 <p class="text-truncate"><%= competitions_task.task.title %></p>
-                <p style="font-size: 0.8rem"><strong>for <%= competitions_task.task.kid.name %></strong></p>
+                <p class="fs-7"><strong>for <%= competitions_task.task.kid.name %></strong></p>
               <% end %>
 
               <%= link_to mark_as_done_path(id: competitions_task, competition_id: @current_competition), class: "todo-check-box flex-shrink-0" do %>
@@ -27,7 +27,7 @@
             <div class="competitions_task border bg-white d-flex justify-content-between align-items-center px-3 py-2 rounded-1 w-100 <%= "mb-3" if competitions_task != @user_tasks_completed.last %> ">
               <%= link_to task_path(competitions_task.task, competition: @current_competition), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
                 <p class="text-truncate"><%= competitions_task.task.title %></p>
-                <p style="font-size: 0.8rem"><strong>for <%= competitions_task.task.kid.name %></strong></p>
+                <p class="fs-7"><strong>for <%= competitions_task.task.kid.name %></strong></p>
               <% end %>
 
               <%= link_to unmark_as_done_path(id: competitions_task, competition_id: @current_competition), class: "todo-check-box flex-shrink-0" do %>

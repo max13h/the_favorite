@@ -1,62 +1,81 @@
-<div class="user d-flex flex-column align-items-center">
+<div class="user d-flex flex-column align-items-center mt-3">
   <div class="profile-picture position-relative mt-5">
-    <%= image_tag "crown.svg", alt: "crown image", class: "position-absolute", style: "width: 70px; vertical-align: unset; top: -44px; left: -24px; filter: drop-shadow(1px 1px 0px rgb(0 0 0 / 0.2))" %>
+    <%= image_tag "crown.svg", alt: "crown image", class: "position-absolute", style: "width: 90px; vertical-align: unset; top: -54px; left: -24px; filter: drop-shadow(1px 1px 0px rgb(0 0 0 / 0.2))" %>
 
-    <%= render "shared/picture", user: current_user, size: "5rem", kid_or_parent: "parent" %>
+    <%= render "shared/picture", user: current_user, size: "8rem", kid_or_parent: "parent" %>
   </div>
-  <p class="fs-3 fw-bold"><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
+  <p class="fs-2 fw-bold"><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
   <%= link_to edit_user_registration_path, class: "d-flex align-items-center me-3 mb-4" do %>
     <span class="material-symbols-outlined me-1" style="font-variation-settings: 'FILL' 1; font-size: 1rem !important">
       edit
     </span>
-    <p class="btn-link"> Edit my profile </p>
+    <p class="btn-link fs-7"> Edit my profile </p>
   <% end %>
 </div>
 
-<div class="family border-dotted border-secondary rounded d-flex flex-column align-items-center p-3 mt-5">
+<h2 class="heading-container mt-4">
+  Your family
+  <span class="material-symbols-outlined heading-illustration-icons">
+    escalator_warning
+  </span>
+</h2>
 
+<div class="family border-dotted border-secondary rounded d-flex flex-column align-items-center p-3 mt-2">
   <% if @family %>
-    <h2>Your family</h2>
-    <% if @rival %>
-      <div class="rival d-flex flex-column align-items-center w-100 mt-3">
-        <h3 class="fs-5 align-self-start">Rival:</h3>
+    <div class="rival d-flex flex-column align-items-center w-100">
+      <h3 class="fs-5 align-self-start">
+        Rival
+        <span class="material-symbols-outlined heading-illustration-icons" style="font-size: 1.2rem !important; transform: translateY(1px)">
+          bolt
+        </span>
+      </h3>
 
+      <% if @rival %>
         <%= render "shared/picture", user: @rival, size: "4rem", kid_or_parent: "parent" %>
-
-        <p class="fs-5 fw-bold"><%= "#{@rival.first_name} #{@rival.last_name}" %></p>
-      </div>
-    <% else %>
-      <div class="d-flex flex-column align-items-center w-100">
-        <p>Invite your rival to join your family:</p>
-        <div class="copytoclipboard mt-3 d-flex justify-content-evenly align-items-center w-100" data-controller="clipboard">
-          <%= text_field_tag(:code, @family.code, class: "text-center fs-4 border rounded py-1 border-2 border-primary", data: {"clipboard-target": "text"}, readonly: true) %>
-          <button class="btn btn-outline-secondary fs-3 border-2" data-action="click->clipboard#copy"><i class="ri-file-copy-line" data-clipboard-target="icon"></i></button>
+        <p class="mt-1"><%= "#{@rival.first_name.capitalize} #{@rival.last_name.capitalize}" %></p>
+      <% else %>
+        <div class="my-3">
+          <p class="fs-7 fst-italic">Send the code only to your rival</p>
+          <div class="copytoclipboard mt-2 w-100 d-flex justify-content-center" data-controller="clipboard">
+            <%= text_field_tag(:code, @family.code, class: "text-center fs-5 bg-light rounded me-3", style: "width: 9rem; border: none", data: {"clipboard-target": "text"}, readonly: true) %>
+            <button class="fs-3 bg-white rounded" style="border: none" data-action="click->clipboard#copy"><i class="ri-file-copy-line" data-clipboard-target="icon"></i></button>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
 
-    <% unless @family.kids.empty? %>
-      <div class="kids mt-3 w-100 border-top-dotted pt-3">
-        <h3 class="fs-5">Kids:</h3>
+    <div class="kids mt-3 w-100">
+      <h3 class="fs-5 align-self-start">
+        Kids
+        <span class="material-symbols-outlined heading-illustration-icons" style="font-size: 1.2rem !important; transform: translateY(1px)">
+          favorite
+        </span>
+      </h3>
+
+      <% unless @family.kids.empty? %>
         <div class="kids d-flex justify-content-evenly flex-wrap">
           <% @family.kids.each do |kid| %>
             <div class="kid d-flex flex-column align-items-center">
-              <%= render "shared/picture", user: kid, size: "2rem", kid_or_parent: "kid" %>
+              <%= render "shared/picture", user: kid, size: "2.2rem", kid_or_parent: "kid" %>
 
-              <p><%= kid.name %></p>
+              <p class="mt-1"><%= kid.name.capitalize %></p>
             </div>
           <% end %>
         </div>
-      </div>
-    <% else %>
-      <p class="fst-italic kids mt-3 w-100 border-top-dotted pt-4 text-center">No kid yet</p>
-      <%= link_to "Add kids", new_kid_path, class: "btn btn-outline-primary mt-3" %>
-    <% end %>
+      <% else %>
+        <div class="d-flex flex-column align-items-center my-3">
+          <p class="fst-italic kids fs-7">No kid yet</p>
+          <%= link_to "Add kids", new_kid_path, class: "btn btn-outline-primary mt-2" %>
+        </div>
+      <% end %>
+    </div>
 
 
   <% else %>
-    <p class="fst-italic ">No family yet</p>
-    <%= link_to "Add you family", new_family_path, class: "btn btn-secondary fw-bold mt-2 fs-4" %>
+    <div class="d-flex flex-column align-items-center m-2">
+      <p class="fst-italic text-center">You need to <strong>join</strong> or <strong>create</strong> a family to have full access to the app</p>
+      <%= link_to "Add you family", new_family_path, class: "btn btn-secondary fw-bold mt-3 fs-4 p-3" %>
+    </div>
   <% end %>
 </div>
 

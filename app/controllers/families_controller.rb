@@ -3,6 +3,8 @@ class FamiliesController < ApplicationController
     @code = Family.new
 
     authorize @code
+
+    render layout: 'focus'
   end
 
   def create
@@ -11,7 +13,7 @@ class FamiliesController < ApplicationController
     if @family.save
       current_user.family = @family
       current_user.save!
-      redirect_to profile_path, notice: "You're family as been successfully created"
+      redirect_to profile_path, notice: "Family successfully created, send the code to your rival !"
     else
       render :new, status: :unprocessable_entity
     end
@@ -23,6 +25,7 @@ class FamiliesController < ApplicationController
     family_array = Family.where(code: @code)
     family = family_array.first
     if family_array.count == 1
+      authorize family
       if family.users.count == 1
         current_user.family = family
         current_user.save!
@@ -35,6 +38,8 @@ class FamiliesController < ApplicationController
         render :new, alert: "Error during assignation of family"
       end
     else
+      @family = Family.new(code: SecureRandom.urlsafe_base64(4))
+      authorize @family
       redirect_to new_family_path, alert: "Error during assignation of family"
     end
   end
