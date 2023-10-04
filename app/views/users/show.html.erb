@@ -37,8 +37,8 @@
         <div class="my-3">
           <p class="fs-7 fst-italic">Send the code only to your rival</p>
           <div class="copytoclipboard mt-2 w-100 d-flex justify-content-center" data-controller="clipboard">
-            <%= text_field_tag(:code, @family.code, class: "text-center fs-5 bg-light rounded me-3", style: "width: 9rem; border: none", data: {"clipboard-target": "text"}, readonly: true) %>
-            <button class="fs-3 bg-white rounded" style="border: none" data-action="click->clipboard#copy"><i class="ri-file-copy-line" data-clipboard-target="icon"></i></button>
+            <%= text_field_tag(:code, @family.code, class: "text-center fs-5 bg-light border border-secondary rounded me-3", style: "width: 9rem", data: {"clipboard-target": "text"}, readonly: true) %>
+            <button class="fs-3 bg-white rounded border border-secondary" style="border: none" data-action="click->clipboard#copy"><i class="ri-file-copy-line" data-clipboard-target="icon"></i></button>
           </div>
         </div>
       <% end %>
@@ -65,7 +65,7 @@
       <% else %>
         <div class="d-flex flex-column align-items-center my-3">
           <p class="fst-italic kids fs-7">No kid yet</p>
-          <%= link_to "Add kids", new_kid_path, class: "btn btn-outline-primary mt-2" %>
+          <%= link_to "Add kids", new_kid_path, class: "btn btn-secondary mt-2" %>
         </div>
       <% end %>
     </div>

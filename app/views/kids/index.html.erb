@@ -12,19 +12,18 @@
     <% unless @kids.empty? %>
 
       <% @kids.each do |kid| %>
-        <%= link_to kid_path(kid), class: "border mb-3 w-100 d-flex justify-content-around align-items-center rounded p-3" do %>
+        <%= link_to kid_path(kid[:kid]), class: "border bg-white shadow-sm mb-3 w-100 d-flex justify-content-around align-items-center rounded p-3 #{kid[:task_count].zero? && kid[:event_count].zero? ? "border-light" : "border-secondary"}" do %>
           <div class="flex-grow-1">
-            <p class="fs-3 mb-3"><%= kid.name %></p>
-            <% task_count = kid.tasks.joins(:competitions_tasks).where(competitions_tasks: { is_done: false }).count %>
-            <% event_count = kid.events.where("date > ?", DateTime.current).count %>
+            <p class="fs-3 mb-3 fw-bold"><%= kid[:kid].name %></p>
+
             <p>
-              <%= task_count %> task<%= "s" if task_count > 1 %> pending
+              <%= kid[:task_count] %> task<%= "s" if kid[:task_count] > 1 %> pending
             </p>
             <p>
-              <%= event_count %> event<%= "s" if event_count > 1 %> soon
+              <%= kid[:event_count] %> event<%= "s" if kid[:event_count] > 1 %> soon
             </p>
           </div>
-          <%= render "shared/picture", user: kid, size: "3rem", kid_or_parent: "kid" %>
+          <%= render "shared/picture", user: kid[:kid], size: "3rem", kid_or_parent: "kid" %>
         <% end %>
       <% end %>
 
