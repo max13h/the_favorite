@@ -1,4 +1,4 @@
-<div class="border-dotted rounded border-secondary d-flex align-items-center flex-column p-3 w-100 max-width-lg <%= competition.end_date < Time.now ? "bg-light border-info" : "bg-white border-secondary" %>">
+<div class="border-dotted rounded border-secondary d-flex align-items-center flex-column p-3 w-100 max-width-lg bg-white <%= competition.end_date < Time.now ? "border-info" : "border-secondary" %>">
 
   <div class="scores d-flex align-items-center justify-content-evenly w-100">
     <% current_user.family.users.each do |user| %>

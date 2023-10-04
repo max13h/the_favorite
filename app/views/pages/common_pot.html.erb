@@ -19,7 +19,7 @@
         <% else %>
 
           <% @pending_competitions_tasks.each do |competitions_task|%>
-            <div class="task border bg-white d-flex justify-content-between p-3 rounded-1 w-100 <%= (competitions_task == @pending_competitions_tasks.last && @pending_events.empty?) ? "" : "mb-3" %>">
+            <div class="task border border-info shadow-sm bg-white d-flex justify-content-between p-3 rounded-1 w-100 <%= (competitions_task == @pending_competitions_tasks.last && @pending_events.empty?) ? "" : "mb-3" %>">
 
 
 
@@ -57,7 +57,7 @@
           <% end %>
 
           <% @pending_events.each do |event|%>
-            <div class="event border bg-white d-flex justify-content-between p-3 rounded-1 w-100 <%= (event == @pending_events.last) ? "" : "mb-3" %>">
+            <div class="event border border-info shadow-sm bg-white d-flex justify-content-between p-3 rounded-1 w-100 <%= (event == @pending_events.last) ? "" : "mb-3" %>">
               <%= link_to event_path(event, competition: @current_competition), class: "overflow-hidden flex-grow-1 me-2", style: "min-width: 0" do %>
                 <p class="text-truncate mb-2 fw-bold"><%= event.title %></p>
                 <p class="d-inline-flex align-items-center fs-7"><span class="material-symbols-outlined fw-bold me-2" style="font-size: 1.5rem !important; transform: rotate(10deg) translateY(0px); font-variation-settings: 'FILL' 0, 'wght' 300;">event</span>for <%= event.kid.name %></p>
