@@ -4,7 +4,7 @@
     <%= link_to "Events", home_events_path, class: "btn btn-secondary", data: { btn: "Events" }  %>
   </div>
 
-  <div class="flex-grow-1">
+  <div class="overflow-y-scroll d-flex flex-column border-dotted border-secondary rounded p-2 w-100 flex-grow-1 position-relative">
     <% if @current_competition %>
       <div class="events d-flex align-items-center flex-column h-100" >
         <div class="flex-grow-1 d-flex align-items-center flex-column rounded p-3 w-100 position-relative">
