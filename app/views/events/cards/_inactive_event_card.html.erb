@@ -1,4 +1,4 @@
-<%= link_to event_path(event, competition: @current_competition), class: "bg-light border-dotted border-info h-100 rounded p-3 d-flex flex-column align-items-center"  do %>
+<%= link_to event_path(event, competition: @current_competition), class: "bg-white border shadow-sm border-info h-100 rounded p-3 d-flex flex-column align-items-center"  do %>
   <div class="w-100 text-center">
     <p class="text-break fw-bold fs-3"><%= event.title.capitalize %></p>
     <div class="d-flex justify-content-center align-items-center mt-3">
@@ -6,7 +6,13 @@
       <%= render 'shared/picture', user: event.kid, size: "2rem", kid_or_parent: "kid" %>
     </div>
   </div>
-  <p class="mt-5 flex-grow-1"><%= event.content %></p>
+  <% if event.content.blank? %>
+    <div class="w-100 flex-grow-1 position-relative">
+      <p class="mt-5 pt-5 text-center fs-7 fst-italic">No additional content</p>
+    </div>
+  <% else %>
+    <p class="mt-5 flex-grow-1 w-100 text-break"><%= event.content %></p>
+  <% end %>
 
   <% days_left = (event.date - DateTime.current).to_i %>
 

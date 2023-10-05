@@ -6,7 +6,7 @@
     </span>
   </h2>
 
-  <div class="p-4 rounded mb-4 d-flex flex-column align-items-center w-100 max-width-md position-relative border-dotted <%= @event.date < DateTime.current ? "bg-light border-info" : "bg-white border-secondary" %>">
+  <div class="p-4 rounded mb-4 d-flex flex-column align-items-center w-100 max-width-md position-relative border-dotted bg-white <%= @event.date < DateTime.current ? "border-info" : "border-secondary" %>">
 
     <% if @current_competition == @competition %>
       <div class="dropdown position-absolute top-0 end-0 me-2 mt-2">
@@ -27,9 +27,9 @@
 
     <div class="w-100 mb-3">
       <% if @event.content.blank? %>
-        <p class="w-100 text-center fst-italic mb-3">No additional info</p>
+        <p class="w-100 fst-italic mb-3">No additional info</p>
       <% else %>
-        <p class="w-100 text-center mb-3"><%= @event.content %></p>
+        <p class="w-100 text-break mb-3"><%= @event.content %></p>
       <% end %>
     </div>
 

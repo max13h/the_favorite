@@ -19,7 +19,7 @@
     </span>
   </h3>
 
-  <div class="competitions_tasks border-dotted border-secondary rounded p-3 w-100 max-width-sm overflow-y-scroll" style="max-height: 66vh">
+  <div class="competitions_tasks border-dotted border-info rounded p-3 w-100 max-width-sm overflow-y-scroll" style="max-height: 66vh">
     <% @competitions_tasks.each do |competitions_task| %>
       <%= render "competitions/cards/task_card",
         competitions_task: competitions_task,
