@@ -50,6 +50,8 @@ class EventsController < ApplicationController
     if @event.update(event_params)
       redirect_to(event_path(@event, competition: competition), notice: 'Your event was successfully updated')
     else
+      @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+      @kids = current_user.family.kids
       render :edit, status: :unprocessable_entity
     end
   end
