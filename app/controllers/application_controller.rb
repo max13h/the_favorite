@@ -85,3 +85,8 @@ class ApplicationController < ActionController::Base
     devise_controller? || pages_actions.include?(params[:action])
   end
 end
+
+# app/controllers/application_controller.rb
+def default_url_options
+  { host: ENV["www.the-favorite.app"] || "localhost:3000" }
+end
