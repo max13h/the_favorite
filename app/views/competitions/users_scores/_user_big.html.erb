@@ -14,9 +14,9 @@
 
   <p class="fs-1">
     <% if counter %>
-    <strong data-controller="counter" data-counter-target="counter">
-      <%= user.scores.where(competition: competition)[0].score %>
-    </strong>
+      <strong data-controller="counter" data-counter-target="counter">
+        <%= user.scores.where(competition: competition)[0].score %>
+      </strong>
     <% else %>
       <strong>
         <%= user.scores.where(competition: competition)[0].score %>
