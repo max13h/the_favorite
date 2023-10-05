@@ -1,7 +1,7 @@
-<div class="h-100 d-flex flex-column align-items-center">
-  <div class="switch w-100 d-flex justify-content-center align-items-center mt-2 mb-4 ">
-    <%= link_to "Tasks", home_tasks_path, class: "switch-btn-inactive me-3", data: { btn: "Tasks" }  %>
-    <%= link_to "Events", home_events_path, class: "switch-btn-active", data: { btn: "Events" }  %>
+<div class="d-flex flex-column h-100">
+  <div class="btn-group btn-group-toggle w-100 d-flex justify-content-center align-items-center mt-2 mb-4" data-toggle="buttons">
+    <%= link_to "Tasks", home_tasks_path, class: "btn btn-outline-secondary", data: { btn: "Tasks" }  %>
+    <%= link_to "Events", home_events_path, class: "btn btn-secondary", data: { btn: "Events" }  %>
   </div>
 
   <div class="overflow-y-scroll d-flex flex-column border-dotted border-secondary rounded p-2 w-100 flex-grow-1 position-relative">
