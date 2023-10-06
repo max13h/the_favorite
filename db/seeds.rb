@@ -158,11 +158,13 @@ Competition.where(family: family).each do |competition|
 
     else
 
+      e_user = rand(4).zero? ? family.users.last : family.users.first
+
       e = Event.new(
         title: events_list[event_nb][0],
         content: events_list[event_nb][1],
         date: event_date,
-        user: competition.end_date < DateTime.current ? family.users.sample : nil,
+        user: e_user,
         kid: family.kids.sample,
         competition: competition
       )
