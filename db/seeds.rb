@@ -297,4 +297,16 @@ Competition.all.each do |competition|
   end
 end
 
+user = User.create!(
+  email: "max@gmail.com",
+  password: "1234567890",
+  first_name: "Maxime",
+  last_name: Hmae,
+  family: nil
+)
+
+user.picture.attach(io: URI.open("https://avatars.githubusercontent.com/u/114936764?v=4"), filename: "parent.png")
+user.save!
+user_nb += 1
+
 puts "Seed completed !"
