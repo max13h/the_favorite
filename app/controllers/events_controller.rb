@@ -62,17 +62,29 @@ class EventsController < ApplicationController
   end
 
   def assign_event
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+
     if @event && @event.user.nil?
       @event.user = current_user
       @event.save!
+
+      score = Score.where(user: current_user).where(competition: @current_competition).first
+      score.score += 1
+      score.save!
     end
     redirect_back(fallback_location: root_path)
   end
 
   def unassign_event
+    @current_competition = current_user.family.competitions.where("end_date > ?", Time.now).first
+
     if @event && @event.user
       @event.user = nil
       @event.save!
+
+      score = Score.where(user: current_user).where(competition: @current_competition).first
+      score.score -= 1
+      score.save!
     end
     redirect_back(fallback_location: root_path)
   end
