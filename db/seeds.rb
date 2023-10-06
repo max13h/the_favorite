@@ -301,7 +301,7 @@ user = User.create!(
   email: "max@gmail.com",
   password: "1234567890",
   first_name: "Maxime",
-  last_name: Hmae,
+  last_name: "Hmae",
   family: nil
 )
 
