@@ -8,6 +8,10 @@ Final project of the LeWagon bootcamp by [Tanya Lathion](https://github.com/tany
 The mental load is doubled when it's shared with the other parents and relationships deteriorate due to the tensions created by the organization.
 
 **The Favorite** offers a humorous take on the burden of parenthood. Parents work as a real team, while having fun competing against each other.
+
+## Link the the presentation video:
+https://www.youtube.com/watch?v=HKW5yFXF45Q
+
 ## Screenshots
 <div style="width: 100%; display: flex; justify-content: center; flex-wrap: wrap">
   <img src="app/assets/images/readme/root.png" alt="root page" height="450px" style="margin: 10px">
