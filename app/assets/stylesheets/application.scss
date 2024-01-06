@@ -11,6 +11,11 @@
 @import "components/index";
 @import "pages/index";
 
+.body {
+  height: 100vh; /* Valeur de repli pour les navigateurs qui ne prennent pas en charge les propriétés personnalisées */
+  height: calc(var(--vh, 1vh) * 100);
+}
+
 .body-font {
   font-family: $body-font;
 }
