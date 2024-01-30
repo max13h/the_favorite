@@ -31,6 +31,8 @@
         <%= yield %>
       </div>
     </div>
-    <%= render "shared/navbar" %>
+    <% if browser.device.mobile? %>
+      <%= render "shared/navbar" %>
+    <% end %>
   </body>
 </html>

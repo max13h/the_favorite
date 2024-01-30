@@ -1,10 +1,54 @@
-<header class="d-flex justify-content-between align-items-center shadow-sm position-relative branded-header">
+<header class="header d-flex justify-content-between align-items-center shadow-sm position-relative branded-header">
   <%= image_tag "the-favorite-logo-svg.svg", alt: "the favorite logo", class: "d-flex flex-column align-items-center",style: "width: 147.937px; height: 40px;" %>
-  <%# <%= link_to "", new_task_path, class: "ri-add-circle-line fs-1 me-3" %>
-  <%= link_to profile_path, class: "on-active d-flex flex-column align-items-center my-1" do %>
-    <div class="d-flex justify-content-center align-items-center" style="height: 40px;">
 
-      <%= render "shared/picture", user: current_user, size: "30px", kid_or_parent: "parent" %>
-    </div>
-  <% end %>
+  <div class="d-flex">
+
+    <% unless browser.device.mobile? %>
+      <nav class="d-flex justify-content-around p-0" style="font-variation-settings: 'FILL' 0, 'wght' 200">
+        <div class="d-flex justify-content-around p-0 max-width-lg w-100">
+          <%= link_to home_tasks_path, class: "nav-el on-active d-flex align-items-center my-1" do %>
+            <span class="material-symbols-outlined" style="font-size: 32px !important;">
+              home
+            </span>
+            <p class="fs-7">home</p>
+          <% end %>
+
+          <%= link_to competitions_path, class: "nav-el on-active d-flex align-items-center my-1" do %>
+            <span class="material-symbols-outlined" style="font-size: 32px !important;">
+              trophy
+            </span>
+            <p class="fs-7">Score</p>
+          <% end %>
+
+          <%= link_to common_pot_path, class: "nav-el on-active d-flex align-items-center my-1" do %>
+            <span class="material-symbols-outlined" style="font-size: 32px !important;">
+              inventory_2
+            </span>
+            <p class="fs-7">Pot</p>
+          <% end %>
+
+          <%= link_to kids_path, class: "nav-el on-active d-flex align-items-center my-1" do %>
+            <span class="material-symbols-outlined" style="font-size: 32px !important;">
+              child_care
+            </span>
+            <p class="fs-7">Kids</p>
+          <% end %>
+
+          <%= link_to new_task_path, class: "btn btn-secondary nav-el on-active d-flex align-items-center my-1" do %>
+            <span class="material-symbols-outlined" style="font-size: 32px !important;">
+              add_circle
+            </span>
+            <p class="fs-7">Add</p>
+          <% end %>
+        </div>
+      </nav>
+    <% end %>
+
+    <%= link_to profile_path, class: "ms-5 on-active d-flex flex-column align-items-center my-1" do %>
+      <div class="d-flex justify-content-center align-items-center" style="height: 40px;">
+
+        <%= render "shared/picture", user: current_user, size: "30px", kid_or_parent: "parent" %>
+      </div>
+    <% end %>
+  </div>
 </header>
