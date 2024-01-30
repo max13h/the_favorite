@@ -24,6 +24,7 @@ class EventPolicy < ApplicationPolicy
   end
 
   def update?
-    record.kid.family == user.family
+    # record.kid.family == user.family
+    false
   end
 end

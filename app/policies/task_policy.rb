@@ -26,7 +26,8 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def update?
-    record.kid.family == user.family
+    # record.kid.family == user.family
+    false
   end
 
   def add_recurent?
