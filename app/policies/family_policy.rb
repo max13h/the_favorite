@@ -7,10 +7,12 @@ class FamilyPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    # true
+    false
   end
 
   def join_family?
-    true
+    # true
+    false
   end
 end

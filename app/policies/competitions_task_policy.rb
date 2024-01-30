@@ -23,7 +23,8 @@ class CompetitionsTaskPolicy < ApplicationPolicy
   end
 
   def create_competitions_task?
-    record.task.kid.family == user.family
+    # record.task.kid.family == user.family
+    false
   end
 
   def update?
@@ -31,6 +32,7 @@ class CompetitionsTaskPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    # true
+    false
   end
 end

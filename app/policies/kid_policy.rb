@@ -15,10 +15,12 @@ class KidPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    # true
+    false
   end
 
   def update?
-    record.family == user.family
+    # record.family == user.family
+    false
   end
 end

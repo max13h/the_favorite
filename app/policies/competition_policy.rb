@@ -11,11 +11,13 @@ class CompetitionPolicy < ApplicationPolicy
   end
 
   def create?
-    user.family == record.family
+    # user.family == record.family
+    false
   end
 
   def destroy?
-    true
+    # true
+    false
   end
 
   def show?

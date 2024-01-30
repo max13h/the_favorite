@@ -15,7 +15,8 @@ class EventPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    # true
+    false
   end
 
   def unassign_event?

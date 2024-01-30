@@ -11,15 +11,18 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def create?
-    true
+    # true
+    false
   end
 
   def mark_as_recurent?
-    record.kid.family == user.family
+    # record.kid.family == user.family
+    false
   end
 
   def unmark_as_recurent?
-    record.kid.family == user.family
+    # record.kid.family == user.family
+    false
   end
 
   def update?
@@ -27,6 +30,7 @@ class TaskPolicy < ApplicationPolicy
   end
 
   def add_recurent?
-    true
+    # true
+    fale
   end
 end
