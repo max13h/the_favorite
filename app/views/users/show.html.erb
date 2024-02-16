@@ -5,12 +5,14 @@
     <%= render "shared/picture", user: current_user, size: "8rem", kid_or_parent: "parent" %>
   </div>
   <p class="fs-2 fw-bold"><%= "#{current_user.first_name.capitalize} #{current_user.last_name.capitalize}" %></p>
-  <%= link_to edit_user_registration_path, class: "d-flex align-items-center me-3 mb-4" do %>
+  <%# <%= link_to edit_user_registration_path, class: "d-flex align-items-center me-3 mb-4" do %>
+  <div class="d-flex align-items-center me-3 mb-4" style="cursor: no-drop">
     <span class="material-symbols-outlined me-1" style="font-variation-settings: 'FILL' 1; font-size: 1rem !important">
       edit
     </span>
     <p class="btn-link fs-7"> Edit my profile </p>
-  <% end %>
+  </div>
+  <%# <% end %>
 </div>
 
 <h2 class="heading-container mt-4">
@@ -84,6 +86,7 @@
     <%# if current_user.family %>
       <%#= link_to "Leave family", leave_family_path, data: {turbo_confirm: "Are you sure you want to leave you family ?"}, class: "mb-3 btn btn-outline-danger" %>
     <%# end %>
-    <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-outline-danger" %>
+    <%# <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-outline-danger" %>
+    <p class="btn btn-outline-danger" style="cursor: no-drop">Log out</p>
   </div>
 </div>
